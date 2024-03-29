@@ -29,6 +29,9 @@ android {
     defaultConfig {
         minSdk = 21
     }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
 }
 
 kotlin {
@@ -79,4 +82,8 @@ kotlin {
             dependsOn(nonAndroidMain)
         }
     }
+}
+
+dependencies {
+    coreLibraryDesugaring(libs.desugar)
 }
