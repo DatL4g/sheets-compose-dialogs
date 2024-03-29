@@ -43,8 +43,8 @@ internal fun ValueContainerComponent(
 ) {
     Column(
         modifier = Modifier
-            .padding(vertical = dimensionResource(RC.dimen.scd_normal_150))
-            .padding(horizontal = dimensionResource(RC.dimen.scd_small_100)),
+            .padding(vertical = 24.dp)
+            .padding(horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         UnitLabel(unit = unit)

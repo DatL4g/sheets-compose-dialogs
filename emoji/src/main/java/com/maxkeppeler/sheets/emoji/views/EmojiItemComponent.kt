@@ -84,7 +84,7 @@ internal fun EmojiItemComponent(
                     if (emoji.variants.isNotEmpty()) showVariants.value = true
                 }
             )
-            .padding(dimensionResource(RC.dimen.scd_small_25)),
+            .padding(2.dp),
     ) {
 
         AndroidView(

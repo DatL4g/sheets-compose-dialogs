@@ -108,11 +108,11 @@ internal fun KeyItemComponent(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (isActionNext || isActionPrev) {
-            val maxSize = dimensionResource(RC.dimen.scd_size_150)
+            val maxSize = 48.dp
             val minSize = dimensionResource(RC.dimen.scd_size_100)
             Icon(
                 modifier = Modifier
-                    .padding(dimensionResource(RC.dimen.scd_small_100))
+                    .padding(8.dp)
                     .sizeIn(
                         maxWidth = maxSize,
                         maxHeight = maxSize,

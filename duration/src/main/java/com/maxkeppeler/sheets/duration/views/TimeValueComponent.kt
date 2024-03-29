@@ -114,7 +114,7 @@ internal fun TimeValueComponent(
                         when {
                             orientation == LibOrientation.LANDSCAPE && !isHintView ->
                                 dimensionResource(RC.dimen.scd_small_150)
-                            else -> dimensionResource(RC.dimen.scd_small_50)
+                            else -> 4.dp
                         }
                     )
                 )
@@ -144,7 +144,7 @@ internal fun TimeValueComponent(
                 content = {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Row { valueContent() }
-                        if (valid) Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_normal_100)))
+                        if (valid) Spacer(modifier = Modifier.height(16.dp))
                         hintView?.invoke()
                     }
                 }
@@ -158,7 +158,7 @@ internal fun TimeValueComponent(
                 verticalArrangement = Arrangement.Center,
                 content = {
                     valueContent()
-//                    Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_normal_100)))
+//                    Spacer(modifier = Modifier.height(16.dp))
                     hintView?.invoke()
                 }
             )

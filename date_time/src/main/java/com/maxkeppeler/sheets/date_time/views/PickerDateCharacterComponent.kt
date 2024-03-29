@@ -33,9 +33,9 @@ internal fun PickerDateCharacterComponent(text: String) {
     Text(
         modifier = Modifier
             .clip(MaterialTheme.shapes.extraSmall)
-            .padding(start = dimensionResource(RC.dimen.scd_small_25))
-            .padding(bottom = dimensionResource(RC.dimen.scd_normal_150))
-            .padding(end = dimensionResource(RC.dimen.scd_small_100)),
+            .padding(start = 2.dp)
+            .padding(bottom = 24.dp)
+            .padding(end = 8.dp),
         text = text
     )
 }

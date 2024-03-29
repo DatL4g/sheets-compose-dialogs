@@ -43,7 +43,7 @@ internal fun DefaultBodyComponent(
     Column(
         modifier = Modifier
             .testTag(TestTags.RATING_BODY_DEFAULT)
-            .padding(top = dimensionResource(RC.dimen.scd_normal_100))
+            .padding(top = 16.dp)
     ) {
         body.preBody()
         Text(

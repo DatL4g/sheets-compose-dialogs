@@ -26,74 +26,53 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
-import com.maxkeppeler.sheets.calendar.utils.Constants
-import java.time.LocalDate
-import java.time.Month
-import java.time.format.DateTimeFormatter
-import com.maxkeppeler.sheets.core.R as RC
+import androidx.compose.ui.unit.dp
 
 /**
- * The item component of the month selection view.
- * @param month The month that this item represents.
- * @param thisMonth The current month.
- * @param selected If the month is selected.
- * @param onMonthClick The listener that is invoked when a year is selected.
+ * The item component of the year selection view.
+ * @param year The year that this item represents.
+ * @param thisYear The current year.
+ * @param selected If the year is selected.
+ * @param onYearClick The listener that is invoked when a year is selected.
  */
 @Composable
-internal fun MonthItemComponent(
-    month: Month,
-    thisMonth: Boolean = false,
-    disabled: Boolean = false,
-    selected: Boolean = false,
-    onMonthClick: () -> Unit
+internal fun YearItemComponent(
+    year: Int,
+    thisYear: Boolean,
+    selected: Boolean,
+    onYearClick: (Int) -> Unit
 ) {
     val textStyle =
         when {
             selected -> MaterialTheme.typography.bodySmall.copy(MaterialTheme.colorScheme.onPrimary)
-            thisMonth -> MaterialTheme.typography.titleSmall.copy(MaterialTheme.colorScheme.primary)
+            thisYear -> MaterialTheme.typography.titleSmall.copy(MaterialTheme.colorScheme.primary)
             else -> MaterialTheme.typography.bodyMedium
         }
 
     val baseModifier = Modifier
         .wrapContentWidth()
-        .padding(dimensionResource(RC.dimen.scd_small_50))
-        .clickable(!disabled) { onMonthClick() }
-
-    val normalModifier = baseModifier
         .clip(MaterialTheme.shapes.small)
+        .clickable { onYearClick(year) }
 
-    val selectedModifier = normalModifier
+    val selectedModifier = baseModifier
         .background(MaterialTheme.colorScheme.primary)
-
-    val textAlpha = when {
-        disabled -> Constants.DATE_ITEM_DISABLED_TIMELINE_OPACITY
-        else -> Constants.DATE_ITEM_OPACITY
-    }
+        .clickable { onYearClick(year) }
 
     Column(
-        modifier = when {
-            disabled -> normalModifier
-            selected -> selectedModifier
-            thisMonth -> baseModifier
-            else -> normalModifier
-        },
+        modifier = if (selected) selectedModifier else baseModifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             modifier = Modifier
-                .alpha(textAlpha)
-                .padding(horizontal = dimensionResource(RC.dimen.scd_small_150))
-                .padding(vertical = dimensionResource(RC.dimen.scd_small_100)),
-            text = LocalDate.now().withMonth(month.value)
-                .format(DateTimeFormatter.ofPattern("MMM")),
+                .padding(horizontal = 12.dp)
+                .padding(vertical = 8.dp),
+            text = year.toString(),
             style = textStyle,
-            textAlign = TextAlign.Center,
-            maxLines = 1,
+            textAlign = TextAlign.Center
         )
     }
 }

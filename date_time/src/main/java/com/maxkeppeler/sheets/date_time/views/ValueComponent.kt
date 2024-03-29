@@ -58,7 +58,7 @@ internal fun ValueComponent(
                 else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
             )
             .clickable { onClick() }
-            .padding(dimensionResource(RC.dimen.scd_normal_100)),
+            .padding(16.dp),
         text = unit.value?.label
             ?: unit.value?.labelRes?.let { stringResource(id = it) }
             ?: unit.options.last().label?.map { "  " }?.joinToString(separator = "")

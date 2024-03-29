@@ -22,13 +22,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -158,7 +152,7 @@ fun CalendarView(
         layoutLandscape = when (config.style) {
             CalendarStyle.MONTH -> {
                 {
-                    var calendarHeight by remember { mutableStateOf(0) }
+                    var calendarHeight by remember { mutableIntStateOf(0) }
                     CalendarTopLandscapeComponent(
                         modifier = Modifier
                             .weight(0.3f)

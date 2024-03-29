@@ -44,7 +44,7 @@ internal fun InputItemHeaderComponent(
             .testTags(TestTags.INPUT_ITEM_HEADER, index)
             .fillMaxWidth()
             .padding(
-                bottom = dimensionResource(RC.dimen.scd_small_100)
+                bottom = 8.dp
             ),
         verticalArrangement = Arrangement.Center
     ) {
@@ -61,7 +61,7 @@ internal fun InputItemHeaderComponent(
 
             header.title?.let { title ->
                 val startPadding =
-                    if (header.icon != null) dimensionResource(RC.dimen.scd_small_100) else 0.dp
+                    if (header.icon != null) 8.dp else 0.dp
                 Text(
                     modifier = Modifier
                         .testTags(TestTags.INPUT_ITEM_HEADER_TITLE, index)
@@ -76,7 +76,7 @@ internal fun InputItemHeaderComponent(
             Text(
                 modifier = Modifier
                     .testTags(TestTags.INPUT_ITEM_HEADER_BODY, index)
-                    .padding(top = dimensionResource(RC.dimen.scd_small_50)),
+                    .padding(top = 4.dp),
                 text = text,
                 style = MaterialTheme.typography.bodySmall
             )

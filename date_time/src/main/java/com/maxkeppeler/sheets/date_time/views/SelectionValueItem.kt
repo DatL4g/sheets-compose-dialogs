@@ -45,8 +45,8 @@ internal fun SelectionValueItem(
         modifier = modifier
             .clip(MaterialTheme.shapes.small)
             .clickable { option?.let { onValueChange.invoke(it) } }
-            .padding(vertical = dimensionResource(RC.dimen.scd_small_100))
-            .padding(horizontal = dimensionResource(RC.dimen.scd_small_100)),
+            .padding(vertical = 8.dp)
+            .padding(horizontal = 8.dp),
         text = option?.labelRes?.let { stringResource(id = it) } ?: option?.label ?: "",
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.bodyLarge

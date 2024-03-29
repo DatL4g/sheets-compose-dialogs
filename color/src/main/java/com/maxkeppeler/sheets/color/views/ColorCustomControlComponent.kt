@@ -76,7 +76,7 @@ internal fun ColorCustomControlComponent(
 
     Grid(
         modifier = Modifier.padding(
-            top = dimensionResource(RC.dimen.scd_normal_100)
+            top = 16.dp
         ),
         items = colorItems,
         columns = when (orientation) {

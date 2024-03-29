@@ -18,6 +18,7 @@
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.expandIn
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -37,23 +38,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDownward
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -63,8 +63,20 @@ import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.calendar.generated.resources.*
+import sheets_compose_dialogs.calendar.generated.resources.Res
+import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_prev_month
+import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_prev_week
+import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_select_month
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlin.math.max
+import kotlin.math.min
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -80,6 +92,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param onMonthClick The listener that is invoked when the month selection was clicked.
  * @param onYearClick The listener that is invoked when the year selection was clicked.
  */
+@OptIn(ExperimentalResourceApi::class)
 @ExperimentalMaterial3Api
 @Composable
 internal fun CalendarTopComponent(
@@ -101,7 +114,7 @@ internal fun CalendarTopComponent(
     val enterTransition = expandIn(expandFrom = Alignment.Center, clip = false) + fadeIn()
     val exitTransition = shrinkOut(shrinkTowards = Alignment.Center, clip = false) + fadeOut()
 
-    val chevronAVD = AnimatedImageVector.animatedVectorResource(R.drawable.avd_chevron_down_up)
+    val rotation by chevronDownUpRotation()
     var chevronMonthAtEnd by remember { mutableStateOf(false) }
     var chevronYearAtEnd by remember { mutableStateOf(false) }
 
@@ -119,9 +132,9 @@ internal fun CalendarTopComponent(
 
     val selectableContainerModifier = Modifier.clip(MaterialTheme.shapes.extraSmall)
     val selectableItemModifier = Modifier
-        .padding(start = dimensionResource(RC.dimen.scd_small_100))
-        .padding(vertical = dimensionResource(RC.dimen.scd_small_50))
-        .padding(end = dimensionResource(RC.dimen.scd_small_50))
+        .padding(start = 8.dp)
+        .padding(vertical = 4.dp)
+        .padding(end = 4.dp)
 
     Box(modifier = modifier) {
 
@@ -136,17 +149,17 @@ internal fun CalendarTopComponent(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                     modifier = Modifier
                         .testTags(TestTags.CALENDAR_PREVIOUS_ACTION)
-                        .size(dimensionResource(RC.dimen.scd_size_200)),
+                        .size(32.dp),
                     enabled = !navigationDisabled && !prevDisabled,
                     onClick = onPrev
                 ) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                        modifier = Modifier.size(48.dp),
                         imageVector = config.icons.ChevronLeft,
                         contentDescription = stringResource(
                             when (config.style) {
-                                CalendarStyle.MONTH -> R.string.scd_calendar_dialog_prev_month
-                                CalendarStyle.WEEK -> R.string.scd_calendar_dialog_prev_week
+                                CalendarStyle.MONTH -> Res.string.scd_calendar_dialog_prev_month
+                                CalendarStyle.WEEK -> Res.string.scd_calendar_dialog_prev_week
                             }
                         )
                     )
@@ -180,9 +193,9 @@ internal fun CalendarTopComponent(
                 )
                 if (config.monthSelection && monthSelectionEnabled) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                        painter = rememberAnimatedVectorPainter(chevronAVD, chevronMonthAtEnd),
-                        contentDescription = stringResource(R.string.scd_calendar_dialog_select_month),
+                        modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
+                        imageVector = Icons.Filled.KeyboardArrowDown,
+                        contentDescription = stringResource(Res.string.scd_calendar_dialog_select_month),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -207,9 +220,9 @@ internal fun CalendarTopComponent(
                 )
                 if (config.yearSelection && yearSelectionEnabled) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                        painter = rememberAnimatedVectorPainter(chevronAVD, chevronYearAtEnd),
-                        contentDescription = stringResource(id = R.string.scd_calendar_dialog_select_year),
+                        modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
+                        imageVector = Icons.Filled.KeyboardArrowDown,
+                        contentDescription = stringResource(Res.string.scd_calendar_dialog_select_year),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -227,17 +240,17 @@ internal fun CalendarTopComponent(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                     modifier = Modifier
                         .testTags(TestTags.CALENDAR_NEXT_ACTION)
-                        .size(dimensionResource(RC.dimen.scd_size_200)),
+                        .size(32.dp),
                     enabled = !navigationDisabled && !nextDisabled,
                     onClick = onNext
                 ) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                        modifier = Modifier.size(48.dp),
                         imageVector = config.icons.ChevronRight,
                         contentDescription = stringResource(
                             when (config.style) {
-                                CalendarStyle.MONTH -> R.string.scd_calendar_dialog_next_month
-                                CalendarStyle.WEEK -> R.string.scd_calendar_dialog_next_week
+                                CalendarStyle.MONTH -> Res.string.scd_calendar_dialog_next_month
+                                CalendarStyle.WEEK -> Res.string.scd_calendar_dialog_next_week
                             }
                         )
                     )
@@ -260,6 +273,7 @@ internal fun CalendarTopComponent(
  * @param onMonthClick The listener that is invoked when the month selection was clicked.
  * @param onYearClick The listener that is invoked when the year selection was clicked.
  */
+@OptIn(ExperimentalResourceApi::class)
 @ExperimentalMaterial3Api
 @Composable
 internal fun CalendarTopLandscapeComponent(
@@ -279,7 +293,7 @@ internal fun CalendarTopLandscapeComponent(
     val enterTransition = expandIn(expandFrom = Alignment.Center, clip = false) + fadeIn()
     val exitTransition = shrinkOut(shrinkTowards = Alignment.Center, clip = false) + fadeOut()
 
-    val chevronAVD = AnimatedImageVector.animatedVectorResource(R.drawable.avd_chevron_down_up)
+    val rotation by chevronDownUpRotation()
     var chevronMonthAtEnd by remember { mutableStateOf(false) }
     var chevronYearAtEnd by remember { mutableStateOf(false) }
 
@@ -300,9 +314,9 @@ internal fun CalendarTopLandscapeComponent(
         .clip(MaterialTheme.shapes.extraSmall)
 
     val selectableItemModifier = Modifier
-        .padding(start = dimensionResource(RC.dimen.scd_small_100))
-        .padding(vertical = dimensionResource(RC.dimen.scd_small_50))
-        .padding(end = dimensionResource(RC.dimen.scd_small_50))
+        .padding(start = 8.dp)
+        .padding(vertical = 4.dp)
+        .padding(end = 4.dp)
 
     Column(
         modifier = modifier,
@@ -327,9 +341,9 @@ internal fun CalendarTopLandscapeComponent(
             )
             if (config.yearSelection) {
                 Icon(
-                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                    painter = rememberAnimatedVectorPainter(chevronAVD, chevronYearAtEnd),
-                    contentDescription = stringResource(id = R.string.scd_calendar_dialog_select_year),
+                    modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
+                    imageVector = Icons.Filled.KeyboardArrowDown,
+                    contentDescription = stringResource(Res.string.scd_calendar_dialog_select_year),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
@@ -355,9 +369,9 @@ internal fun CalendarTopLandscapeComponent(
             )
             if (config.monthSelection) {
                 Icon(
-                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                    painter = rememberAnimatedVectorPainter(chevronAVD, chevronMonthAtEnd),
-                    contentDescription = stringResource(R.string.scd_calendar_dialog_select_month),
+                    modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
+                    imageVector = Icons.Filled.KeyboardArrowDown,
+                    contentDescription = stringResource(Res.string.scd_calendar_dialog_select_month),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
@@ -379,17 +393,17 @@ internal fun CalendarTopLandscapeComponent(
                     FilledIconButton(
                         colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                         modifier = Modifier
-                            .size(dimensionResource(RC.dimen.scd_size_200)),
+                            .size(32.dp),
                         enabled = !navigationDisabled && !prevDisabled,
                         onClick = onPrev
                     ) {
                         Icon(
-                            modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                            modifier = Modifier.size(48.dp),
                             imageVector = config.icons.ChevronLeft,
                             contentDescription = stringResource(
                                 when (config.style) {
-                                    CalendarStyle.MONTH -> R.string.scd_calendar_dialog_prev_month
-                                    CalendarStyle.WEEK -> R.string.scd_calendar_dialog_prev_week
+                                    CalendarStyle.MONTH -> Res.string.scd_calendar_dialog_prev_month
+                                    CalendarStyle.WEEK -> Res.string.scd_calendar_dialog_prev_week
                                 }
                             )
                         )
@@ -407,17 +421,17 @@ internal fun CalendarTopLandscapeComponent(
                 Column(Modifier.align(Alignment.CenterVertically)) {
                     FilledIconButton(
                         colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
-                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_200)),
+                        modifier = Modifier.size(32.dp),
                         enabled = !navigationDisabled && !nextDisabled,
                         onClick = onNext
                     ) {
                         Icon(
-                            modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                            modifier = Modifier.size(48.dp),
                             imageVector = config.icons.ChevronRight,
                             contentDescription = stringResource(
                                 when (config.style) {
-                                    CalendarStyle.MONTH -> R.string.scd_calendar_dialog_next_month
-                                    CalendarStyle.WEEK -> R.string.scd_calendar_dialog_next_week
+                                    CalendarStyle.MONTH -> Res.string.scd_calendar_dialog_next_month
+                                    CalendarStyle.WEEK -> Res.string.scd_calendar_dialog_next_week
                                 }
                             )
                         )
@@ -426,4 +440,24 @@ internal fun CalendarTopLandscapeComponent(
             }
         }
     }
+}
+
+@Composable
+private fun chevronDownUpRotation(): State<Int> {
+    var rotation by remember { mutableIntStateOf(0) }
+
+    LaunchedEffect(rotation) {
+        while (rotation < 180) {
+            rotation = min(rotation + 1, 180)
+
+            withContext(Dispatchers.Default) {
+                delay(2)
+            }
+        }
+    }
+
+    return animateIntAsState(
+        targetValue = rotation,
+        label = "ArrowRotation"
+    )
 }

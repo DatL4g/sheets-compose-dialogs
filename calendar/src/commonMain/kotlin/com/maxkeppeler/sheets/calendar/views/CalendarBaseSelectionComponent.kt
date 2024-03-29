@@ -13,10 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalSnapperApi::class)
 
 package com.maxkeppeler.sheets.calendar.views
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.snapping.rememberSnapFlingBehavior
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
@@ -34,16 +35,16 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
-import dev.chrisbanes.snapper.ExperimentalSnapperApi
-import dev.chrisbanes.snapper.SnapOffsets
-import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.calendar.generated.resources.Res
+import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_select_month
+import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_select_year
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -56,6 +57,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param onMonthView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.MONTH].
  * @param onYearView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.YEAR].
  */
+@OptIn(ExperimentalFoundationApi::class, ExperimentalResourceApi::class)
 @Composable
 internal fun CalendarBaseSelectionComponent(
     modifier: Modifier,
@@ -70,7 +72,7 @@ internal fun CalendarBaseSelectionComponent(
 
     val baseModifier = modifier.then(
             when (orientation) {
-                LibOrientation.PORTRAIT -> Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_100))
+                LibOrientation.PORTRAIT -> Modifier.padding(top = 16.dp)
                 LibOrientation.LANDSCAPE -> Modifier.sizeIn(
                     maxHeight = BaseConstants.DYNAMIC_SIZE_MAX,
                     maxWidth = BaseConstants.DYNAMIC_SIZE_MAX
@@ -83,13 +85,13 @@ internal fun CalendarBaseSelectionComponent(
         .wrapContentHeight()
         .then(
             when (orientation) {
-                LibOrientation.PORTRAIT -> Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_150))
+                LibOrientation.PORTRAIT -> Modifier.padding(top = 24.dp)
                 LibOrientation.LANDSCAPE -> Modifier
             }
         )
 
     val baseViewModifier = Modifier
-        .padding(top = dimensionResource(RC.dimen.scd_normal_100))
+        .padding(top = 16.dp)
 
     val gridYearModifier = baseViewModifier
         .graphicsLayer { alpha = 0.99F }
@@ -106,11 +108,6 @@ internal fun CalendarBaseSelectionComponent(
                 blendMode = BlendMode.DstIn
             )
         }
-
-    val behavior = rememberSnapperFlingBehavior(
-        lazyListState = yearListState,
-        snapOffsetForItem = SnapOffsets.Center,
-    )
 
     when (mode) {
         CalendarDisplayMode.CALENDAR -> {
@@ -129,7 +126,7 @@ internal fun CalendarBaseSelectionComponent(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = stringResource(R.string.scd_calendar_dialog_select_month),
+                    text = stringResource(Res.string.scd_calendar_dialog_select_month),
                     style = MaterialTheme.typography.titleMedium,
                 )
                 LazyVerticalGrid(
@@ -149,15 +146,15 @@ internal fun CalendarBaseSelectionComponent(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = stringResource(R.string.scd_calendar_dialog_select_year),
+                    text = stringResource(Res.string.scd_calendar_dialog_select_year),
                     style = MaterialTheme.typography.titleMedium,
                 )
                 LazyRow(
                     modifier = gridYearModifier,
                     state = yearListState,
-                    flingBehavior = behavior,
-                    contentPadding = PaddingValues(horizontal = dimensionResource(RC.dimen.scd_large_100)),
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_50)),
+                    flingBehavior = rememberSnapFlingBehavior(yearListState),
+                    contentPadding = PaddingValues(horizontal = 32.dp),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp),
                     content = onYearView
                 )
             }

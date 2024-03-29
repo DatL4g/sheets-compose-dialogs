@@ -61,7 +61,7 @@ internal fun FeedbackTextFieldErrorContainer(
                 modifier = Modifier
                     .testTags(TestTags.RATING_FEEDBACK_TEXT_FIELD_ERROR_TEXT)
                     .fillMaxWidth()
-                    .padding(top = dimensionResource(RC.dimen.scd_small_100)),
+                    .padding(top = 8.dp),
                 text = errorMessage,
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.labelMedium,

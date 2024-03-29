@@ -14,23 +14,42 @@
  *  limitations under the License.
  */
 plugins {
-    id(Plugins.CUSTOM_LIBRARY_MODULE.id)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.serialization)
 }
 
 android {
     namespace = Modules.CALENDAR.namespace
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 21
+    }
     compileOptions {
-        // Flag to enable support for the new language APIs
         isCoreLibraryDesugaringEnabled = true
     }
 }
 
-dependencies {
-    implementations(Dependencies.SNAPPER)
-    coreLibraryDesugaring(Dependencies.DESUGAR)
+kotlin {
+    androidTarget()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.materialIconsExtended)
+            implementation(compose.components.resources)
+            implementation(compose.animation)
+            implementation(compose.animationGraphics)
+
+            implementation(project(":core"))
+        }
+    }
 }
 
-mavenPublishing {
-    publishToMavenCentral()
-    signAllPublications()
+dependencies {
+    coreLibraryDesugaring(libs.desugar)
 }

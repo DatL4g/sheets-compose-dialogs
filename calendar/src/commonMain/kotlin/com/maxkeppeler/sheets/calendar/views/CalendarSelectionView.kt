@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarData
@@ -63,7 +64,7 @@ internal fun LazyGridScope.setupCalendarSelectionView(
         val label = dayOfWeekLabels.values.toList().getOrNull(cell - offset)
         label?.let { CalendarHeaderItemComponent(label) } ?: CalendarWeekHeaderItemComponent()
     }
-    item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_small_50))) }
+    item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(4.dp)) }
 
 
     data.days.forEach { weekDays ->

@@ -51,7 +51,7 @@ internal fun ColorSelectionModeComponent(
     onModeChange: (ColorSelectionMode) -> Unit,
     onNoColorClick: () -> Unit
 ) {
-    Row(modifier = Modifier.padding(bottom = dimensionResource(RC.dimen.scd_small_100))) {
+    Row(modifier = Modifier.padding(bottom = 8.dp)) {
         if (config.displayMode == null) {
 
             TextButton(
@@ -75,13 +75,13 @@ internal fun ColorSelectionModeComponent(
                     }
                 )
                 Icon(
-                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                    modifier = Modifier.size(48.dp),
                     imageVector = if (mode != ColorSelectionMode.TEMPLATE) config.icons.Apps else config.icons.Tune,
                     contentDescription = text,
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    modifier = Modifier.padding(horizontal = dimensionResource(RC.dimen.scd_small_100)),
+                    modifier = Modifier.padding(horizontal = 8.dp),
                     text = text,
                 )
             }
@@ -98,13 +98,13 @@ internal fun ColorSelectionModeComponent(
                 shape = RoundedCornerShape(50)
             ) {
                 Icon(
-                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                    modifier = Modifier.size(48.dp),
                     imageVector = config.icons.NotInterested,
                     contentDescription = stringResource(R.string.scd_color_dialog_no_color),
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    modifier = Modifier.padding(horizontal = dimensionResource(RC.dimen.scd_small_100)),
+                    modifier = Modifier.padding(horizontal = 8.dp),
                     text = stringResource(R.string.scd_color_dialog_no_color),
                 )
             }

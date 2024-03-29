@@ -13,7 +13,7 @@ include(
     ":core",
     //":info",
     //":rating",
-    //":calendar",
+    ":calendar",
     //":duration",
     //":clock",
     //":date_time",

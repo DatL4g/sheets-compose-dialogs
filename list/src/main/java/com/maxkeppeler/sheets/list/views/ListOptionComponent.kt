@@ -56,7 +56,7 @@ fun ListOptionComponent(
 
     LazyColumn(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(options) { option ->
             ListOptionItemComponent(

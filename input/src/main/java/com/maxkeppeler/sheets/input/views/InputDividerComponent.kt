@@ -39,8 +39,8 @@ internal fun InputDividerComponent(
             .testTags(TestTags.INPUT_ITEM_DIVIDER, index)
             .fillMaxWidth()
             .padding(
-                top = dimensionResource(RC.dimen.scd_small_100),
-                bottom = dimensionResource(RC.dimen.scd_small_50),
+                top = 8.dp,
+                bottom = 4.dp,
             ),
         color = MaterialTheme.colorScheme.outlineVariant
     )

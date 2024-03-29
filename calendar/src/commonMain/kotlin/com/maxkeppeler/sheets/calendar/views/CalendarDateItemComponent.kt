@@ -119,9 +119,9 @@ internal fun CalendarDateItemComponent(
         }
 
     val parentModifier = when (selection) {
-        is CalendarSelection.Date -> Modifier.padding(dimensionResource(RC.dimen.scd_small_25))
-        is CalendarSelection.Dates -> Modifier.padding(dimensionResource(RC.dimen.scd_small_25))
-        is CalendarSelection.Period -> Modifier.padding(vertical = dimensionResource(RC.dimen.scd_small_25))
+        is CalendarSelection.Date -> Modifier.padding(2.dp)
+        is CalendarSelection.Dates -> Modifier.padding(2.dp)
+        is CalendarSelection.Period -> Modifier.padding(vertical = 2.dp)
     }.testTags(
         TestTags.CALENDAR_DATE,
         data.date?.format(DateTimeFormatter.ISO_DATE) ?: ""

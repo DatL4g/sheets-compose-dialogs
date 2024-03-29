@@ -56,7 +56,7 @@ fun OptionComponent(
 
     val verticalDirectionModifier = modifier
         .fillMaxWidth()
-        .padding(horizontal = dimensionResource(RC.dimen.scd_normal_150))
+        .padding(horizontal = 24.dp)
 
     val columnsLimits = config.gridColumns
     val columns = if (options.size < columnsLimits) options.size else columnsLimits
@@ -73,8 +73,8 @@ fun OptionComponent(
     when (config.mode) {
         DisplayMode.GRID_HORIZONTAL -> {
             LazyRow(
-                contentPadding = PaddingValues(horizontal = dimensionResource(RC.dimen.scd_normal_150)),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
+                contentPadding = PaddingValues(horizontal = 24.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(options) { option ->
                     OptionItemComponent(
@@ -91,8 +91,8 @@ fun OptionComponent(
             LazyVerticalGrid(
                 modifier = verticalDirectionModifier,
                 columns = GridCells.Fixed(columns),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(options) { option ->
                     OptionItemComponent(
@@ -108,7 +108,7 @@ fun OptionComponent(
         DisplayMode.LIST -> {
             LazyColumn(
                 modifier = verticalDirectionModifier,
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(options) { option ->
                     OptionItemComponent(

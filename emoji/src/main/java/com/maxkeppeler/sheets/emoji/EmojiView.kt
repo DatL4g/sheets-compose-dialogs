@@ -104,12 +104,12 @@ fun EmojiView(
             LazyVerticalGrid(
                 modifier = Modifier
                     .dynamicContentWrapOrMaxHeight(this)
-                    .padding(top = dimensionResource(RC.dimen.scd_normal_100)),
+                    .padding(top = 16.dp),
                 contentPadding = PaddingValues(
-                    bottom = if (selection.withButtonView) 0.dp else dimensionResource(RC.dimen.scd_normal_100),
+                    bottom = if (selection.withButtonView) 0.dp else 16.dp,
                 ),
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_25)),
-                verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_25)),
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
                 columns = GridCells.Fixed(emojiState.categories.size)
             ) {
                 items(emojiState.categoryEmojis, key = { it.unicode }) { emoji ->

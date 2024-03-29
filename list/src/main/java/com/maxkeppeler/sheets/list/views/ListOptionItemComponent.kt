@@ -99,8 +99,8 @@ internal fun ListOptionItemComponent(
         option.icon?.let {
             IconComponent(
                 modifier = Modifier
-                    .padding(start = dimensionResource(RC.dimen.scd_normal_100))
-                    .size(dimensionResource(RC.dimen.scd_size_150)),
+                    .padding(start = 16.dp)
+                    .size(48.dp),
                 iconSource = it,
                 tint = iconColor
             )
@@ -109,7 +109,7 @@ internal fun ListOptionItemComponent(
         Column(
             modifier = Modifier
                 .padding(vertical = dimensionResource(RC.dimen.scd_small_150))
-                .padding(start = dimensionResource(RC.dimen.scd_normal_100))
+                .padding(start = 16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(),
         ) {

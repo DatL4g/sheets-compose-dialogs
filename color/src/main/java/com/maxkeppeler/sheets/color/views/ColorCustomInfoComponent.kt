@@ -92,13 +92,13 @@ internal fun ColorCustomInfoComponent(
             modifier = Modifier
                 .height(Constants.COLOR_CUSTOM_ITEM_SIZE)
                 .fillMaxWidth()
-                .padding(start = dimensionResource(RC.dimen.scd_normal_100))
+                .padding(start = 16.dp)
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = dimensionResource(RC.dimen.scd_normal_100))
-                    .padding(end = dimensionResource(RC.dimen.scd_small_100)),
+                    .padding(start = 16.dp)
+                    .padding(end = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
@@ -115,7 +115,7 @@ internal fun ColorCustomInfoComponent(
                             maxLines = 1
                         )
                         Text(
-                            modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_25)),
+                            modifier = Modifier.padding(top = 2.dp),
                             text = getFormattedColor(color),
                             style = MaterialTheme.typography.labelSmall,
                             maxLines = 1

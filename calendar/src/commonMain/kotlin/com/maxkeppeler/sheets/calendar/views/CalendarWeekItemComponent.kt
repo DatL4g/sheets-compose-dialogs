@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
@@ -46,9 +47,9 @@ internal fun CalendarWeekItemComponent(
     val normalModifier = Modifier.aspectRatio(1f, true)
     val textStyle = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp)
     val parentModifier = when (selection) {
-        is CalendarSelection.Date -> Modifier.padding(dimensionResource(RC.dimen.scd_small_25))
-        is CalendarSelection.Dates -> Modifier.padding(dimensionResource(RC.dimen.scd_small_25))
-        is CalendarSelection.Period -> Modifier.padding(vertical = dimensionResource(RC.dimen.scd_small_25))
+        is CalendarSelection.Date -> Modifier.padding(2.dp)
+        is CalendarSelection.Dates -> Modifier.padding(2.dp)
+        is CalendarSelection.Period -> Modifier.padding(vertical = 2.dp)
     }.testTags(TestTags.CALENDAR_CW, value)
     Column(modifier = parentModifier) {
         Row(

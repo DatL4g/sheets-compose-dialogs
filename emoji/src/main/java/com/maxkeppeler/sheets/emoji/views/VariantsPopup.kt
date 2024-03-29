@@ -57,16 +57,16 @@ internal fun VariantsPopup(
             Box(Modifier.wrapContentWidth()) {
                 Surface(
                     modifier = Modifier
-                        .padding(horizontal = dimensionResource(RC.dimen.scd_small_50))
+                        .padding(horizontal = 4.dp)
                         .widthIn(max = itemSize * 6),
                     shape = MaterialTheme.shapes.medium,
                     color = MaterialTheme.colorScheme.surface,
-                    shadowElevation = dimensionResource(RC.dimen.scd_small_50),
+                    shadowElevation = 4.dp,
                 ) {
                     LazyVerticalGrid(
                         modifier = Modifier
                             .wrapContentWidth()
-                            .padding(dimensionResource(RC.dimen.scd_normal_100)),
+                            .padding(16.dp),
                         columns = GridCells.Adaptive(itemSize),
                         userScrollEnabled = false,
                         horizontalArrangement = Arrangement.Center

@@ -55,16 +55,16 @@ internal fun InputCheckboxItemComponent(
         Checkbox(
             modifier = Modifier
                 .testTags(TestTags.INPUT_ITEM_CHECKBOX_GROUP_ITEM_CHECKBOX, index)
-                .padding(start = dimensionResource(RC.dimen.scd_small_50))
-                .size(dimensionResource(RC.dimen.scd_normal_150)),
+                .padding(start = 4.dp)
+                .size(24.dp),
             checked = selected,
             onCheckedChange = { onSelected() },
         )
 
         Column(
             modifier = Modifier
-                .padding(vertical = dimensionResource(RC.dimen.scd_small_100))
-                .padding(start = dimensionResource(RC.dimen.scd_normal_100))
+                .padding(vertical = 8.dp)
+                .padding(start = 16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(),
         ) {

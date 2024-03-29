@@ -42,7 +42,7 @@ internal fun BoxScope.InputItemOverlayComponent(
         modifier = Modifier
             .align(Alignment.TopEnd)
             .testTags(TestTags.INPUT_ITEM_OVERLAY, index)
-            .padding(dimensionResource(RC.dimen.scd_small_100))
+            .padding(8.dp)
             .size(dimensionResource(RC.dimen.scd_size_50)),
         imageVector = config.icons.Star,
         contentDescription = null,

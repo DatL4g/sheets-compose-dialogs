@@ -53,7 +53,7 @@ internal fun TextFieldErrorContainer(
                 modifier = Modifier
                     .testTags(TestTags.INPUT_ITEM_TEXT_FIELD_ERROR_TEXT)
                     .fillMaxWidth()
-                    .padding(top = dimensionResource(RC.dimen.scd_small_100))
+                    .padding(top = 8.dp)
             )
         }
     }

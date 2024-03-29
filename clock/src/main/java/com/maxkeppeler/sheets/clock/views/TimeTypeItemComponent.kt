@@ -57,7 +57,7 @@ internal fun TimeTypeItemComponent(
             .clip(MaterialTheme.shapes.medium)
             .background(backgroundColor)
             .clickable { onClick.invoke() }
-            .padding(dimensionResource(RC.dimen.scd_small_100))
+            .padding(8.dp)
     ) {
         Text(
             text = text,

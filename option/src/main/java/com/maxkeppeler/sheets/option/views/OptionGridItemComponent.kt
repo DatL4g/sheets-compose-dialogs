@@ -85,14 +85,14 @@ internal fun OptionGridItemComponent(
             option.customView?.invoke(option.selected) ?: run {
                 Column(
                     modifier = Modifier
-                        .padding(top = dimensionResource(RC.dimen.scd_normal_100))
-                        .padding(bottom = dimensionResource(RC.dimen.scd_normal_100))
+                        .padding(top = 16.dp)
+                        .padding(bottom = 16.dp)
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     option.icon?.let {
                         IconComponent(
-                            modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                            modifier = Modifier.size(48.dp),
                             iconSource = it,
                             tint = iconColor
                         )

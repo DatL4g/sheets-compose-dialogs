@@ -61,7 +61,7 @@ internal fun RatingFeedbackView(
         RatingViewStyle.START -> Arrangement.Start
         RatingViewStyle.CENTER -> Arrangement.Center
     }
-    Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_normal_150)))
+    Spacer(modifier = Modifier.height(24.dp))
     Row(
         modifier = Modifier
             .testTags(TestTags.RATING_FEEDBACK_TEXT_FIELD)

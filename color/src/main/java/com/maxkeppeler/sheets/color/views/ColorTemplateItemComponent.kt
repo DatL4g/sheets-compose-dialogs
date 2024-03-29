@@ -84,7 +84,7 @@ internal fun ColorTemplateItemComponent(
                 colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.background),
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(dimensionResource(RC.dimen.scd_size_150)),
+                    .size(48.dp),
                 onClick = {}
             ) {
                 Icon(

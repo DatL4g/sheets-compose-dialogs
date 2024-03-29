@@ -45,8 +45,8 @@ internal fun InputComponent(
     LazyVerticalGrid(
         modifier = modifier,
         columns = GridCells.Fixed(config.columns),
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         itemsIndexed(
             items = input,

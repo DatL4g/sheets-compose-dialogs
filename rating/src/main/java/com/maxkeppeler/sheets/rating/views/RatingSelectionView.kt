@@ -58,7 +58,7 @@ internal fun RatingSelectionView(
     FlowRow(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(
-            space = dimensionResource(RC.dimen.scd_small_50),
+            space = 4.dp,
             alignment = alignment
         ),
         verticalArrangement = Arrangement.Center,
@@ -99,8 +99,8 @@ private fun RatingOptionView(
             modifier = Modifier
                 .size(dimensionResource(RC.dimen.scd_size_250))
                 .sizeIn(
-                    minWidth = dimensionResource(RC.dimen.scd_size_200),
-                    minHeight = dimensionResource(RC.dimen.scd_size_200),
+                    minWidth = 32.dp,
+                    minHeight = 32.dp,
                     maxHeight = dimensionResource(RC.dimen.scd_size_250),
                     maxWidth = dimensionResource(RC.dimen.scd_size_250)
                 ),

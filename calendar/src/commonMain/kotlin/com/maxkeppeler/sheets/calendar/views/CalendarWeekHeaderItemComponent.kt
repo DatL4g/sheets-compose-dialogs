@@ -27,31 +27,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
+import com.maxkeppeler.sheets.calendar.R
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.calendar.generated.resources.Res
+import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_cw
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
- * Composable function that represents a calendar header item with the given [label].
- *
- * @param label The label to display in the header item.
+ * Composable function that represents a calendar week header item with the given [label].
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
-internal fun CalendarHeaderItemComponent(label: String) {
+internal fun CalendarWeekHeaderItemComponent() {
     Row(
         modifier = Modifier
-            .testTags(TestTags.CALENDAR_HEADER_DAY, label)
+            .testTags(TestTags.CALENDAR_HEADER_CW)
             .aspectRatio(1f, true)
-            .padding(dimensionResource(RC.dimen.scd_small_50))
+            .padding(4.dp)
             .clip(MaterialTheme.shapes.extraSmall),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = label,
-            style = MaterialTheme.typography.labelSmall,
+            text = stringResource(Res.string.scd_calendar_dialog_cw),
+            style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.primary
         )
     }
 }

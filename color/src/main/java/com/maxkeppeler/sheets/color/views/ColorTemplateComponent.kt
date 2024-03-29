@@ -83,7 +83,7 @@ internal fun ColorTemplateComponent(
                 config = config,
                 modifier = Modifier
                     .testTags(TestTags.COLOR_TEMPLATE_SELECTION, color)
-                    .padding(dimensionResource(RC.dimen.scd_small_50)),
+                    .padding(4.dp),
                 color = color,
                 selected = selected,
                 inputDisabled = inputDisabled,

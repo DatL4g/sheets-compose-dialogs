@@ -65,7 +65,7 @@ internal fun InputCheckboxGroupComponent(
                 }
             )
             if (index != input.items.lastIndex) {
-                Spacer(Modifier.height(dimensionResource(RC.dimen.scd_small_50)))
+                Spacer(Modifier.height(4.dp))
             }
         }
     }

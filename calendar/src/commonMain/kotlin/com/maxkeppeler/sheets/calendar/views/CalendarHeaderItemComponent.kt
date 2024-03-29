@@ -26,33 +26,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
- * Composable function that represents a calendar week header item with the given [label].
+ * Composable function that represents a calendar header item with the given [label].
+ *
+ * @param label The label to display in the header item.
  */
 @Composable
-internal fun CalendarWeekHeaderItemComponent() {
+internal fun CalendarHeaderItemComponent(label: String) {
     Row(
         modifier = Modifier
-            .testTags(TestTags.CALENDAR_HEADER_CW)
+            .testTags(TestTags.CALENDAR_HEADER_DAY, label)
             .aspectRatio(1f, true)
-            .padding(dimensionResource(RC.dimen.scd_small_50))
+            .padding(4.dp)
             .clip(MaterialTheme.shapes.extraSmall),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            text = stringResource(R.string.scd_calendar_dialog_cw),
-            style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
+            text = label,
+            style = MaterialTheme.typography.labelSmall,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }

@@ -61,8 +61,8 @@ internal fun OptionListItemComponent(
                     option.icon?.let {
                         IconComponent(
                             modifier = Modifier
-                                .padding(start = dimensionResource(RC.dimen.scd_normal_150))
-                                .size(dimensionResource(RC.dimen.scd_size_150)),
+                                .padding(start = 24.dp)
+                                .size(48.dp),
                             iconSource = it,
                             tint = iconColor
                         )
@@ -71,9 +71,9 @@ internal fun OptionListItemComponent(
                     Column(
                         modifier = Modifier
                             .padding(
-                                top = dimensionResource(RC.dimen.scd_normal_100),
-                                bottom = dimensionResource(RC.dimen.scd_normal_100),
-                                start = dimensionResource(RC.dimen.scd_normal_100)
+                                top = 16.dp,
+                                bottom = 16.dp,
+                                start = 16.dp
                             )
                             .fillMaxWidth()
                             .wrapContentHeight(),

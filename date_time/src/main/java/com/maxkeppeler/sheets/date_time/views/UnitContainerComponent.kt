@@ -50,7 +50,7 @@ internal fun UnitContainerComponent(
 
         if (expanded.value) {
             SelectionContainerComponent(
-                heightOffsetTopPadding = dimensionResource(RC.dimen.scd_normal_150),
+                heightOffsetTopPadding = 24.dp,
                 unit = unit,
                 height = height,
                 width = width,

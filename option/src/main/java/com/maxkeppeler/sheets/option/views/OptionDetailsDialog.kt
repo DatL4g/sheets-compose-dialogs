@@ -55,8 +55,8 @@ internal fun OptionDetailsDialog(
         Column {
             Row(
                 modifier = Modifier
-                    .padding(top = dimensionResource(RC.dimen.scd_normal_100))
-                    .padding(horizontal = dimensionResource(RC.dimen.scd_normal_100))
+                    .padding(top = 16.dp)
+                    .padding(horizontal = 16.dp)
                     .fillMaxWidth()
                     .clip(MaterialTheme.shapes.medium)
                     .then(
@@ -64,13 +64,13 @@ internal fun OptionDetailsDialog(
                             backgroundColor
                         ) else Modifier
                     )
-                    .padding(dimensionResource(RC.dimen.scd_normal_100)),
+                    .padding(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
                 option.icon?.let {
                     IconComponent(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                        modifier = Modifier.size(48.dp),
                         iconSource = it,
                         tint = iconColor
                     )
@@ -87,16 +87,16 @@ internal fun OptionDetailsDialog(
 
             Column(
                 modifier = Modifier
-                    .padding(horizontal = dimensionResource(RC.dimen.scd_normal_150))
-                    .padding(bottom = dimensionResource(RC.dimen.scd_normal_150))
+                    .padding(horizontal = 24.dp)
+                    .padding(bottom = 24.dp)
             ) {
                 Text(
-                    modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_100)),
+                    modifier = Modifier.padding(top = 16.dp),
                     text = option.details!!.title,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_100)),
+                    modifier = Modifier.padding(top = 8.dp),
                     text = option.details.body,
                     style = MaterialTheme.typography.bodyMedium
                 )

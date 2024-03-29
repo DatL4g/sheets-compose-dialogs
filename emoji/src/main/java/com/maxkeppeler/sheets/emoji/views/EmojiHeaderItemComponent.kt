@@ -53,12 +53,12 @@ internal fun EmojiHeaderItemComponent(
             .clip(if (selected) RoundedCornerShape(50) else MaterialTheme.shapes.small)
             .background(if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent)
             .clickable { onClick() }
-            .padding(dimensionResource(RC.dimen.scd_small_50)),
+            .padding(4.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(dimensionResource(RC.dimen.scd_normal_150)),
+            modifier = Modifier.size(24.dp),
             imageVector = imageVector,
             contentDescription = "",
             tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface

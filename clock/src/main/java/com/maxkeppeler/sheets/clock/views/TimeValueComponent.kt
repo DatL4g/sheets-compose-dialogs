@@ -97,7 +97,7 @@ internal fun PortraitTimeValueComponent(
                     Text(
                         modifier = Modifier
                             .wrapContentSize()
-                            .padding(horizontal = dimensionResource(RC.dimen.scd_small_50)),
+                            .padding(horizontal = 4.dp),
                         text = ":",
                         style = textStyle
                     )
@@ -107,7 +107,7 @@ internal fun PortraitTimeValueComponent(
         if (!is24hourFormat) {
             Row(
                 Modifier
-                    .padding(top = dimensionResource(RC.dimen.scd_small_50)),
+                    .padding(top = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TimeTypeItemComponent(
@@ -202,7 +202,7 @@ internal fun LandscapeTimeValueComponent(
         if (!is24hourFormat) {
             Row(
                 Modifier
-                    .padding(top = dimensionResource(RC.dimen.scd_small_100)),
+                    .padding(top = 8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TimeTypeItemComponent(
