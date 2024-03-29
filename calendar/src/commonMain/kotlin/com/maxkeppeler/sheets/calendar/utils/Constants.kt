@@ -15,7 +15,10 @@
  */
 package com.maxkeppeler.sheets.calendar.utils
 
-import java.time.LocalDate
+import com.maxkeppeler.sheets.calendar.now
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.plus
 
 /**
  * Calendar dialog specific constants.
@@ -28,11 +31,11 @@ internal object Constants {
     internal const val DEFAULT_MONTH_SELECTION = false
     internal const val DEFAULT_YEAR_SELECTION = false
 
-    private val DEFAULT_RANGE_START_DATE = LocalDate.of(1980, 3, 15)
+    private val DEFAULT_RANGE_START_DATE = LocalDate(1980, 3, 15)
     private const val DEFAULT_RANGE_END_YEAR_OFFSET = 20L
-    private val DEFAULT_RANGE_END_DATE = LocalDate.now().plusYears(DEFAULT_RANGE_END_YEAR_OFFSET)
-        .withMonth(1)
-        .withDayOfMonth(15)
+    private val DEFAULT_RANGE_END_DATE = LocalDate.now().plus(DEFAULT_RANGE_END_YEAR_OFFSET, DateTimeUnit.YEAR).run {
+        LocalDate(this.year, 1, 15)
+    }
 
     internal val DEFAULT_RANGE = DEFAULT_RANGE_START_DATE..DEFAULT_RANGE_END_DATE
 

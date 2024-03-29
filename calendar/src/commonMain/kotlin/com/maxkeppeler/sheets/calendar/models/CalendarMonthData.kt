@@ -15,7 +15,8 @@
  */
 package com.maxkeppeler.sheets.calendar.models
 
-import java.time.Month
+import kotlinx.datetime.Month
+
 
 /**
  * Defines information for the months selection.

@@ -48,7 +48,7 @@ import com.maxkeppeler.sheets.calendar.views.CalendarTopLandscapeComponent
 import com.maxkeppeler.sheets.calendar.views.setupCalendarSelectionView
 import com.maxkeppeler.sheets.calendar.views.setupMonthSelectionView
 import com.maxkeppeler.sheets.calendar.views.setupYearSelectionView
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
 
 /**
  * Calendar dialog for the use-case to select a date or period in a typical calendar-view.

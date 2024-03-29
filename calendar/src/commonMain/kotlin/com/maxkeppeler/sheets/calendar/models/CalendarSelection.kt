@@ -17,11 +17,11 @@
 
 package com.maxkeppeler.sheets.calendar.models
 
-import android.util.Range
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.BaseConstants
-import java.time.LocalDate
+import com.maxkeppeler.sheets.calendar.LocalDateRange
+import kotlinx.datetime.LocalDate
 
 /**
  * The selection configuration for the calendar dialog.
@@ -88,7 +88,7 @@ sealed class CalendarSelection : BaseSelection() {
         override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
-        val selectedRange: Range<LocalDate>? = null,
+        val selectedRange: LocalDateRange? = null,
         val onSelectRange: (startDate: LocalDate, endDate: LocalDate) -> Unit
     ) : CalendarSelection()
 }

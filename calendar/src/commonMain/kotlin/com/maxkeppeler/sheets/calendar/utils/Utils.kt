@@ -15,7 +15,6 @@
  */
 package com.maxkeppeler.sheets.calendar.utils
 
-import androidx.annotation.RestrictTo
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarData
 import com.maxkeppeler.sheets.calendar.models.CalendarDateData
@@ -23,38 +22,20 @@ import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.maxkeppeler.sheets.calendar.models.CalendarViewType
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.Month
-import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAdjusters
-import java.time.temporal.WeekFields
-import java.util.Locale
-
-/**
- * Returns the week of the week-based-year for this [LocalDate].
- *
- * The week of the week-based-year is defined using the [Locale.getDefault] locale's [WeekFields].
- *
- * @return an `Int` representing the week of the week-based-year for this [LocalDate].
- */
-internal val LocalDate.weekOfWeekBasedYear: Int
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() = get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear())
+import com.maxkeppeler.sheets.calendar.now
+import kotlinx.datetime.*
 
 /**
  * Returns the date for the first day of the week (Monday) for this [LocalDate].
  */
 internal val LocalDate.startOfWeek: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() = minusDays(dayOfWeek.value - 1L)
+    get() = minus(dayOfWeek.isoDayNumber - 1, DateTimeUnit.DAY)
 
 /**
  * Returns the date for the last day of the week (Sunday) for this [LocalDate].
  */
 internal val LocalDate.endOfWeek: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() = plusDays(7L - dayOfWeek.value)
+    get() = plus(7 - dayOfWeek.isoDayNumber, DateTimeUnit.DAY)
 
 /**
  * Extension function that jumps to the first day of the same week (Monday) or the first day of the month, whichever comes first.
@@ -62,11 +43,10 @@ internal val LocalDate.endOfWeek: LocalDate
  * @return [LocalDate] representing the first day of the week or the month, whichever is earliest
  */
 internal val LocalDate.startOfWeekOrMonth: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         var result = this
         while (result.dayOfMonth > 1 && result.dayOfWeek != DayOfWeek.MONDAY) {
-            result = result.minusDays(1)
+            result = result.minus(1, DateTimeUnit.DAY)
         }
         return result
     }
@@ -77,17 +57,66 @@ internal val LocalDate.startOfWeekOrMonth: LocalDate
  * @return [LocalDate] representing the first day of the month
  */
 internal val LocalDate.startOfMonth: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() = withDayOfMonth(1)
+    get() = LocalDate(this.year, this.month, 1)
 
 /**
+ * Extension function that checks if year is a leap year.
+ *
+ * Example: 2016, 2020, 2024, etc
+ *
+ * @return [Boolean] whether year is a leap year
+ */
+internal val LocalDate.isLeapYear: Boolean
+    get() {
+        var isLeapYear = year % 4 == 0
+        isLeapYear = isLeapYear && (year % 100 != 0 || year % 400 == 0)
 
+        return isLeapYear
+    }
+
+/**
+ * Extension function that gets the maximum days of month
+ *
+ * @return [Int] of days in month
+ */
+internal fun Month.length(leapYear: Boolean): Int = when (this) {
+    Month.JANUARY -> 31
+    Month.FEBRUARY -> {
+        if (leapYear) {
+            29
+        } else {
+            28
+        }
+    }
+    Month.MARCH -> 31
+    Month.APRIL -> 30
+    Month.MAY -> 31
+    Month.JUNE -> 30
+    Month.JULY -> 31
+    Month.AUGUST -> 31
+    Month.SEPTEMBER -> 30
+    Month.OCTOBER -> 31
+    Month.NOVEMBER -> 30
+    Month.DECEMBER -> 31
+    else -> 30
+}
+
+/**
+ * Extension function that gets the maximum days of month
+ *
+ * @return [Int] of days in month
+ */
+internal val LocalDate.lengthOfMonth: Int
+    get() = month.length(isLeapYear)
+
+/**
 Extension function that jumps to the last day of the month.
 @return [LocalDate] representing the last day of the month
  */
 internal val LocalDate.endOfMonth: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() = with(TemporalAdjusters.lastDayOfMonth())
+    get() {
+        return LocalDate(this.year, this.month, lengthOfMonth)
+    }
 
 /**
  * Get the first day of the previous week from the current date.
@@ -98,16 +127,12 @@ internal val LocalDate.endOfMonth: LocalDate
  * @return The first day of the previous week as a `LocalDate` object.
  */
 internal val LocalDate.previousWeek: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = when {
-        dayOfMonth == Constants.FIRST_DAY_IN_MONTH
-                && dayOfWeek != DayOfWeek.MONDAY -> with(DayOfWeek.MONDAY)
-
         dayOfMonth >= Constants.DAYS_IN_WEEK ||
                 dayOfMonth == Constants.FIRST_DAY_IN_MONTH
-                && dayOfWeek == DayOfWeek.MONDAY -> minusWeeks(1)
+                && dayOfWeek == DayOfWeek.MONDAY -> minus(1, DateTimeUnit.WEEK)
 
-        else -> withDayOfMonth(Constants.FIRST_DAY_IN_MONTH)
+        else -> startOfMonth
     }
 
 
@@ -120,11 +145,10 @@ internal val LocalDate.previousWeek: LocalDate
  * @return The first day of the next week as a `LocalDate` object.
  */
 internal val LocalDate.nextWeek: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = when {
-        dayOfMonth == Constants.FIRST_DAY_IN_MONTH -> plusDays((7 - dayOfWeek.value) + 1L)
-        lengthOfMonth() - dayOfMonth >= Constants.DAYS_IN_WEEK -> plusWeeks(1)
-        else -> plusMonths(1).withDayOfMonth(Constants.FIRST_DAY_IN_MONTH)
+        dayOfMonth == Constants.FIRST_DAY_IN_MONTH -> plus((7 - dayOfWeek.isoDayNumber) + 1, DateTimeUnit.DAY)
+        lengthOfMonth - dayOfMonth >= Constants.DAYS_IN_WEEK -> plus(1, DateTimeUnit.WEEK)
+        else -> plus(1, DateTimeUnit.MONTH).startOfMonth
     }
 
 /**
@@ -136,9 +160,8 @@ internal val LocalDate.nextWeek: LocalDate
  * @param config The `CalendarConfig` to determine the jump step.
  * @return A new `LocalDate` instance representing the previous date based on the `CalendarConfig`.
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun LocalDate.jumpPrev(config: CalendarConfig): LocalDate = when (config.style) {
-    CalendarStyle.MONTH -> this.minusMonths(1).withDayOfMonth(1)
+    CalendarStyle.MONTH -> this.minus(1, DateTimeUnit.MONTH).startOfMonth
     CalendarStyle.WEEK -> this.previousWeek
 }
 
@@ -151,9 +174,8 @@ fun LocalDate.jumpPrev(config: CalendarConfig): LocalDate = when (config.style) 
  * @param config The `CalendarConfig` to determine the jump step.
  * @return A new `LocalDate` instance representing the next date based on the `CalendarConfig`.
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun LocalDate.jumpNext(config: CalendarConfig): LocalDate = when (config.style) {
-    CalendarStyle.MONTH -> this.plusMonths(1).withDayOfMonth(1)
+    CalendarStyle.MONTH -> this.plus(1, DateTimeUnit.MONTH).startOfMonth
     CalendarStyle.WEEK -> this.nextWeek
 }
 
@@ -170,7 +192,7 @@ internal fun getInitialCameraDate(
     val cameraDateBasedOnMode = when (selection) {
         is CalendarSelection.Date -> selection.selectedDate
         is CalendarSelection.Dates -> selection.selectedDates?.firstOrNull()
-        is CalendarSelection.Period -> selection.selectedRange?.lower
+        is CalendarSelection.Period -> selection.selectedRange?.start
     } ?: run {
         val now = LocalDate.now()
         if (now in boundary) now else boundary.start
@@ -194,17 +216,15 @@ internal fun getInitialCustomCameraDate(
  * Get selection value of date.
  */
 internal val CalendarSelection.dateValue: LocalDate?
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = if (this is CalendarSelection.Date) selectedDate else null
 
 /**
  * Get selection value of dates.
  */
 internal val CalendarSelection.datesValue: Array<LocalDate>
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         val value = if (this is CalendarSelection.Dates) selectedDates?.toMutableList()
-            ?: mutableListOf() else mutableListOf()
+            ?: emptyList() else emptyList()
         return value.toTypedArray()
     }
 
@@ -212,44 +232,40 @@ internal val CalendarSelection.datesValue: Array<LocalDate>
  * Get selection value of range.
  */
 internal val CalendarSelection.rangeValue: Array<LocalDate?>
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         val value = if (this is CalendarSelection.Period) selectedRange else null
-        return mutableListOf(value?.lower, value?.upper).toTypedArray()
+        return mutableListOf(value?.start, value?.endInclusive).toTypedArray()
     }
 
 /**
  * Get range start value.
  */
 internal val List<LocalDate?>.startValue: LocalDate?
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = this.getOrNull(Constants.RANGE_START)
 
 /**
  * Get range end value.
  */
 internal val List<LocalDate?>.endValue: LocalDate?
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = this.getOrNull(Constants.RANGE_END)
 
 /**
  * Calculate the month data based on the camera date and the restrictions.
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun calcMonthData(
     config: CalendarConfig,
     cameraDate: LocalDate,
     today: LocalDate = LocalDate.now()
 ): CalendarMonthData {
-    val months = Month.values().toMutableList()
+    val months = Month.entries.toMutableList()
 
     // Check that months are within the boundary
     val boundaryFilteredMonths = months.filter { month ->
         val maxDayOfMonth = month.length(cameraDate.isLeapYear)
         val startDay = minOf(config.boundary.start.dayOfMonth, maxDayOfMonth)
         val endDay = minOf(config.boundary.endInclusive.dayOfMonth, maxDayOfMonth)
-        val cameraDateWithMonth = cameraDate.withMonth(month.value).withDayOfMonth(startDay)
-        cameraDateWithMonth in config.boundary || cameraDateWithMonth.withDayOfMonth(endDay) in config.boundary
+        val cameraDateWithMonth = LocalDate(cameraDate.year, month, startDay)
+        cameraDateWithMonth in config.boundary || LocalDate(cameraDateWithMonth.year, cameraDateWithMonth.month, endDay) in config.boundary
     }
 
     return CalendarMonthData(
@@ -259,34 +275,51 @@ internal fun calcMonthData(
     )
 }
 
+private fun LocalDate.isoWeekNumber(): Int {
+    if (firstWeekInYearStart(year + 1) < this) return 1
+
+    val currentYearStart = firstWeekInYearStart(year)
+    val start = if (this < currentYearStart) firstWeekInYearStart(year - 1) else currentYearStart
+
+    val currentCalendarWeek = start.until(this, DateTimeUnit.WEEK) + 1
+
+    return currentCalendarWeek
+}
+
+private fun firstWeekInYearStart(year: Int): LocalDate {
+    val jan1st = LocalDate(year, 1, 1)
+    val previousMonday = jan1st.minus(jan1st.dayOfWeek.ordinal, DateTimeUnit.DAY)
+
+    return if (jan1st.dayOfWeek <= DayOfWeek.THURSDAY) previousMonday else previousMonday.plus(1, DateTimeUnit.WEEK)
+}
+
 /**
  * Calculate the calendar data based on the camera-date.
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): CalendarData {
     var weekCameraDate = cameraDate
 
-    val firstDayOfWeek = WeekFields.of(config.locale).firstDayOfWeek
+    val firstDayOfWeek = DayOfWeek.MONDAY
     val dayOfWeek = cameraDate.dayOfWeek
-    val diff = (dayOfWeek.value - firstDayOfWeek.value + 7) % 7
+    val diff = (dayOfWeek.isoDayNumber - firstDayOfWeek.isoDayNumber + 7) % 7
 
     val offsetStart = when (config.style) {
         CalendarStyle.MONTH -> diff
         CalendarStyle.WEEK -> {
             // Calculate the difference in days to the first day of the week from the camera date
-            val dayOfWeekInMonth = cameraDate.with(TemporalAdjusters.firstDayOfMonth()).dayOfWeek
-            val dayDiff = (dayOfWeekInMonth.value - firstDayOfWeek.value + 7) % 7
+            val dayOfWeekInMonth = cameraDate.startOfMonth.dayOfWeek
+            val dayDiff = (dayOfWeekInMonth.isoDayNumber - firstDayOfWeek.isoDayNumber + 7) % 7
 
             // Adjust weekCameraDate to the start of the week if necessary
             val adjustedWeekCameraDate =
                 if (cameraDate.dayOfMonth <= Constants.DAYS_IN_WEEK && dayDiff > 0) {
-                    cameraDate.minusDays((cameraDate.dayOfWeek.value - firstDayOfWeek.value + 7) % 7.toLong())
+                    cameraDate.minus((cameraDate.dayOfWeek.isoDayNumber - firstDayOfWeek.isoDayNumber + 7) % 7, DateTimeUnit.DAY)
                 } else {
                     weekCameraDate
                 }
 
             // Calculate the offset based on the adjustedWeekCameraDate
-            ((adjustedWeekCameraDate.dayOfWeek.value - firstDayOfWeek.value + 7) % 7).also {
+            ((adjustedWeekCameraDate.dayOfWeek.isoDayNumber - firstDayOfWeek.isoDayNumber + 7) % 7).also {
                 // Update weekCameraDate if it was adjusted
                 weekCameraDate = adjustedWeekCameraDate
             }
@@ -294,21 +327,21 @@ internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): Ca
     }
 
     val days = when (config.style) {
-        CalendarStyle.MONTH -> cameraDate.lengthOfMonth()
-        CalendarStyle.WEEK -> DayOfWeek.values().size
+        CalendarStyle.MONTH -> cameraDate.lengthOfMonth
+        CalendarStyle.WEEK -> DayOfWeek.entries.size
     }
 
     val rangedDays = (1..days.plus(offsetStart)).toMutableList()
         .map { dayIndex ->
             val date = when (config.style) {
                 CalendarStyle.MONTH -> cameraDate
-                    .withDayOfMonth(1)
-                    .plusDays(dayIndex.toLong().minus(1))
-                    .minusDays(offsetStart.toLong())
+                    .startOfMonth
+                    .plus(dayIndex.minus(1), DateTimeUnit.DAY)
+                    .minus(offsetStart, DateTimeUnit.DAY)
 
                 CalendarStyle.WEEK -> weekCameraDate
-                    .plusDays(dayIndex.toLong().minus(1))
-                    .minusDays(offsetStart.toLong())
+                    .plus(dayIndex.minus(1), DateTimeUnit.DAY)
+                    .minus(offsetStart, DateTimeUnit.DAY)
             }
             Pair(CalendarViewType.DAY, date)
         }.drop(
@@ -338,9 +371,7 @@ internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): Ca
             val newWeek = week.toMutableList().apply {
                 val firstDateCalendarWeek =
                     week.first { it.first == CalendarViewType.DAY }.second as LocalDate
-                val formatter = DateTimeFormatter.ofPattern("w").withLocale(config.locale)
-                val calendarWeek = formatter.format(firstDateCalendarWeek)
-                add(0, Pair(CalendarViewType.CW, calendarWeek))
+                add(0, Pair(CalendarViewType.CW, firstDateCalendarWeek.isoWeekNumber()))
             }
             newWeek
         } else week
@@ -354,10 +385,17 @@ internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): Ca
     )
 }
 
+internal fun LocalDate.isAfter(other: LocalDate): Boolean {
+    return this.toEpochDays() > other.toEpochDays()
+}
+
+internal fun LocalDate.isBefore(other: LocalDate): Boolean {
+    return other.isAfter(this)
+}
+
 /**
  * Calculate the calendar date-data based on the date.
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun calcCalendarDateData(
     date: LocalDate,
     calendarViewData: CalendarData,
@@ -368,7 +406,7 @@ internal fun calcCalendarDateData(
     selectedRange: Pair<LocalDate?, LocalDate?>
 ): CalendarDateData? {
 
-    if (date.monthValue != calendarViewData.cameraDate.monthValue) return null
+    if (date.monthNumber != calendarViewData.cameraDate.monthNumber) return null
 
     var selectedStartInit = false
     var selectedEnd = false

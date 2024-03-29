@@ -31,7 +31,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -40,10 +39,10 @@ import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.calendar.models.CalendarDateData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.now
 import com.maxkeppeler.sheets.calendar.utils.Constants
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import com.maxkeppeler.sheets.core.R as RC
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.isoDayNumber
 
 /**
  * The date item component of the calendar view.
@@ -124,7 +123,7 @@ internal fun CalendarDateItemComponent(
         is CalendarSelection.Period -> Modifier.padding(vertical = 2.dp)
     }.testTags(
         TestTags.CALENDAR_DATE,
-        data.date?.format(DateTimeFormatter.ISO_DATE) ?: ""
+        data.date?.toString() ?: ""
     )
 
     val cellModifier = when {
@@ -149,7 +148,7 @@ internal fun CalendarDateItemComponent(
                 modifier = Modifier
                     .weight(1f)
                     .alpha(textAlpha),
-                text = data.date?.format(DateTimeFormatter.ofPattern("d"))
+                text = data.date?.dayOfWeek?.isoDayNumber?.toString()
                     ?.takeUnless { data.otherMonth } ?: "",
                 style = textStyle,
                 textAlign = TextAlign.Center

@@ -17,6 +17,7 @@ package com.maxkeppeker.sheets.core.models.base
 
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.utils.BaseConstants
+import kotlinx.serialization.Serializable
 
 /**
  * Base configs for dialog-specific configs.

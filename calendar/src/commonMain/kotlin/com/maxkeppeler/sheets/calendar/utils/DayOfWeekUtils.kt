@@ -15,10 +15,9 @@
  */
 package com.maxkeppeler.sheets.calendar.utils
 
-import java.time.DayOfWeek
-import java.time.format.TextStyle
-import java.time.temporal.WeekFields
-import java.util.Locale
+import com.maxkeppeler.sheets.calendar.models.FormatLocale
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.isoDayNumber
 
 /**
  * Returns a map of day of week labels in the specified locale.
@@ -26,9 +25,9 @@ import java.util.Locale
  * @param locale the locale to get the labels for
  * @return a map of day of week labels
  */
-internal fun getDayOfWeekLabels(locale: Locale): Map<DayOfWeek, String> = when {
-    Locale.SIMPLIFIED_CHINESE.let { locale.language == it.language && locale.country == it.country } -> getSimplifiedChineseDayOfWeekLabels()
-    Locale.JAPANESE.let { locale.language == it.language } -> getJapaneseDayOfWeekLabels()
+internal fun getDayOfWeekLabels(locale: FormatLocale): Map<DayOfWeek, String> = when(locale) {
+    FormatLocale.Chinese -> getSimplifiedChineseDayOfWeekLabels()
+    FormatLocale.Japanese -> getJapaneseDayOfWeekLabels()
     else -> getDefaultDayOfWeekLabels(locale)
 }
 
@@ -38,10 +37,9 @@ internal fun getDayOfWeekLabels(locale: Locale): Map<DayOfWeek, String> = when {
  * @param locale the locale to adjust for
  * @return an ordered list of DayOfWeek values starting with the locale's first day of the week
  */
-internal fun getOrderedDaysOfWeek(locale: Locale): List<DayOfWeek> {
-    val firstDayOfWeek = WeekFields.of(locale).firstDayOfWeek
-    val daysOfWeek = DayOfWeek.values()
-    val orderedDays = daysOfWeek.sortedBy { (it.value - firstDayOfWeek.value + 7) % 7 }
+internal fun getOrderedDaysOfWeek(locale: FormatLocale): List<DayOfWeek> {
+    val daysOfWeek = DayOfWeek.entries.toTypedArray()
+    val orderedDays = daysOfWeek.sortedBy { (it.isoDayNumber - 1 + 7) % 7 }
     return orderedDays
 }
 
@@ -51,7 +49,7 @@ internal fun getOrderedDaysOfWeek(locale: Locale): List<DayOfWeek> {
  * @param locale the locale to get labels and order for
  * @return a linked map of ordered day of week labels
  */
-internal fun getOrderedDayOfWeekLabels(locale: Locale): LinkedHashMap<DayOfWeek, String> {
+internal fun getOrderedDayOfWeekLabels(locale: FormatLocale): LinkedHashMap<DayOfWeek, String> {
     val dayLabels = getDayOfWeekLabels(locale)
     val orderedDays = getOrderedDaysOfWeek(locale)
     return linkedMapOf<DayOfWeek, String>().apply {
@@ -61,15 +59,27 @@ internal fun getOrderedDayOfWeekLabels(locale: Locale): LinkedHashMap<DayOfWeek,
     }
 }
 
+private fun DayOfWeek.displayName(): String {
+    return when (this) {
+        DayOfWeek.MONDAY -> "Monday"
+        DayOfWeek.TUESDAY -> "Tuesday"
+        DayOfWeek.WEDNESDAY -> "Wednesday"
+        DayOfWeek.THURSDAY -> "Thursday"
+        DayOfWeek.FRIDAY -> "Friday"
+        DayOfWeek.SATURDAY -> "Saturday"
+        DayOfWeek.SUNDAY -> "Sunday"
+        else -> this.name
+    }
+}
+
 /**
  * Returns a map of day of week labels in the default locale.
  *
  * @param locale the locale to get the labels for
  * @return a map of day of week labels
  */
-private fun getDefaultDayOfWeekLabels(locale: Locale): Map<DayOfWeek, String> =
-    DayOfWeek.values()
-        .associateWith { dayOfWeek -> dayOfWeek.getDisplayName(TextStyle.NARROW, locale) }
+private fun getDefaultDayOfWeekLabels(locale: FormatLocale): Map<DayOfWeek, String> =
+    DayOfWeek.entries.associateWith { dayOfWeek -> dayOfWeek.displayName() }
 
 /**
  * Returns a map of day of week labels in Simplified Chinese locale.

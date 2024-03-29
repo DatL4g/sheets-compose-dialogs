@@ -15,9 +15,12 @@
  */
 package com.maxkeppeler.sheets.calendar.models
 
+import kotlinx.serialization.Serializable
+
 /**
  * Defined display modes for the calendar.
  */
+@Serializable
 internal enum class CalendarDisplayMode {
 
     /**

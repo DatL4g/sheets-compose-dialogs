@@ -21,7 +21,6 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
@@ -30,9 +29,8 @@ import com.maxkeppeler.sheets.calendar.models.CalendarDateData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarViewType
 import com.maxkeppeler.sheets.calendar.utils.calcCalendarDateData
-import java.time.DayOfWeek
-import java.time.LocalDate
-import com.maxkeppeler.sheets.core.R as RC
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
 
 /**
  * The view that displays all relevant calendar information.

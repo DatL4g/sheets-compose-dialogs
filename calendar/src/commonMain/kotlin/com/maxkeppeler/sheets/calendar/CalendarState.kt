@@ -29,6 +29,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import com.maxkeppeler.sheets.calendar.utils.*
 import com.maxkeppeler.sheets.calendar.utils.Constants
 import com.maxkeppeler.sheets.calendar.utils.calcCalendarData
 import com.maxkeppeler.sheets.calendar.utils.calcMonthData
@@ -39,17 +40,14 @@ import com.maxkeppeler.sheets.calendar.utils.endOfWeek
 import com.maxkeppeler.sheets.calendar.utils.endValue
 import com.maxkeppeler.sheets.calendar.utils.getInitialCameraDate
 import com.maxkeppeler.sheets.calendar.utils.getInitialCustomCameraDate
-import com.maxkeppeler.sheets.calendar.utils.jumpNext
-import com.maxkeppeler.sheets.calendar.utils.jumpPrev
 import com.maxkeppeler.sheets.calendar.utils.rangeValue
 import com.maxkeppeler.sheets.calendar.utils.startOfMonth
 import com.maxkeppeler.sheets.calendar.utils.startOfWeek
-import com.maxkeppeler.sheets.calendar.utils.startOfWeekOrMonth
 import com.maxkeppeler.sheets.calendar.utils.startValue
-import java.io.Serializable
-import java.time.DayOfWeek
-import java.time.LocalDate
-import java.time.Month
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
+import kotlinx.serialization.Serializable
 
 /**
  * Handles the calendar state.
@@ -174,7 +172,7 @@ internal class CalendarState(
 
     val cells: Int
         get() = when (mode) {
-            CalendarDisplayMode.CALENDAR -> DayOfWeek.values().size + if (config.displayCalendarWeeks) 1 else 0
+            CalendarDisplayMode.CALENDAR -> DayOfWeek.entries.size + if (config.displayCalendarWeeks) 1 else 0
             CalendarDisplayMode.YEAR -> Constants.YEAR_GRID_COLUMNS
             CalendarDisplayMode.MONTH -> Constants.MONTH_GRID_COLUMNS
         }
@@ -209,22 +207,22 @@ internal class CalendarState(
     }
 
     fun onMonthClick(month: Month) {
-        cameraDate = cameraDate.withMonth(month.value).startOfWeekOrMonth
+        cameraDate = LocalDate(cameraDate.year, month, cameraDate.dayOfMonth).startOfWeekOrMonth
         mode = CalendarDisplayMode.CALENDAR
         refreshData()
     }
 
     fun onYearClick(year: Int) {
-        var newDate = cameraDate.withYear(year)
+        var newDate = LocalDate(year, cameraDate.month, cameraDate.dayOfMonth)
         // Check if current new date would be within the boundary otherwise reset to month within boundary
         newDate = when {
-            newDate.isBefore(config.boundary.start) ->
-                newDate.withMonth(config.boundary.start.monthValue)
-                    .withDayOfMonth(config.boundary.start.dayOfMonth)
+            newDate.isBefore(config.boundary.start) -> {
+                LocalDate(newDate.year, config.boundary.start.month, config.boundary.start.dayOfMonth)
+            }
 
-            newDate.isAfter(config.boundary.endInclusive) ->
-                newDate.withMonth(config.boundary.endInclusive.monthValue)
-                    .withDayOfMonth(config.boundary.endInclusive.dayOfMonth)
+            newDate.isAfter(config.boundary.endInclusive) -> {
+                LocalDate(newDate.year, config.boundary.endInclusive.month, config.boundary.endInclusive.dayOfMonth)
+            }
 
             else -> newDate
         }
@@ -328,6 +326,7 @@ internal class CalendarState(
      * Data class that stores the important information of the current state
      * and can be used by the [Saver] to save and restore the state.
      */
+    @Serializable
     data class CalendarStateData(
         val mode: CalendarDisplayMode,
         val cameraDate: LocalDate,
@@ -335,11 +334,12 @@ internal class CalendarState(
         val dates: Array<LocalDate>,
         val range: Array<LocalDate?>,
         val rangeSelectionStart: Boolean
-    ) : Serializable {
+    ) {
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true
-            if (javaClass != other?.javaClass) return false
+            if (other == null) return false
+            if (this::class != other::class) return false
 
             other as CalendarStateData
 

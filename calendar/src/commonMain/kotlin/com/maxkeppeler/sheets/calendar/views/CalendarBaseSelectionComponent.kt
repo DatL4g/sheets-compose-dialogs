@@ -38,14 +38,12 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.BaseConstants
-import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import sheets_compose_dialogs.calendar.generated.resources.Res
 import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_select_month
 import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_select_year
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The main component for the selection of the use-case as well as the selection of month and year within the dialog.

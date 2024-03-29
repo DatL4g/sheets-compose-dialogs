@@ -19,12 +19,10 @@ import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 import com.maxkeppeler.sheets.calendar.utils.Constants
-import java.time.LocalDate
-import java.util.Locale
+import kotlinx.datetime.LocalDate
 
 /**
  * The general configuration for the calendar dialog.
- * @param locale The locale of the calendar.
  * @param style The style of the calendar.
  * @param cameraDate The date that is initially displayed when the calendar is opened.
  * @param monthSelection Allow the direct selection of a month.
@@ -34,7 +32,7 @@ import java.util.Locale
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 class CalendarConfig(
-    val locale: Locale = Locale.getDefault(),
+    val locale: FormatLocale = FormatLocale.getDefault(),
     val style: CalendarStyle = CalendarStyle.MONTH,
     val cameraDate: LocalDate? = null,
     val displayCalendarWeeks: Boolean = Constants.DEFAULT_DISPLAY_CALENDAR_WEEKS,

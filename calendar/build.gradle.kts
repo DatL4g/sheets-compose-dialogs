@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+
 /*
  *  Copyright (C) 2022-2024. Maximilian Keppeler (https://www.maxkeppeler.com)
  *
@@ -34,6 +36,27 @@ android {
 
 kotlin {
     androidTarget()
+    jvm()
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    macosX64()
+    macosArm64()
+
+    js(IR) {
+        browser()
+        binaries.executable()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        binaries.executable()
+    }
+
+    applyDefaultHierarchyTemplate()
 
     sourceSets {
         commonMain.dependencies {
@@ -45,7 +68,23 @@ kotlin {
             implementation(compose.animation)
             implementation(compose.animationGraphics)
 
+            implementation(libs.datetime)
+            implementation(libs.desugar)
+            implementation(libs.serialization)
+            implementation(libs.stdlib)
+
             implementation(project(":core"))
+        }
+
+        val nonJvmMain by creating {
+            dependsOn(commonMain.get())
+
+            nativeMain.orNull?.dependsOn(this)
+            jsMain.orNull?.dependsOn(this)
+        }
+
+        val wasmJsMain by getting {
+            dependsOn(nonJvmMain)
         }
     }
 }

@@ -18,7 +18,7 @@ package com.maxkeppeler.sheets.calendar.views
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
-import java.time.Month
+import kotlinx.datetime.Month
 
 /**
  * The view that displays all relevant year information.
@@ -29,7 +29,7 @@ internal fun LazyGridScope.setupMonthSelectionView(
     monthsData: CalendarMonthData,
     onMonthClick: (Month) -> Unit,
 ) {
-    items(Month.values()) { month ->
+    items(Month.entries.toTypedArray()) { month ->
         val selected = monthsData.selected == month
         val disabled = monthsData.disabled.contains(month)
         val thisMonth = monthsData.thisMonth == month

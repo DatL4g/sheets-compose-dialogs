@@ -15,7 +15,8 @@
  */
 package com.maxkeppeler.sheets.calendar.models
 
-import java.time.LocalDate
+import kotlinx.datetime.LocalDate
+
 
 /**
  * Defines all calculated information for a specific date.

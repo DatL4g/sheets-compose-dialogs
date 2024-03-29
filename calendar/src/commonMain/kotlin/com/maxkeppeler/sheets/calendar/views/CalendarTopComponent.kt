@@ -23,9 +23,6 @@ import androidx.compose.animation.expandIn
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
-import androidx.compose.animation.graphics.res.animatedVectorResource
-import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
-import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,7 +36,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconButton
@@ -52,20 +48,20 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import com.maxkeppeler.sheets.calendar.monthShort
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.number
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import sheets_compose_dialogs.calendar.generated.resources.*
@@ -73,11 +69,8 @@ import sheets_compose_dialogs.calendar.generated.resources.Res
 import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_prev_month
 import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_prev_week
 import sheets_compose_dialogs.calendar.generated.resources.scd_calendar_dialog_select_month
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import kotlin.math.max
 import kotlin.math.min
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Top header component of the calendar dialog.
@@ -186,8 +179,8 @@ internal fun CalendarTopComponent(
             ) {
                 Text(
                     modifier = selectableItemModifier
-                        .testTags(TestTags.CALENDAR_MONTH_TITLE, cameraDate.month.value),
-                    text = cameraDate.format(DateTimeFormatter.ofPattern("MMM")),
+                        .testTags(TestTags.CALENDAR_MONTH_TITLE, cameraDate.month.number),
+                    text = cameraDate.monthShort(),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )
@@ -214,7 +207,7 @@ internal fun CalendarTopComponent(
                 Text(
                     modifier = selectableItemModifier
                         .testTags(TestTags.CALENDAR_YEAR_TITLE, cameraDate.year),
-                    text = cameraDate.format(DateTimeFormatter.ofPattern("yyyy")),
+                    text = cameraDate.year.toString(),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )
@@ -335,7 +328,7 @@ internal fun CalendarTopLandscapeComponent(
         ) {
             Text(
                 modifier = selectableItemModifier.weight(1f),
-                text = cameraDate.format(DateTimeFormatter.ofPattern("yyyy")),
+                text = cameraDate.year.toString(),
                 style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Start
             )
@@ -363,7 +356,7 @@ internal fun CalendarTopLandscapeComponent(
         ) {
             Text(
                 modifier = selectableItemModifier.weight(1f),
-                text = cameraDate.format(DateTimeFormatter.ofPattern("MMM")),
+                text = cameraDate.monthShort(),
                 style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Start
             )

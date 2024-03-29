@@ -16,7 +16,8 @@
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.foundation.lazy.LazyListScope
-import java.time.LocalDate
+import com.maxkeppeler.sheets.calendar.now
+import kotlinx.datetime.LocalDate
 
 /**
  * The view that displays all relevant year information.
