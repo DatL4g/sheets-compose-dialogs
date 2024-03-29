@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
@@ -105,7 +106,7 @@ fun FrameBase(
             Spacer(
                 modifier = Modifier
                     .testTag(TestTags.FRAME_BASE_NO_HEADER)
-                    .height(dimensionResource(RC.dimen.scd_small_100))
+                    .height(8.dp)
             )
         }
 
@@ -118,7 +119,7 @@ fun FrameBase(
                     ),
                     end = horizontalContentPadding.calculateEndPadding(layoutDirection),
                     // Enforce default top spacing
-                    top = dimensionResource(RC.dimen.scd_normal_100),
+                    top = 16.dp,
                 )
             )
         when (layoutType) {
@@ -147,7 +148,7 @@ fun FrameBase(
             } else Spacer(
                 modifier = Modifier
                     .testTag(TestTags.FRAME_BASE_NO_BUTTONS)
-                    .height(dimensionResource(RC.dimen.scd_normal_150))
+                    .height(24.dp)
             )
         }
     }

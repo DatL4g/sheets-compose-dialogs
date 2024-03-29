@@ -1,7 +1,7 @@
 object Versions {
 
     // Kotlin
-    const val KOTLIN = "1.8.10"
+    const val KOTLIN = "1.9.22"
 
     // Compose
     const val COMPOSE_BOM = "2024.02.00"

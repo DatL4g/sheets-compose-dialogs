@@ -13,11 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.maxkeppeker.sheets.core
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.IntOffset
@@ -36,7 +34,6 @@ import com.maxkeppeker.sheets.core.views.base.PopupBase
  * @param onPositiveValid If the positive button is valid and therefore enabled.
  * @param properties The properties of the popup.
  */
-@ExperimentalMaterial3Api
 @Composable
 fun CorePopup(
     state: UseCaseState,

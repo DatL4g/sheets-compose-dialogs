@@ -14,14 +14,31 @@
  *  limitations under the License.
  */
 plugins {
-    id(Plugins.CUSTOM_LIBRARY_MODULE.id)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.multiplatform)
 }
 
 android {
     namespace = Modules.CORE.namespace
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 21
+    }
 }
 
-mavenPublishing {
-    publishToMavenCentral()
-    signAllPublications()
+kotlin {
+    androidTarget()
+
+    applyDefaultHierarchyTemplate()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.materialIconsExtended)
+            implementation(compose.material3)
+        }
+    }
 }

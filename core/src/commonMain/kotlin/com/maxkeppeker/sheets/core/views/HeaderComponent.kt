@@ -32,7 +32,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.utils.TestTags
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Header component of the dialog.
@@ -64,14 +63,14 @@ private fun DefaultHeaderComponent(
             .testTag(TestTags.HEADER_DEFAULT)
             .fillMaxWidth()
             .padding(contentHorizontalPadding)
-            .padding(top = dimensionResource(id = RC.dimen.scd_normal_150)),
+            .padding(top = 24.dp),
         horizontalAlignment = if (header.icon != null) Alignment.CenterHorizontally else Alignment.Start
     ) {
         header.icon?.let {
             IconComponent(
                 modifier = Modifier
                     .testTag(TestTags.HEADER_DEFAULT_ICON)
-                    .size(dimensionResource(RC.dimen.scd_size_150)),
+                    .size(24.dp),
                 iconSource = it,
                 defaultTint = MaterialTheme.colorScheme.secondary
             )
@@ -82,7 +81,7 @@ private fun DefaultHeaderComponent(
             modifier = Modifier
                 .testTag(TestTags.HEADER_DEFAULT_TEXT)
                 .padding(
-                    top = if (header.icon != null) dimensionResource(id = RC.dimen.scd_normal_100)
+                    top = if (header.icon != null) 16.dp
                     else 0.dp
                 ),
             color = MaterialTheme.colorScheme.onSurface,

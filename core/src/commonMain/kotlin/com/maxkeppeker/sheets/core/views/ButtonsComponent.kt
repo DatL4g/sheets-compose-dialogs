@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.ButtonStyle
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
@@ -82,14 +83,14 @@ fun ButtonsComponent(
 
     val buttonPadding = when (orientation) {
         LibOrientation.PORTRAIT -> Modifier
-            .padding(top = dimensionResource(id = R.dimen.scd_normal_150))
-            .padding(bottom = dimensionResource(id = R.dimen.scd_normal_150))
-            .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_150))
+            .padding(top = 24.dp)
+            .padding(bottom = 24.dp)
+            .padding(horizontal = 24.dp)
 
         LibOrientation.LANDSCAPE -> Modifier
-            .padding(top = dimensionResource(id = R.dimen.scd_small_100))
-            .padding(bottom = dimensionResource(id = R.dimen.scd_small_100))
-            .padding(horizontal = dimensionResource(id = R.dimen.scd_small_100))
+            .padding(top = 8.dp)
+            .padding(bottom = 8.dp)
+            .padding(horizontal = 8.dp)
     }
 
     Row(
@@ -114,7 +115,7 @@ fun ButtonsComponent(
             SelectionButtonComponent(
                 modifier = Modifier
                     .wrapContentWidth()
-                    .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
+                    .padding(horizontal = 16.dp),
                 button = negativeButton,
                 onClick = negativeAction,
                 testTag = TestTags.BUTTON_NEGATIVE,
@@ -153,10 +154,10 @@ private fun SelectionButtonComponent(
             IconComponent(
                 modifier = Modifier
                     .testTags(testTag, TestTags.BUTTON_ICON)
-                    .size(dimensionResource(R.dimen.scd_size_100)),
+                    .size(16.dp),
                 iconSource = icon,
             )
-            Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.scd_small_100)))
+            Spacer(modifier = Modifier.width(8.dp))
         }
 
         when {

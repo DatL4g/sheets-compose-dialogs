@@ -1,0 +1,13 @@
+[versions]
+android = "8.2.2"
+compose = "1.6.1"
+kotlin = "1.9.22"
+
+[libraries]
+
+[plugins]
+android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "android" }
+android-library = { id = "com.android.library", version.ref = "android" }
+compose = { id = "org.jetbrains.compose", version.ref = "compose" }
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

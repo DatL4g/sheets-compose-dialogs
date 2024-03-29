@@ -40,13 +40,7 @@ class LibraryModulePlugin : Plugin<Project> {
             // Compose libs
 
             implementations(
-                platform(Dependencies.Compose.BOM),
-                Dependencies.Compose.UI,
-                Dependencies.Compose.UI_TOOLING,
-                Dependencies.Compose.ANIMATION,
-                Dependencies.Compose.ANIMATION_GRAPHICS,
-                Dependencies.Compose.RUNTIME,
-                Dependencies.Compose.MATERIAL_3,
+
             )
 
 

@@ -17,16 +17,6 @@ object Dependencies {
 
     object Compose {
 
-        const val BOM = "androidx.compose:compose-bom:${Versions.COMPOSE_BOM}"
-        const val UI = "androidx.compose.ui:ui"
-        const val RUNTIME = "androidx.compose.runtime:runtime"
-        const val MATERIAL_2 = "androidx.compose.material:material"
-        const val MATERIAL_3 = "androidx.compose.material3:material3"
-        const val UI_TOOLING = "androidx.compose.ui:ui-tooling-preview"
-        const val ICONS_EXTENDED = "androidx.compose.material:material-icons-extended"
-        const val ANIMATION = "androidx.compose.animation:animation"
-        const val ANIMATION_GRAPHICS = "androidx.compose.animation:animation-graphics"
-
         object Test {
             const val JUNIT = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"
             const val TOOLING = "androidx.compose.ui:ui-tooling"
@@ -36,10 +26,10 @@ object Dependencies {
 
     object Vanniktech {
 
-        const val EMOJI_GOOGLE = "com.vanniktech:emoji-google:0.15.0"
-        const val EMOJI_IOS = "com.vanniktech:emoji-ios:0.15.0"
-        const val EMOJI_FACEBOOK = "com.vanniktech:emoji-facebook:0.15.0"
-        const val EMOJI_TWITTER = "com.vanniktech:emoji-twitter:0.15.0"
+        const val EMOJI_GOOGLE = "com.vanniktech:emoji-google:0.18.0"
+        const val EMOJI_IOS = "com.vanniktech:emoji-ios:0.18.0"
+        const val EMOJI_FACEBOOK = "com.vanniktech:emoji-facebook:0.18.0"
+        const val EMOJI_TWITTER = "com.vanniktech:emoji-twitter:0.18.0"
     }
 
     object Test {
@@ -50,7 +40,7 @@ object Dependencies {
     object Kotlin {
 
         const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}"
-        const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
+        const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk8${Versions.KOTLIN}"
     }
 
     object Gradle {

@@ -8,6 +8,7 @@ object Plugins {
     val SPOTLESS = Plugin("com.diffplug.spotless", "6.10.0")
     val MAVEN_PUBLISH = Plugin("com.vanniktech.maven.publish")
     val DOKKA = Plugin("org.jetbrains.dokka", Versions.DOKKA)
+    val COMPOSE = Plugin("org.jetbrains.compose", Versions.COMPOSE)
 
     val CUSTOM_LIBRARY_MODULE = Plugin("library-module")
 }

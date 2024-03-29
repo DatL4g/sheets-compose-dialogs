@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.core.R
 
 
@@ -35,11 +36,10 @@ object BaseModifiers {
      */
     fun Modifier.dynamicContentWrapOrMaxHeight(scope: ColumnScope): Modifier = composed {
         val modifier = this
-        val dynamicContentMaxHeight = dimensionResource(id = R.dimen.scd_dynamic_content_max_height)
         scope.run {
             modifier
                 .weight(1f, false)
-                .heightIn(max = dynamicContentMaxHeight)
+                .heightIn(max = 350.dp)
         }
     }
 }

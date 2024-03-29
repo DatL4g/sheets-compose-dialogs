@@ -29,8 +29,8 @@ object BaseValues {
     val CONTENT_DEFAULT_PADDING: PaddingValues
         @Composable
         get() = PaddingValues(
-            start = dimensionResource(id = R.dimen.scd_normal_150),
-            end = dimensionResource(id = R.dimen.scd_normal_150),
-            top = dimensionResource(id = R.dimen.scd_normal_100)
+            start = 24.dp,
+            end = 24.dp,
+            top = 16.dp
         )
 }
