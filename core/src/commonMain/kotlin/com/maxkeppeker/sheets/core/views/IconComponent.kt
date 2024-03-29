@@ -20,8 +20,9 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import com.maxkeppeker.sheets.core.models.base.IconSource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 
 /**
  * Icon component that is displayed in various places in a dialog.
@@ -30,6 +31,7 @@ import com.maxkeppeker.sheets.core.models.base.IconSource
  * @param tint The color that is used to tint the icon.
  * @param defaultTint The default color that is used.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun IconComponent(
     modifier: Modifier,
@@ -40,7 +42,7 @@ fun IconComponent(
 
     val actualTint = tint ?: iconSource.tint ?: defaultTint ?: LocalContentColor.current
 
-    val resolvedPainterDrawableRes = iconSource.drawableRes?.let { painterResource(id = it) }
+    val resolvedPainterDrawableRes = iconSource.drawableRes?.let(::painterResource)
     (iconSource.painter ?: resolvedPainterDrawableRes)?.let {
         Icon(
             modifier = modifier,

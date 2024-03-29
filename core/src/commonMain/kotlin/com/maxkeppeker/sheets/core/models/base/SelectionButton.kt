@@ -15,8 +15,9 @@
  */
 package com.maxkeppeker.sheets.core.models.base
 
-import androidx.annotation.StringRes
 import androidx.compose.ui.text.AnnotatedString
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.StringResource
 
 /**
  * Represents a button with text and an optional icon.
@@ -24,8 +25,8 @@ import androidx.compose.ui.text.AnnotatedString
 open class SelectionButton {
 
     internal val text: String?
-    @StringRes
-    internal val textRes: Int?
+    @OptIn(ExperimentalResourceApi::class)
+    internal val textRes: StringResource?
     val annotatedString: AnnotatedString?
     internal val icon: IconSource?
     internal val type: ButtonStyle
@@ -37,6 +38,7 @@ open class SelectionButton {
      * @param icon The icon to be displayed on the button. Can be `null`.
      * @param type The style of the button. Default value is `ButtonStyle.TEXT`.
      */
+    @OptIn(ExperimentalResourceApi::class)
     constructor(
         text: String,
         icon: IconSource? = null,
@@ -56,8 +58,9 @@ open class SelectionButton {
      * @param icon The icon to be displayed on the button. Can be `null`.
      * @param type The style of the button. Default value is `ButtonStyle.TEXT`.
      */
+    @OptIn(ExperimentalResourceApi::class)
     constructor(
-        @StringRes textRes: Int,
+        textRes: StringResource,
         icon: IconSource? = null,
         type: ButtonStyle = ButtonStyle.TEXT
     ) {
@@ -75,6 +78,7 @@ open class SelectionButton {
      * @param icon The icon to be displayed on the button. Can be `null`.
      * @param type The style of the button. Default value is `ButtonStyle.TEXT`.
      */
+    @OptIn(ExperimentalResourceApi::class)
     constructor(
         annotatedString: AnnotatedString,
         icon: IconSource? = null,

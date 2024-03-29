@@ -17,9 +17,7 @@ package com.maxkeppeker.sheets.core.utils
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import com.maxkeppeler.sheets.core.R
 
 /**
  * Defines module-wide values.

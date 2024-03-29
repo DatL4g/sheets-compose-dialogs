@@ -17,25 +17,22 @@
 
 package com.maxkeppeker.sheets.core.views.base
 
-import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.BaseValues
 import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.isLandscape
 import com.maxkeppeker.sheets.core.utils.shouldUseLandscape
 import com.maxkeppeker.sheets.core.views.HeaderComponent
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Base component for the content structure of a dialog.
@@ -62,8 +59,7 @@ fun FrameBase(
 ) {
     val layoutDirection = LocalLayoutDirection.current
     val shouldUseLandscapeLayout = shouldUseLandscape()
-    val currentOrientation = LocalConfiguration.current.orientation
-    val isDeviceLandscape = currentOrientation == Configuration.ORIENTATION_LANDSCAPE
+    val isDeviceLandscape = isLandscape()
     val deviceOrientation =
         if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
     val layoutType = when (config?.orientation) {

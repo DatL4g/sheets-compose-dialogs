@@ -20,6 +20,10 @@ import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.ButtonStyle
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import sheets_compose_dialogs.core.generated.resources.Res
+import sheets_compose_dialogs.core.generated.resources.cancel
+import sheets_compose_dialogs.core.generated.resources.ok
 
 /**
  * Defines module-wide constants.
@@ -38,14 +42,16 @@ object BaseConstants {
 
     val DYNAMIC_SIZE_MAX = 200.dp
 
+    @OptIn(ExperimentalResourceApi::class)
     val DEFAULT_NEGATIVE_BUTTON = SelectionButton(
-        textRes = android.R.string.cancel,
+        textRes = Res.string.cancel,
         type = ButtonStyle.TEXT
     )
 
+    @OptIn(ExperimentalResourceApi::class)
     val DEFAULT_POSITIVE_BUTTON =
         SelectionButton(
-            textRes = android.R.string.ok,
+            textRes = Res.string.ok,
             type = ButtonStyle.TEXT
         )
 }

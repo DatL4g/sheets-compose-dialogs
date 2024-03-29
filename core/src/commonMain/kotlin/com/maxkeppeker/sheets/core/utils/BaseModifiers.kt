@@ -19,9 +19,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import com.maxkeppeler.sheets.core.R
 
 
 /**

@@ -21,7 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
 /**
  * Handles the base behavior of any use-case view.
@@ -154,10 +154,11 @@ class UseCaseState(
      * Data class that stores the important information of the current state
      * and can be used by the [Saver] to save and restore the state.
      */
+    @Serializable
     data class UseCaseStateData(
         val visible: Boolean,
         val embedded: Boolean,
-    ) : Serializable
+    )
 }
 
 /**

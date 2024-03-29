@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+
 /*
  *  Copyright (C) 2022-2024. Maximilian Keppeler (https://www.maxkeppeler.com)
  *
@@ -17,6 +19,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.compose)
     alias(libs.plugins.multiplatform)
+    alias(libs.plugins.serialization)
 }
 
 android {
@@ -30,6 +33,25 @@ android {
 
 kotlin {
     androidTarget()
+    jvm()
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    macosX64()
+    macosArm64()
+
+    js(IR) {
+        browser()
+        binaries.executable()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        browser()
+        binaries.executable()
+    }
 
     applyDefaultHierarchyTemplate()
 
@@ -39,6 +61,22 @@ kotlin {
             implementation(compose.foundation)
             implementation(compose.materialIconsExtended)
             implementation(compose.material3)
+            implementation(compose.components.resources)
+
+            implementation(libs.datetime)
+            implementation(libs.serialization)
+        }
+
+        val nonAndroidMain by creating {
+            dependsOn(commonMain.get())
+
+            jvmMain.orNull?.dependsOn(this)
+            nativeMain.orNull?.dependsOn(this)
+            jsMain.orNull?.dependsOn(this)
+        }
+
+        val wasmJsMain by getting {
+            dependsOn(nonAndroidMain)
         }
     }
 }

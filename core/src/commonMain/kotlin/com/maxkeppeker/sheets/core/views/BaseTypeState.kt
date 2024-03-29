@@ -18,12 +18,13 @@ package com.maxkeppeker.sheets.core.views
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
 /**
  * The base class for the use-case view states.
  */
-abstract class BaseTypeState : Serializable {
+@Serializable
+abstract class BaseTypeState {
 
     open var inputDisabled by mutableStateOf(false)
 

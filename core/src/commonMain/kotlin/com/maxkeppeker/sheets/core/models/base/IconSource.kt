@@ -17,19 +17,21 @@
 
 package com.maxkeppeker.sheets.core.models.base
 
-import androidx.annotation.DrawableRes
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
+import org.jetbrains.compose.resources.DrawableResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 /**
  * An icon from various sources alongside an optional contentDescription and tint.
  */
 class IconSource {
 
-    @DrawableRes
-    var drawableRes: Int? = null
+    @OptIn(ExperimentalResourceApi::class)
+    var drawableRes: DrawableResource? = null
     var imageVector: ImageVector? = null
     var bitmap: ImageBitmap? = null
     var painter: Painter? = null
@@ -43,8 +45,9 @@ class IconSource {
      * @param contentDescription Text that is used as content description for the icon
      * @param tint Color that is used to tint the icon
      */
+    @OptIn(ExperimentalResourceApi::class)
     constructor(
-        @DrawableRes drawableRes: Int,
+        drawableRes: DrawableResource,
         contentDescription: String? = null,
         tint: Color? = null
     ) {
@@ -108,8 +111,9 @@ class IconSource {
      * @param tint Color that is used to tint the icon
      * @param selectedTint Color that is used to tint the icon when selected
      */
+    @OptIn(ExperimentalResourceApi::class)
     constructor(
-        @DrawableRes drawableRes: Int,
+        drawableRes: DrawableResource,
         contentDescription: String? = null,
         tint: Color? = null,
         selectedTint: Color? = null
