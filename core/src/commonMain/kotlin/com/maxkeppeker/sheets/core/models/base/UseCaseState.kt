@@ -38,7 +38,7 @@ class UseCaseState(
     internal val onFinishedRequest: (UseCaseState.() -> Unit)? = null,
     internal val onDismissRequest: (UseCaseState.() -> Unit)? = null,
     internal val onCloseRequest: (UseCaseState.() -> Unit)? = null,
-) {
+) : JvmSerializable {
     internal var visible by mutableStateOf(visible)
     internal var embedded by mutableStateOf(embedded)
     internal var reset by mutableStateOf(false)
