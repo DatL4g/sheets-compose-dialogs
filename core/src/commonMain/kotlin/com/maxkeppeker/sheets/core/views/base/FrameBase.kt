@@ -44,6 +44,7 @@ import com.maxkeppeker.sheets.core.views.HeaderComponent
  * @param buttonsVisible Display the buttons.
  * @param buttons The content to be displayed inside the dialog that functions as the buttons view of the dialog.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FrameBase(
     header: Header? = null,

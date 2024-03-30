@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
@@ -5,6 +6,8 @@ plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.serialization)
+    alias(libs.plugins.publish)
+    `maven-publish`
 }
 
 android {
@@ -17,7 +20,9 @@ android {
 }
 
 kotlin {
-    androidTarget()
+    androidTarget {
+        publishAllLibraryVariants()
+    }
     jvm()
 
     iosX64()
@@ -52,4 +57,9 @@ kotlin {
             implementation(project(":core"))
         }
     }
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+    pomFromGradleProperties()
 }
