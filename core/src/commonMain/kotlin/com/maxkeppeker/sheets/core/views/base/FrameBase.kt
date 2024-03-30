@@ -31,7 +31,6 @@ import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.BaseValues
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.isLandscape
-import com.maxkeppeker.sheets.core.utils.shouldUseLandscape
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 
 /**
@@ -58,7 +57,6 @@ fun FrameBase(
     buttons: @Composable (ColumnScope.(LibOrientation) -> Unit)? = null,
 ) {
     val layoutDirection = LocalLayoutDirection.current
-    val shouldUseLandscapeLayout = shouldUseLandscape()
     val isDeviceLandscape = isLandscape()
     val deviceOrientation =
         if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
@@ -67,9 +65,7 @@ fun FrameBase(
             when {
                 // Only if auto orientation is currently landscape, content for landscape exists
                 // and the device screen is not larger than a typical phone.
-                isDeviceLandscape
-                        && layoutLandscape != null
-                        && shouldUseLandscapeLayout -> LibOrientation.LANDSCAPE
+                isDeviceLandscape && layoutLandscape != null -> LibOrientation.LANDSCAPE
                 else -> LibOrientation.PORTRAIT
             }
         }

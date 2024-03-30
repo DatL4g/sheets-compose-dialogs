@@ -70,16 +70,21 @@ kotlin {
             implementation(libs.serialization)
         }
 
-        val nonAndroidMain by creating {
+        val nonMacOsMain by creating {
             dependsOn(commonMain.get())
 
+            androidMain.orNull?.dependsOn(this)
             jvmMain.orNull?.dependsOn(this)
-            nativeMain.orNull?.dependsOn(this)
+            iosMain.orNull?.dependsOn(this)
             jsMain.orNull?.dependsOn(this)
+
+            dependencies {
+                implementation(libs.window.size)
+            }
         }
 
         val wasmJsMain by getting {
-            dependsOn(nonAndroidMain)
+            dependsOn(nonMacOsMain)
         }
     }
 }

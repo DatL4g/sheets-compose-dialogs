@@ -17,15 +17,5 @@ package com.maxkeppeker.sheets.core.utils
 
 import androidx.compose.runtime.Composable
 
-internal const val TABLET_THRESHOLD = 800
-
-/**
- * Determines whether the current screen should use landscape mode.
- *
- * @return `true` if the screen height is less than the [TABLET_THRESHOLD] in landscape mode, `false` otherwise.
- */
-@Composable
-expect fun shouldUseLandscape(): Boolean
-
 @Composable
 expect fun isLandscape(): Boolean
