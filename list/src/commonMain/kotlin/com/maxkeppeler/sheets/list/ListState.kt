@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.list.models.ListConfig
 import com.maxkeppeler.sheets.list.models.ListOption
@@ -137,7 +138,7 @@ internal class ListState(
     @Serializable
     data class ListStateData(
         val options: List<ListOption>
-    )
+    ) : JvmSerializable
 }
 
 

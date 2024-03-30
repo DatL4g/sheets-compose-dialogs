@@ -19,6 +19,7 @@ package com.maxkeppeler.sheets.option.models
 
 import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.models.base.IconSource
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
@@ -47,7 +48,7 @@ data class Option(
     @Transient val customView: (@Composable (selected: Boolean) -> Unit)? = null,
     @Transient val listTopView: (@Composable (selected: Boolean) -> Unit)? = null,
     @Transient val listBottomView: (@Composable (selected: Boolean) -> Unit)? = null,
-) {
+) : JvmSerializable {
     internal var position: Int = 0
 }
 

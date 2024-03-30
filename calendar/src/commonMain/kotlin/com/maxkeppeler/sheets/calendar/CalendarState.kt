@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarData
@@ -334,7 +335,7 @@ internal class CalendarState(
         val dates: Array<LocalDate>,
         val range: Array<LocalDate?>,
         val rangeSelectionStart: Boolean
-    ) {
+    ) : JvmSerializable {
 
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

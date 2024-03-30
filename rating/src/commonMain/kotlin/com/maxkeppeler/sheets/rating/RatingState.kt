@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.rating.models.RatingConfig
 import com.maxkeppeler.sheets.rating.models.RatingSelection
@@ -98,7 +99,7 @@ internal class RatingState(
     data class RatingStateData(
         val rating: Int?,
         val feedback: String?,
-    )
+    ) : JvmSerializable
 }
 
 /**

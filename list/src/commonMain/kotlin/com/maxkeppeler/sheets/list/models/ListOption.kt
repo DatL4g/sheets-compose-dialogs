@@ -18,6 +18,7 @@
 package com.maxkeppeler.sheets.list.models
 
 import com.maxkeppeker.sheets.core.models.base.IconSource
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
@@ -34,7 +35,7 @@ data class ListOption(
     val titleText: String,
     val subtitleText: String? = null,
     val selected: Boolean = false,
-) {
+) : JvmSerializable {
     internal var position: Int = 0
 }
 

@@ -70,7 +70,7 @@ kotlin {
             implementation(libs.serialization)
         }
 
-        val nonMacOsMain by creating {
+        val nonMacosMain by creating {
             dependsOn(commonMain.get())
 
             androidMain.orNull?.dependsOn(this)
@@ -81,6 +81,13 @@ kotlin {
             dependencies {
                 implementation(libs.window.size)
             }
+        }
+
+        val nonJvmMain by creating {
+            dependsOn(commonMain.get())
+
+            nativeMain.orNull?.dependsOn(this)
+            jsMain.orNull?.dependsOn(this)
         }
     }
 }

@@ -16,6 +16,7 @@
 package com.maxkeppeler.sheets.option.models
 
 import androidx.compose.runtime.Composable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
@@ -30,4 +31,4 @@ class OptionDetails(
     val title: String,
     val body: String,
     @Transient val postView: (@Composable (selected: Boolean) -> Unit)? = null,
-)
+) : JvmSerializable

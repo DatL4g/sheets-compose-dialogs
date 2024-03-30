@@ -3,10 +3,11 @@
 package com.maxkeppeker.sheets.core.icons
 
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed class LibIcons {
+sealed class LibIcons : JvmSerializable {
 
     abstract var EmojiEmotions: ImageVector
     abstract var EmojiNature: ImageVector

@@ -15,13 +15,14 @@
  */
 package com.maxkeppeler.sheets.calendar.models
 
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
 
 /**
  * Defined display modes for the calendar.
  */
 @Serializable
-internal enum class CalendarDisplayMode {
+internal enum class CalendarDisplayMode : JvmSerializable {
 
     /**
      * The default calendar view.
