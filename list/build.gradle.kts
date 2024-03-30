@@ -51,7 +51,7 @@ kotlin {
 
             implementation(libs.serialization)
 
-            implementation(project(":core"))
+            api(project(":core"))
         }
     }
 }

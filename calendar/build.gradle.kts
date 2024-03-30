@@ -73,7 +73,7 @@ kotlin {
             implementation(libs.serialization)
             implementation(libs.stdlib)
 
-            implementation(project(":core"))
+            api(project(":core"))
         }
 
         val nonJvmMain by creating {
