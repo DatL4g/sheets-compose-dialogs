@@ -186,7 +186,7 @@ internal fun CalendarTopComponent(
                 )
                 if (config.monthSelection && monthSelectionEnabled) {
                     Icon(
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(24.dp),
                         imageVector = Icons.Filled.KeyboardArrowUp,
                         contentDescription = stringResource(Res.string.scd_calendar_dialog_select_month),
                         tint = MaterialTheme.colorScheme.primary
@@ -213,7 +213,7 @@ internal fun CalendarTopComponent(
                 )
                 if (config.yearSelection && yearSelectionEnabled) {
                     Icon(
-                        modifier = Modifier.size(48.dp),
+                        modifier = Modifier.size(24.dp),
                         imageVector = Icons.Filled.KeyboardArrowUp,
                         contentDescription = stringResource(Res.string.scd_calendar_dialog_select_year),
                         tint = MaterialTheme.colorScheme.primary
@@ -333,7 +333,7 @@ internal fun CalendarTopLandscapeComponent(
             )
             if (config.yearSelection) {
                 Icon(
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(24.dp),
                     imageVector = Icons.Filled.KeyboardArrowUp,
                     contentDescription = stringResource(Res.string.scd_calendar_dialog_select_year),
                     tint = MaterialTheme.colorScheme.primary
@@ -361,7 +361,7 @@ internal fun CalendarTopLandscapeComponent(
             )
             if (config.monthSelection) {
                 Icon(
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(24.dp),
                     imageVector = Icons.Filled.KeyboardArrowUp,
                     contentDescription = stringResource(Res.string.scd_calendar_dialog_select_month),
                     tint = MaterialTheme.colorScheme.primary
