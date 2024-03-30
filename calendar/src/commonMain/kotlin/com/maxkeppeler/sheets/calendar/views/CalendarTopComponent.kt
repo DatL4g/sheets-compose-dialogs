@@ -37,6 +37,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
@@ -107,7 +108,6 @@ internal fun CalendarTopComponent(
     val enterTransition = expandIn(expandFrom = Alignment.Center, clip = false) + fadeIn()
     val exitTransition = shrinkOut(shrinkTowards = Alignment.Center, clip = false) + fadeOut()
 
-    val rotation by chevronDownUpRotation()
     var chevronMonthAtEnd by remember { mutableStateOf(false) }
     var chevronYearAtEnd by remember { mutableStateOf(false) }
 
@@ -186,8 +186,8 @@ internal fun CalendarTopComponent(
                 )
                 if (config.monthSelection && monthSelectionEnabled) {
                     Icon(
-                        modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
-                        imageVector = Icons.Filled.KeyboardArrowDown,
+                        modifier = Modifier.size(48.dp),
+                        imageVector = Icons.Filled.KeyboardArrowUp,
                         contentDescription = stringResource(Res.string.scd_calendar_dialog_select_month),
                         tint = MaterialTheme.colorScheme.primary
                     )
@@ -213,8 +213,8 @@ internal fun CalendarTopComponent(
                 )
                 if (config.yearSelection && yearSelectionEnabled) {
                     Icon(
-                        modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
-                        imageVector = Icons.Filled.KeyboardArrowDown,
+                        modifier = Modifier.size(48.dp),
+                        imageVector = Icons.Filled.KeyboardArrowUp,
                         contentDescription = stringResource(Res.string.scd_calendar_dialog_select_year),
                         tint = MaterialTheme.colorScheme.primary
                     )
@@ -286,7 +286,6 @@ internal fun CalendarTopLandscapeComponent(
     val enterTransition = expandIn(expandFrom = Alignment.Center, clip = false) + fadeIn()
     val exitTransition = shrinkOut(shrinkTowards = Alignment.Center, clip = false) + fadeOut()
 
-    val rotation by chevronDownUpRotation()
     var chevronMonthAtEnd by remember { mutableStateOf(false) }
     var chevronYearAtEnd by remember { mutableStateOf(false) }
 
@@ -334,8 +333,8 @@ internal fun CalendarTopLandscapeComponent(
             )
             if (config.yearSelection) {
                 Icon(
-                    modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
-                    imageVector = Icons.Filled.KeyboardArrowDown,
+                    modifier = Modifier.size(48.dp),
+                    imageVector = Icons.Filled.KeyboardArrowUp,
                     contentDescription = stringResource(Res.string.scd_calendar_dialog_select_year),
                     tint = MaterialTheme.colorScheme.primary
                 )
@@ -362,8 +361,8 @@ internal fun CalendarTopLandscapeComponent(
             )
             if (config.monthSelection) {
                 Icon(
-                    modifier = Modifier.size(48.dp).rotate(rotation.toFloat()),
-                    imageVector = Icons.Filled.KeyboardArrowDown,
+                    modifier = Modifier.size(48.dp),
+                    imageVector = Icons.Filled.KeyboardArrowUp,
                     contentDescription = stringResource(Res.string.scd_calendar_dialog_select_month),
                     tint = MaterialTheme.colorScheme.primary
                 )
@@ -433,24 +432,4 @@ internal fun CalendarTopLandscapeComponent(
             }
         }
     }
-}
-
-@Composable
-private fun chevronDownUpRotation(): State<Int> {
-    var rotation by remember { mutableIntStateOf(0) }
-
-    LaunchedEffect(rotation) {
-        while (rotation < 180) {
-            rotation = min(rotation + 1, 180)
-
-            withContext(Dispatchers.Default) {
-                delay(2)
-            }
-        }
-    }
-
-    return animateIntAsState(
-        targetValue = rotation,
-        label = "ArrowRotation"
-    )
 }

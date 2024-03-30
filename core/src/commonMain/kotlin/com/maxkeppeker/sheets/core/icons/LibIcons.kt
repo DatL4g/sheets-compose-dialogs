@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
 
-@Serializable
 sealed class LibIcons : JvmSerializable {
 
     abstract var EmojiEmotions: ImageVector

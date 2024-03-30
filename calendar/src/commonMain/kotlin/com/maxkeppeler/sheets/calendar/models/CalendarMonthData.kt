@@ -15,7 +15,9 @@
  */
 package com.maxkeppeler.sheets.calendar.models
 
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.datetime.Month
+import kotlinx.serialization.Serializable
 
 
 /**
@@ -24,8 +26,9 @@ import kotlinx.datetime.Month
  * @param selected the month that is selected.
  * @param thisMonth the current month.
  */
+@Serializable
 internal data class CalendarMonthData(
     val selected: Month,
     val disabled: List<Month>,
     val thisMonth: Month,
-)
+) : JvmSerializable

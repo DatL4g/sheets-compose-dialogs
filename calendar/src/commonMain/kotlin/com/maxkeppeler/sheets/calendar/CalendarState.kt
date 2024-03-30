@@ -60,7 +60,7 @@ internal class CalendarState(
     val selection: CalendarSelection,
     val config: CalendarConfig,
     stateData: CalendarStateData? = null,
-) : BaseTypeState() {
+) : BaseTypeState(), JvmSerializable {
 
     val today by mutableStateOf(LocalDate.now())
     var mode by mutableStateOf(stateData?.mode ?: CalendarDisplayMode.CALENDAR)
