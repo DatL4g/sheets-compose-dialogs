@@ -34,7 +34,7 @@ internal fun LinearProgressIndicator(
 ) {
 
     val linearIndicatorModifier = Modifier
-        .padding(dimensionResource(id = RC.dimen.scd_normal_150))
+        .padding(24.dp)
 
     indicator.customProgressIndicator?.invoke(indicator.value!!)
         ?: indicator.customIndicator?.invoke()

@@ -52,7 +52,7 @@ internal fun ListOptionBoundsComponent(
                 || selection.maxChoices != null) -> {
             Row(
                 modifier = Modifier
-                    .padding(bottom = dimensionResource(id = RC.dimen.scd_normal_100)),
+                    .padding(bottom = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
 

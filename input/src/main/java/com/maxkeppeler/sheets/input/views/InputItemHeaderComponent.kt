@@ -54,7 +54,7 @@ internal fun InputItemHeaderComponent(
                 IconComponent(
                     modifier = Modifier
                         .testTags(TestTags.INPUT_ITEM_HEADER_ICON, index)
-                        .size(dimensionResource(RC.dimen.scd_size_100)),
+                        .size(16.dp),
                     iconSource = it,
                 )
             }

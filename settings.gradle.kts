@@ -18,7 +18,7 @@ include(
     //":clock",
     //":date_time",
     //":color",
-    //":option",
+    ":option",
     //":state",
     //":input",
     //":emoji",

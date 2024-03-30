@@ -42,7 +42,7 @@ internal fun StateFailureComponent(
         Icon(
             modifier = Modifier
                 .testTag(TestTags.STATE_FAILURE)
-                .padding(vertical = dimensionResource(id = RC.dimen.scd_normal_100))
+                .padding(vertical = 16.dp)
                 .size(dimensionResource(id = RC.dimen.scd_size_350)),
             imageVector = config.icons.Error,
             contentDescription = null,

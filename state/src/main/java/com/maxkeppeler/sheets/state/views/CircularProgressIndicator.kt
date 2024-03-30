@@ -34,7 +34,7 @@ internal fun CircularProgressIndicator(
     indicator: ProgressIndicator.Circular,
 ) {
     val circularIndicatorModifier = Modifier
-        .padding(dimensionResource(id = RC.dimen.scd_normal_150))
+        .padding(24.dp)
         .width(dimensionResource(id = R.dimen.scd_state_dialog_indicator_width))
         .aspectRatio(1f)
 

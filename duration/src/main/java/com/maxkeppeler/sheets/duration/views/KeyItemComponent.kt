@@ -103,7 +103,7 @@ internal fun KeyItemComponent(
     ) {
         if (isActionBackspace || isActionClear) {
             val maxSize = 48.dp
-            val minSize = dimensionResource(RC.dimen.scd_size_100)
+            val minSize = 16.dp
             Icon(
                 modifier = Modifier
                     .padding(8.dp)

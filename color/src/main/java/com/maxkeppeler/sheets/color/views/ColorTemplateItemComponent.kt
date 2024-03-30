@@ -89,7 +89,7 @@ internal fun ColorTemplateItemComponent(
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(dimensionResource(RC.dimen.scd_size_100)),
+                        .size(16.dp),
                     imageVector = config.icons.Check,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary

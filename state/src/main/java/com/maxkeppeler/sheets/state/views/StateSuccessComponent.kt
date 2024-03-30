@@ -42,7 +42,7 @@ internal fun StateSuccessComponent(
         Icon(
             modifier = Modifier
                 .testTag(TestTags.STATE_SUCCESS)
-                .padding(vertical = dimensionResource(id = RC.dimen.scd_normal_100))
+                .padding(vertical = 16.dp)
                 .size(dimensionResource(id = RC.dimen.scd_size_350)),
             imageVector = config.icons.Check,
             contentDescription = null,
