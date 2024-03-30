@@ -1,5 +1,4 @@
 import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.android.library)
@@ -17,6 +16,10 @@ android {
     defaultConfig {
         minSdk = 21
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
 }
 
 kotlin {
@@ -33,12 +36,6 @@ kotlin {
     macosArm64()
 
     js(IR) {
-        browser()
-        binaries.executable()
-    }
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
         browser()
         binaries.executable()
     }
@@ -61,5 +58,4 @@ kotlin {
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
-    pomFromGradleProperties()
 }

@@ -42,7 +42,9 @@ fun IconComponent(
 
     val actualTint = tint ?: iconSource.tint ?: defaultTint ?: LocalContentColor.current
 
-    val resolvedPainterDrawableRes = iconSource.drawableRes?.let(::painterResource)
+    val resolvedPainterDrawableRes = iconSource.drawableRes?.let {
+        painterResource(it)
+    }
     (iconSource.painter ?: resolvedPainterDrawableRes)?.let {
         Icon(
             modifier = modifier,

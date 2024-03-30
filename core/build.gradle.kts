@@ -1,5 +1,4 @@
 import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 /*
  *  Copyright (C) 2022-2024. Maximilian Keppeler (https://www.maxkeppeler.com)
@@ -34,6 +33,8 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 }
 
@@ -51,12 +52,6 @@ kotlin {
     macosArm64()
 
     js(IR) {
-        browser()
-        binaries.executable()
-    }
-
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
         browser()
         binaries.executable()
     }
@@ -87,10 +82,6 @@ kotlin {
                 implementation(libs.window.size)
             }
         }
-
-        val wasmJsMain by getting {
-            dependsOn(nonMacOsMain)
-        }
     }
 }
 
@@ -100,5 +91,4 @@ dependencies {
 
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
-    pomFromGradleProperties()
 }
