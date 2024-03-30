@@ -71,7 +71,7 @@ internal fun InputCheckboxComponent(
 
         Column(
             modifier = Modifier
-                .padding(vertical = dimensionResource(RC.dimen.scd_small_150))
+                .padding(vertical = 12.dp)
                 .padding(start = 16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(),

@@ -52,7 +52,7 @@ internal fun EmojiTextHeaderItemComponent(
             .background(if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent)
             .clickable { onClick() }
             .padding(
-                horizontal = dimensionResource(RC.dimen.scd_small_150),
+                horizontal = 12.dp,
                 vertical = 4.dp
             ),
         text = name,

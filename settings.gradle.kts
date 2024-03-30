@@ -22,5 +22,5 @@ include(
     //":state",
     //":input",
     //":emoji",
-    //":list",
+    ":list",
 )

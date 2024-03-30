@@ -113,7 +113,7 @@ internal fun TimeValueComponent(
                     modifier = Modifier.width(
                         when {
                             orientation == LibOrientation.LANDSCAPE && !isHintView ->
-                                dimensionResource(RC.dimen.scd_small_150)
+                                12.dp
                             else -> 4.dp
                         }
                     )

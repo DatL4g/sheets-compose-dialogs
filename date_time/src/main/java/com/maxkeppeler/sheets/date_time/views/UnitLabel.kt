@@ -33,7 +33,7 @@ import com.maxkeppeler.sheets.core.R as RC
 @Composable
 internal fun UnitLabel(unit: UnitSelection) {
     Text(
-        modifier = Modifier.padding(bottom = dimensionResource(RC.dimen.scd_small_150)),
+        modifier = Modifier.padding(bottom = 12.dp),
         text = unit.placeholderRes?.let { stringResource(id = it) } ?: "",
         style = MaterialTheme.typography.labelMedium
     )

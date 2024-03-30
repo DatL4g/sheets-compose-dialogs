@@ -189,7 +189,7 @@ internal fun LandscapeTimeValueComponent(
                         },
                         style = textStyle
                     )
-                    Spacer(modifier = Modifier.width(dimensionResource(RC.dimen.scd_small_150)))
+                    Spacer(modifier = Modifier.width(12.dp))
 
                     Text(
                         text = stringResource(labelRes[currentGroupIndex]),
