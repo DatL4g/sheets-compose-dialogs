@@ -61,13 +61,13 @@ internal fun getOrderedDayOfWeekLabels(locale: FormatLocale): LinkedHashMap<DayO
 
 private fun DayOfWeek.displayName(): String {
     return when (this) {
-        DayOfWeek.MONDAY -> "Monday"
-        DayOfWeek.TUESDAY -> "Tuesday"
-        DayOfWeek.WEDNESDAY -> "Wednesday"
-        DayOfWeek.THURSDAY -> "Thursday"
-        DayOfWeek.FRIDAY -> "Friday"
-        DayOfWeek.SATURDAY -> "Saturday"
-        DayOfWeek.SUNDAY -> "Sunday"
+        DayOfWeek.MONDAY -> "M"
+        DayOfWeek.TUESDAY -> "T"
+        DayOfWeek.WEDNESDAY -> "W"
+        DayOfWeek.THURSDAY -> "T"
+        DayOfWeek.FRIDAY -> "F"
+        DayOfWeek.SATURDAY -> "S"
+        DayOfWeek.SUNDAY -> "S"
         else -> this.name
     }
 }

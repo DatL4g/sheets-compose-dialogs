@@ -1,9 +1,9 @@
 <resources>
-    <string name="scd_calendar_dialog_select_month" translatable="true">ເລືອກເດືອນ</string>
-    <string name="scd_calendar_dialog_next_month" translatable="true">ເດືອນຕໍ່ໄປ</string>
-    <string name="scd_calendar_dialog_prev_month" translatable="true">ເດືອນຕໍ່ໄປ</string>
-    <string name="scd_calendar_dialog_next_week" translatable="true">ອີກມື້ນີ້</string>
-    <string name="scd_calendar_dialog_prev_week" translatable="true">ອີກດິນເດືອນ</string>
-    <string name="scd_calendar_dialog_select_year" translatable="true">ເລືອກປີ</string>
-    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
+    <string name="scd_calendar_dialog_select_month" >ເລືອກເດືອນ</string>
+    <string name="scd_calendar_dialog_next_month" >ເດືອນຕໍ່ໄປ</string>
+    <string name="scd_calendar_dialog_prev_month" >ເດືອນຕໍ່ໄປ</string>
+    <string name="scd_calendar_dialog_next_week" >ອີກມື້ນີ້</string>
+    <string name="scd_calendar_dialog_prev_week" >ອີກດິນເດືອນ</string>
+    <string name="scd_calendar_dialog_select_year" >ເລືອກປີ</string>
+    <string name="scd_calendar_dialog_cw" >CW</string>
 </resources>
