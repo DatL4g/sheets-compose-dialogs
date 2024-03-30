@@ -23,14 +23,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
-import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.rating.models.RatingBody
 import com.maxkeppeler.sheets.rating.models.RatingConfig
 import com.maxkeppeler.sheets.rating.models.RatingSelection
@@ -75,7 +74,7 @@ fun RatingView(
                 config = config,
                 body = body
             )
-            Spacer(modifier = Modifier.height(dimensionResource(R.dimen.scd_normal_150)))
+            Spacer(modifier = Modifier.height(24.dp))
             RatingComponent(
                 config = config,
                 rating = ratingState.rating,

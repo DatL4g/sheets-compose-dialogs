@@ -30,13 +30,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.rating.models.RatingConfig
 import com.maxkeppeler.sheets.rating.models.RatingViewStyle
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The view for the selection of the rating.
@@ -97,12 +95,12 @@ private fun RatingOptionView(
     ) {
         Icon(
             modifier = Modifier
-                .size(dimensionResource(RC.dimen.scd_size_250))
+                .size(40.dp)
                 .sizeIn(
                     minWidth = 32.dp,
                     minHeight = 32.dp,
-                    maxHeight = dimensionResource(RC.dimen.scd_size_250),
-                    maxWidth = dimensionResource(RC.dimen.scd_size_250)
+                    maxHeight = 40.dp,
+                    maxWidth = 40.dp
                 ),
             imageVector = config.icons.Star,
             contentDescription = null,
@@ -111,7 +109,6 @@ private fun RatingOptionView(
     }
 }
 
-@Preview
 @Composable
 private fun PreviewRatingSelectionView() {
     RatingSelectionView(

@@ -22,13 +22,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.rating.models.RatingBody
 import com.maxkeppeler.sheets.rating.models.RatingConfig
 import com.maxkeppeler.sheets.rating.models.RatingViewStyle
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The default body component for the rating dialog.

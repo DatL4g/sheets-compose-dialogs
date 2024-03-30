@@ -81,7 +81,7 @@ internal fun PickerComponent(
                                         modifier = Modifier
                                             .clip(MaterialTheme.shapes.extraSmall)
                                             .padding(horizontal = dimensionResource(R.dimen.scd_small_75))
-                                            .padding(top = dimensionResource(R.dimen.scd_normal_150)),
+                                            .padding(top = 24.dp),
                                         text = ":"
                                     )
                                 }

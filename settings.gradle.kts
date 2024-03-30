@@ -12,7 +12,7 @@ include(
     // Include all modules
     ":core",
     //":info",
-    //":rating",
+    ":rating",
     ":calendar",
     //":duration",
     //":clock",

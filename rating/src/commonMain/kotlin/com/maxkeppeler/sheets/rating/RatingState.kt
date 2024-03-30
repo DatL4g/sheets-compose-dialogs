@@ -24,7 +24,7 @@ import androidx.compose.runtime.setValue
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.rating.models.RatingConfig
 import com.maxkeppeler.sheets.rating.models.RatingSelection
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
 /**
  * Handles the color state.
@@ -94,10 +94,11 @@ internal class RatingState(
      * Data class that stores the rating info of the current state
      * and can be used by the [Saver] to save and restore the state.
      */
+    @Serializable
     data class RatingStateData(
         val rating: Int?,
         val feedback: String?,
-    ) : Serializable
+    )
 }
 
 /**

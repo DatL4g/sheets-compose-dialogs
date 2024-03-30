@@ -79,7 +79,7 @@ fun ClockView(
             TimeHintComponent(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = dimensionResource(R.dimen.scd_normal_150)),
+                    .padding(bottom = 24.dp),
                 valid = clockState.valid,
                 boundary = config.boundary,
             )

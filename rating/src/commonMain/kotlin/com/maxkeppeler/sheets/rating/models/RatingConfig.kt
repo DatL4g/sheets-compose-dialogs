@@ -15,7 +15,6 @@
  */
 package com.maxkeppeler.sheets.rating.models
 
-import androidx.annotation.IntRange
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
@@ -30,7 +29,7 @@ class RatingConfig(
     val feedbackErrorMessage: String? = null,
     val withFeedback: Boolean = false,
     val feedbackOptional: Boolean = true,
-    @IntRange(from = 3, to = 10) val ratingOptionsCount: Int = DEFAULT_RATING_OPTIONS_COUNT,
+    val ratingOptionsCount: Int = DEFAULT_RATING_OPTIONS_COUNT,
     override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()
 
