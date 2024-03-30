@@ -69,9 +69,7 @@ kotlin {
             implementation(compose.animationGraphics)
 
             implementation(libs.datetime)
-            implementation(libs.desugar)
             implementation(libs.serialization)
-            implementation(libs.stdlib)
 
             api(project(":core"))
         }
