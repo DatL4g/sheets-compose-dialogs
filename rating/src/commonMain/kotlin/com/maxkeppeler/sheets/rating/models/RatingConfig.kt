@@ -30,6 +30,7 @@ class RatingConfig(
     val withFeedback: Boolean = false,
     val feedbackOptional: Boolean = true,
     val ratingOptionsCount: Int = DEFAULT_RATING_OPTIONS_COUNT,
+    val ratingOptionsSelected: Int? = null,
     override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()
 

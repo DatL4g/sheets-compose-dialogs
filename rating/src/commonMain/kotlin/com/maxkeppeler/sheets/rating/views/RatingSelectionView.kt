@@ -108,12 +108,3 @@ private fun RatingOptionView(
         )
     }
 }
-
-@Composable
-private fun PreviewRatingSelectionView() {
-    RatingSelectionView(
-        value = 4,
-        config = RatingConfig(ratingOptionsCount = 5),
-        onSelectRating = {},
-    )
-}
