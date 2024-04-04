@@ -38,6 +38,7 @@ import com.maxkeppeler.sheets.input.models.InputSelection
  * @param offset The offset of the popup.
  * @param properties PopupProperties for further customization of this popup's behavior.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InputPopup(
     state: UseCaseState,

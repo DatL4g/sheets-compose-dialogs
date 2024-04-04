@@ -17,8 +17,8 @@
 
 package com.maxkeppeler.sheets.input.models
 
-import android.os.Bundle
-import java.io.Serializable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
+import kotlinx.serialization.Serializable
 
 /**
  * Base input definition that can be added to the input dialog.
@@ -27,12 +27,13 @@ import java.io.Serializable
  * @param header The additional [InputHeader] to add more context information to the selection.
  * @param columns The columns that this input spans.
  */
+@Serializable
 abstract class Input(
     internal open val key: String? = null,
     internal open val required: Boolean = false,
     internal open val header: InputHeader? = null,
     internal open val columns: Int? = null,
-) : Serializable {
+) : JvmSerializable {
 
     internal var position: Int = 0
 
@@ -57,13 +58,6 @@ abstract class Input(
      * Invoke the result listener that returns the result value.
      */
     internal open fun onResult(): Unit? = Unit
-
-    /**
-     * Save the input value into the bundle.
-     * Takes the index as an key, if there's no unique input key available.
-     * @param bundle The bundle where the input data is saved.
-     */
-    internal open fun putValue(bundle: Bundle): Unit? = Unit
 
     /**
      * Helper method that either uses the key or the index as String to assign key-value pairs

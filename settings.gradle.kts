@@ -20,7 +20,7 @@ include(
     //":color",
     ":option",
     ":state",
-    //":input",
+    ":input",
     //":emoji",
     ":list",
 )

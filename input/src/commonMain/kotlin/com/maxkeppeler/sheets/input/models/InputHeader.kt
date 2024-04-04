@@ -18,7 +18,9 @@
 package com.maxkeppeler.sheets.input.models
 
 import com.maxkeppeker.sheets.core.models.base.IconSource
-import java.io.Serializable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Represents a header that can be added to invidual input types.
@@ -26,8 +28,9 @@ import java.io.Serializable
  * @param body The text that is used for the body.
  * @param icon The icon that is displayed on the left side of the title.
  */
+@Serializable
 class InputHeader(
     val title: String? = null,
     val body: String? = null,
-    val icon: IconSource? = null,
-) : Serializable
+    @Transient val icon: IconSource? = null,
+) : JvmSerializable

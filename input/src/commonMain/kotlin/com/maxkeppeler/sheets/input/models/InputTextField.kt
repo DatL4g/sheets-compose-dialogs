@@ -18,7 +18,6 @@
 
 package com.maxkeppeler.sheets.input.models
 
-import android.os.Bundle
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -88,9 +87,5 @@ data class InputTextField(
         val customValidationOk = validationResult?.valid ?: true
         val requiredValid = (required && value?.isNotEmpty() == true || !required)
         return customValidationOk && requiredValid
-    }
-
-    override fun putValue(bundle: Bundle) {
-        bundle.putString(getBundleKey(), value)
     }
 }

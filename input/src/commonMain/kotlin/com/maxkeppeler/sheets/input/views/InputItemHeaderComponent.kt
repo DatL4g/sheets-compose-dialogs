@@ -21,13 +21,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeker.sheets.core.views.IconComponent
 import com.maxkeppeler.sheets.input.models.InputHeader
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The header for an input item type component.

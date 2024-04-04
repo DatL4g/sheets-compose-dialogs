@@ -15,14 +15,14 @@
  */
 package com.maxkeppeler.sheets.input
 
-import android.os.Bundle
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.input.models.Input
 import com.maxkeppeler.sheets.input.models.InputSelection
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
 /**
  * Handles the list state.
@@ -61,14 +61,12 @@ internal class InputState(
     }
 
     fun onFinish() {
-        val bundle = Bundle()
         input.forEach { input ->
             if (input.isInput()) {
                 input.onResult()
-                input.putValue(bundle)
             }
         }
-        selection.onPositiveClick?.invoke(bundle)
+        selection.onPositiveClick?.invoke()
     }
 
     override fun reset() {
@@ -95,9 +93,10 @@ internal class InputState(
      * Data class that stores the important information of the current state
      * and can be used by the [Saver] to save and restore the state.
      */
+    @Serializable
     data class InputStateData(
         val input: List<Input>
-    ) : Serializable
+    ) : JvmSerializable
 }
 
 

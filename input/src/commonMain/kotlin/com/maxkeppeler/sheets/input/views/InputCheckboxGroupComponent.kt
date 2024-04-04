@@ -18,45 +18,50 @@ package com.maxkeppeler.sheets.input.views
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.input.models.Input
-import com.maxkeppeler.sheets.input.models.InputRadioButtonGroup
-import com.maxkeppeler.sheets.core.R as RC
+import com.maxkeppeler.sheets.input.models.InputCheckboxGroup
 
 /**
- * RadioButton-Group component.
+ * Checkbox-Group component.
  * @param index The index of the input relative to all inputs.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
-internal fun InputRadioButtonGroupComponent(
+internal fun InputCheckboxGroupComponent(
     index: Int,
-    input: InputRadioButtonGroup,
+    input: InputCheckboxGroup,
     onInputUpdated: (Input) -> Unit
 ) {
-    var selectedIndex by remember { mutableStateOf(input.value) }
+    val selectedIndices = remember { mutableStateListOf(*input.value.toTypedArray()) }
 
-    LaunchedEffect(selectedIndex) {
+    LaunchedEffect(selectedIndices.toList()) {
         onInputUpdated(input.apply {
-            value = selectedIndex
+            value = selectedIndices.toList()
         })
     }
 
     Column(
         modifier = Modifier
-            .testTags(TestTags.INPUT_ITEM_RADIOBUTTON_GROUP, index)
+            .testTags(TestTags.INPUT_ITEM_CHECKBOX_GROUP, index)
     ) {
         input.items.forEachIndexed { index, item ->
-            InputRadioButtonItemComponent(
+            InputCheckboxItemComponent(
                 index = index,
                 text = item,
-                selected = selectedIndex == index,
-                onSelected = { selectedIndex = index }
+                selected = selectedIndices.contains(index),
+                onSelected = {
+                    if (selectedIndices.contains(index)) selectedIndices.remove(index)
+                    else selectedIndices.add(index)
+                }
             )
             if (index != input.items.lastIndex) {
                 Spacer(Modifier.height(4.dp))

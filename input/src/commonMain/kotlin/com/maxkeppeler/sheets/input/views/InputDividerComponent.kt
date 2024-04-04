@@ -15,37 +15,32 @@
  */
 package com.maxkeppeler.sheets.input.views
 
-import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.input.models.InputConfig
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
- * The overlay for an input item type component when the data is required.
+ * Divider component.
  * @param index The index of the input relative to all inputs.
  */
 @Composable
-internal fun BoxScope.InputItemOverlayComponent(
-    config: InputConfig,
-    index: Int
+internal fun InputDividerComponent(
+    index: Int,
 ) {
-    Icon(
-        modifier = Modifier
-            .align(Alignment.TopEnd)
-            .testTags(TestTags.INPUT_ITEM_OVERLAY, index)
-            .padding(8.dp)
-            .size(dimensionResource(RC.dimen.scd_size_50)),
-        imageVector = config.icons.Star,
-        contentDescription = null,
-        tint = MaterialTheme.colorScheme.error
+    Divider(
+        Modifier
+            .testTags(TestTags.INPUT_ITEM_DIVIDER, index)
+            .fillMaxWidth()
+            .padding(
+                top = 8.dp,
+                bottom = 4.dp,
+            ),
+        color = MaterialTheme.colorScheme.outlineVariant
     )
 }

@@ -17,8 +17,6 @@
 
 package com.maxkeppeler.sheets.input.models
 
-import android.os.Bundle
-
 /**
  * Represents a group of radio buttons.
  * @param items A list of Strings representing the individual radio button text.
@@ -55,7 +53,5 @@ class InputRadioButtonGroup(
     override fun onResult() = resultListener?.invoke(value)
 
     override fun isValid(): Boolean = required && value != null || !required
-
-    override fun putValue(bundle: Bundle) = value?.let { bundle.putInt(getBundleKey(), it) }
 
 }

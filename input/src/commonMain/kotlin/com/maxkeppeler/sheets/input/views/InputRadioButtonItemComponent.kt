@@ -17,68 +17,63 @@ package com.maxkeppeler.sheets.input.views
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.input.models.Input
-import com.maxkeppeler.sheets.input.models.InputCheckbox
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
- * Checkbox component.
+ * The RadioButton item for the RadioButton-Group.
  * @param index The index of the input relative to all inputs.
- * @param input The input that this component reflects.
- * @param onInputUpdated The listener that returns the updated input.
+ * @param text The text of the RadioButton.
+ * @param selected If the RadioButton is selected.
+ * @param onSelected The listener that is invoked when the RadioButton was clicked.
  */
 @Composable
-internal fun InputCheckboxComponent(
+internal fun InputRadioButtonItemComponent(
     index: Int,
-    input: InputCheckbox,
-    onInputUpdated: (Input) -> Unit
+    text: String,
+    selected: Boolean,
+    onSelected: () -> Unit
 ) {
-    var checked by remember { mutableStateOf(input.value) }
-
-    LaunchedEffect(checked) {
-        onInputUpdated(input.apply {
-            value = checked
-        })
-    }
-
     Row(
         modifier = Modifier
-            .testTags(TestTags.INPUT_ITEM_CHECKBOX, index)
+            .testTags(TestTags.INPUT_ITEM_RADIOBUTTON_GROUP_ITEM, index)
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.small)
-            .clickable { checked = !checked },
+            .clickable(!selected) { onSelected() },
         verticalAlignment = Alignment.CenterVertically
     ) {
 
-        Checkbox(
+        RadioButton(
             modifier = Modifier
-                .testTags(TestTags.INPUT_ITEM_CHECKBOX_CHECKBOX, index)
+                .testTags(TestTags.INPUT_ITEM_RADIOBUTTON_GROUP_ITEM_RADIOBUTTON, index)
                 .padding(start = 4.dp)
                 .size(24.dp),
-            checked = checked,
-            onCheckedChange = { checked = it }
+            selected = selected,
+            onClick = { onSelected() },
         )
 
         Column(
             modifier = Modifier
-                .padding(vertical = 12.dp)
+                .padding(vertical = 8.dp)
                 .padding(start = 16.dp)
                 .fillMaxWidth()
                 .wrapContentHeight(),
         ) {
+
             Text(
-                modifier = Modifier.testTags(TestTags.INPUT_ITEM_CHECKBOX_TEXT, index),
-                text = input.text,
+                modifier = Modifier.testTags(
+                    TestTags.INPUT_ITEM_RADIOBUTTON_GROUP_ITEM_TEXT,
+                    index
+                ),
+                text = text,
                 style = MaterialTheme.typography.labelLarge
             )
         }

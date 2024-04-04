@@ -17,7 +17,6 @@
 
 package com.maxkeppeler.sheets.input.models
 
-import android.os.Bundle
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.BaseConstants
@@ -41,5 +40,5 @@ class InputSelection(
     override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
     override val onNegativeClick: (() -> Unit)? = null,
     override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
-    val onPositiveClick: ((result: Bundle) -> Unit)? = null,
+    val onPositiveClick: (() -> Unit)? = null,
 ) : BaseSelection()

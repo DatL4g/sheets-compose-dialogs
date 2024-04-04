@@ -17,12 +17,10 @@
 
 package com.maxkeppeler.sheets.input.models
 
-import android.os.Bundle
-
 /**
- * Represents a group of checkboxes.
- * @param items A list of Strings representing the individual checkbox text.
- * @param enabledIndices A list of the index of items that are enabled.
+ * Represents a checkbox.
+ * @param text The text to the checkbox.
+ * @param enabled If enabled or not by default.
  * @param changeListener The listener that returns the changed value.
  * @param resultListener The listener that returns the final value.
  * @param key The key of the input that is used for saving the data in the result bundle. (Alternatively the index of the input is used.)
@@ -30,18 +28,18 @@ import android.os.Bundle
  * @param header The additional [InputHeader] to add more context information to the selection.
  * @param columns The columns that this input spans.
  */
-class InputCheckboxGroup(
-    internal val items: List<String>,
-    private val enabledIndices: List<Int> = listOf(),
-    private val changeListener: ((List<Int>) -> Unit)? = null,
-    private val resultListener: ((List<Int>) -> Unit)? = null,
+class InputCheckbox(
+    internal val text: String,
+    private val enabled: Boolean = false,
+    private val changeListener: ((Boolean) -> Unit)? = null,
+    private val resultListener: ((Boolean) -> Unit)? = null,
     override val key: String? = null,
     override val required: Boolean = false,
     override val header: InputHeader? = null,
     override val columns: Int? = null,
 ) : Input() {
 
-    internal var value: List<Int> = enabledIndices
+    internal var value: Boolean = enabled
         set(value) {
             if (field != value) {
                 field = value
@@ -54,7 +52,6 @@ class InputCheckboxGroup(
 
     override fun onResult() = resultListener?.invoke(value)
 
-    override fun isValid(): Boolean = required && value.isNotEmpty() || !required
+    override fun isValid(): Boolean = (required && value) || !required
 
-    override fun putValue(bundle: Bundle) = bundle.putIntArray(getBundleKey(), value.toIntArray())
 }
