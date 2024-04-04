@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import com.maxkeppeker.sheets.core.models.base.*
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
@@ -48,8 +47,7 @@ fun ColorView(
     config: ColorConfig = ColorConfig(),
     header: Header? = null,
 ) {
-    val context = LocalContext.current
-    val colorState = rememberColorState(context, selection, config)
+    val colorState = rememberColorState(selection, config)
     StateHandler(useCaseState, colorState)
 
     val coroutine = rememberCoroutineScope()

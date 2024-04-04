@@ -17,7 +17,7 @@ include(
     //":duration",
     //":clock",
     //":date_time",
-    //":color",
+    ":color",
     ":option",
     ":state",
     ":input",

@@ -27,9 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
-import com.maxkeppeler.sheets.core.R
+import androidx.compose.ui.unit.dp
 
 /**
  * The control item component to build up a value of a custom color.
@@ -124,7 +123,7 @@ internal fun ColorCustomControlListItemComponent(
             modifier = Modifier
                 .testTag(sliderTestTag)
                 .weight(1f)
-                .padding(horizontal = dimensionResource(R.dimen.scd_normal_100)),
+                .padding(horizontal = 16.dp),
             valueRange = 0f..255f,
             value = value.toFloat(),
             onValueChange = { onValueChange(it.toInt()) },

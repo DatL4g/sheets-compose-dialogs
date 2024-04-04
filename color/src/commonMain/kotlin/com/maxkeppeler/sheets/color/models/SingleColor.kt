@@ -15,11 +15,9 @@
  */
 package com.maxkeppeler.sheets.color.models
 
-import android.content.Context
-import android.graphics.Color
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+
 
 /**
  * Helper class to simplify passing colors.
@@ -28,11 +26,12 @@ import androidx.core.content.ContextCompat
  * @param colorHex Color value as Hex-String.
  */
 data class SingleColor(
-    @ColorInt val colorInt: Int? = null,
-    @ColorRes val colorRes: Int? = null,
+    val colorInt: Int? = null,
     val colorHex: String? = null,
 ) {
-    fun colorInInt(context: Context): Int? = colorInt
-        ?: colorRes?.let { ContextCompat.getColor(context, it) }
-        ?: colorHex?.let { Color.parseColor(it) }
+    @OptIn(ExperimentalStdlibApi::class)
+    fun colorInInt(): Int? = colorInt
+        ?: colorHex?.let {
+            Color(it.substringAfter('#').hexToLong()).toArgb()
+        }
 }

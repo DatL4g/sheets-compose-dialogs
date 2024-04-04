@@ -27,13 +27,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
-import com.maxkeppeler.sheets.color.R
+import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
 import com.maxkeppeler.sheets.color.models.ColorSelectionMode
-import com.maxkeppeler.sheets.core.R as RC
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.color.generated.resources.Res
+import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_custom_color
+import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_no_color
+import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_template_colors
 
 /**
  * The color selection mode component that allows the user to switch between template colors, custom color and no color.
@@ -43,6 +46,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param onModeChange The listener that returns the new color selection mode.
  * @param onNoColorClick The listener that is invoked when no color is selected.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun ColorSelectionModeComponent(
     selection: ColorSelection,
@@ -63,15 +67,15 @@ internal fun ColorSelectionModeComponent(
                 },
                 modifier = Modifier,
                 contentPadding = PaddingValues(
-                    vertical = dimensionResource(id = RC.dimen.scd_small_100),
-                    horizontal = dimensionResource(id = RC.dimen.scd_small_100)
+                    vertical = 8.dp,
+                    horizontal = 8.dp
                 ),
                 shape = RoundedCornerShape(50)
             ) {
                 val text = stringResource(
                     when (mode) {
-                        ColorSelectionMode.CUSTOM -> R.string.scd_color_dialog_template_colors
-                        ColorSelectionMode.TEMPLATE -> R.string.scd_color_dialog_custom_color
+                        ColorSelectionMode.CUSTOM -> Res.string.scd_color_dialog_template_colors
+                        ColorSelectionMode.TEMPLATE -> Res.string.scd_color_dialog_custom_color
                     }
                 )
                 Icon(
@@ -92,20 +96,20 @@ internal fun ColorSelectionModeComponent(
                 onClick = onNoColorClick,
                 modifier = Modifier,
                 contentPadding = PaddingValues(
-                    vertical = dimensionResource(id = RC.dimen.scd_small_100),
-                    horizontal = dimensionResource(id = RC.dimen.scd_small_100)
+                    vertical = 8.dp,
+                    horizontal = 8.dp
                 ),
                 shape = RoundedCornerShape(50)
             ) {
                 Icon(
                     modifier = Modifier.size(48.dp),
                     imageVector = config.icons.NotInterested,
-                    contentDescription = stringResource(R.string.scd_color_dialog_no_color),
+                    contentDescription = stringResource(Res.string.scd_color_dialog_no_color),
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
                     modifier = Modifier.padding(horizontal = 8.dp),
-                    text = stringResource(R.string.scd_color_dialog_no_color),
+                    text = stringResource(Res.string.scd_color_dialog_no_color),
                 )
             }
         }

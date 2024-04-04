@@ -17,11 +17,8 @@
 
 package com.maxkeppeler.sheets.color.models
 
-import android.content.Context
-import android.graphics.Color
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 
 /**
  * Holds various colors of a specific type.
@@ -30,28 +27,9 @@ import androidx.core.content.ContextCompat
  * @param colorsHex color as String value, #RRGGBB or #AARRGGBB.
  */
 sealed class MultipleColors(
-    @ColorInt private var colorsInt: Array<Int>? = null,
-    @ColorRes private var colorsRes: Array<Int>? = null,
+    private var colorsInt: Array<Int>? = null,
     private var colorsHex: Array<String>? = null,
 ) {
-
-    /**
-     * Define a variety of color integers.
-     */
-    class ColorsRes : MultipleColors {
-
-        /**
-         * Define dynamic amount of colors.
-         * @param colors The color integers
-         */
-        constructor(@ColorRes vararg colors: Int) : super(colorsRes = colors.toTypedArray())
-
-        /**
-         * Define a list of colors.
-         * @param colors The color integers
-         */
-        constructor(@ColorRes colors: List<Int>) : super(colorsRes = colors.toTypedArray())
-    }
 
     /**
      * Define a variety of color resource references.
@@ -62,13 +40,13 @@ sealed class MultipleColors(
          * Define dynamic amount of colors.
          * @param colors The color resource references
          */
-        constructor(@ColorInt vararg colors: Int) : super(colorsInt = colors.toTypedArray())
+        constructor(vararg colors: Int) : super(colorsInt = colors.toTypedArray())
 
         /**
          * Define an array of colors.
          * @param colors The color resource references
          */
-        constructor(@ColorInt colors: List<Int>) : super(colorsInt = colors.toTypedArray())
+        constructor(colors: List<Int>) : super(colorsInt = colors.toTypedArray())
     }
 
     /**
@@ -93,10 +71,12 @@ sealed class MultipleColors(
      * Resolve the defined colors as color integers.
      * @param context the Context to resolve the colors.
      */
-    fun getColorsAsInt(context: Context): List<Int> {
+    @OptIn(ExperimentalStdlibApi::class)
+    fun getColorsAsInt(): List<Int> {
         return colorsInt?.toList()
-            ?: colorsRes?.map { ContextCompat.getColor(context, it) }
-            ?: colorsHex?.map { Color.parseColor(it) }
+            ?: colorsHex?.map {
+                Color(it.substringAfter('#').hexToLong()).toArgb()
+            }
             ?: throw IllegalStateException("No colors available for color templates view. Either disabled template view or add colors.")
     }
 }

@@ -15,7 +15,6 @@
  */
 package com.maxkeppeler.sheets.color
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,7 +35,6 @@ import java.io.Serializable
  * @param stateData The data of the state when the state is required to be restored.
  */
 internal class ColorState(
-    private val context: Context,
     val selection: ColorSelection,
     val config: ColorConfig = ColorConfig(),
     stateData: ColorStateData? = null,
@@ -48,10 +46,10 @@ internal class ColorState(
     var valid by mutableStateOf(isValid())
 
     private fun getInitColor(): Int? =
-        selection.selectedColor?.colorInInt(context)
+        selection.selectedColor?.colorInInt()
 
     private fun getInitColors(): List<Int> =
-        config.templateColors.getColorsAsInt(context)
+        config.templateColors.getColorsAsInt()
 
     private fun getInitDisplayMode(): ColorSelectionMode =
         config.defaultDisplayMode.takeUnless {
@@ -86,12 +84,11 @@ internal class ColorState(
          * @param config The general configuration for the dialog view.
          */
         fun Saver(
-            context: Context,
             selection: ColorSelection,
             config: ColorConfig
         ): Saver<ColorState, *> = Saver(
             save = { state -> ColorStateData(state.color, state.displayMode) },
-            restore = { data -> ColorState(context, selection, config, data) }
+            restore = { data -> ColorState(selection, config, data) }
         )
     }
 
@@ -113,11 +110,10 @@ internal class ColorState(
  */
 @Composable
 internal fun rememberColorState(
-    context: Context,
     selection: ColorSelection,
     config: ColorConfig,
 ): ColorState = rememberSaveable(
     inputs = arrayOf(selection, config),
-    saver = ColorState.Saver(context, selection, config),
-    init = { ColorState(context, selection, config) }
+    saver = ColorState.Saver(selection, config),
+    init = { ColorState(selection, config) }
 )

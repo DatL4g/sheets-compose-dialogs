@@ -21,20 +21,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.alpha
-import androidx.core.graphics.blue
-import androidx.core.graphics.green
-import androidx.core.graphics.red
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testSequenceTagOf
 import com.maxkeppeker.sheets.core.views.Grid
-import com.maxkeppeler.sheets.color.R
 import com.maxkeppeler.sheets.color.models.ColorConfig
-import com.maxkeppeler.sheets.core.R as RC
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.color.generated.resources.*
+import sheets_compose_dialogs.color.generated.resources.Res
+import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_alpha
+import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_blue
+import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_green
 
 /**
  * The control component to build up a custom color.
@@ -42,6 +41,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param color The color that is currently selected.
  * @param onColorChange The listener that returns a selected color.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun ColorCustomControlComponent(
     config: ColorConfig,
@@ -50,13 +50,18 @@ internal fun ColorCustomControlComponent(
     onColorChange: (Int) -> Unit
 ) {
 
+    val composeColor = Color(color)
     val alphaValue = remember(color) {
-        val value = if (config.allowCustomColorAlphaValues) color.alpha else 255
+        val value = if (config.allowCustomColorAlphaValues) {
+            composeColor.alpha
+        } else {
+            1F
+        }
         mutableStateOf(value)
     }
-    val redValue = remember(color) { mutableStateOf(color.red) }
-    val greenValue = remember(color) { mutableStateOf(color.green) }
-    val blueValue = remember(color) { mutableStateOf(color.blue) }
+    val redValue = remember(color) { mutableStateOf(composeColor.red) }
+    val greenValue = remember(color) { mutableStateOf(composeColor.green) }
+    val blueValue = remember(color) { mutableStateOf(composeColor.blue) }
 
     val newColor by remember(alphaValue.value, redValue.value, greenValue.value, blueValue.value) {
         mutableStateOf(Color(redValue.value, greenValue.value, blueValue.value, alphaValue.value))
@@ -68,10 +73,10 @@ internal fun ColorCustomControlComponent(
     val colorValueLabelWidth = remember { mutableStateOf<Int?>(null) }
 
     val colorItems = mutableListOf(
-        if (config.allowCustomColorAlphaValues) stringResource(R.string.scd_color_dialog_alpha) to alphaValue else null,
-        stringResource(R.string.scd_color_dialog_red) to redValue,
-        stringResource(R.string.scd_color_dialog_green) to greenValue,
-        stringResource(R.string.scd_color_dialog_blue) to blueValue
+        if (config.allowCustomColorAlphaValues) stringResource(Res.string.scd_color_dialog_alpha) to alphaValue else null,
+        stringResource(Res.string.scd_color_dialog_red) to redValue,
+        stringResource(Res.string.scd_color_dialog_green) to greenValue,
+        stringResource(Res.string.scd_color_dialog_blue) to blueValue
     ).filterNotNull()
 
     Grid(
@@ -87,7 +92,9 @@ internal fun ColorCustomControlComponent(
         columnSpacing = 24.dp
     ) { entry ->
         val index = colorItems.indexOf(entry)
-        val onValueChange: (Int) -> Unit = { entry.second.value = it }
+        val onValueChange: (Int) -> Unit = {
+            entry.second.value = it.toFloat()
+        }
         val sliderTestTag = testSequenceTagOf(
             TestTags.COLOR_CUSTOM_VALUE_SLIDER,
             index.toString()
@@ -96,7 +103,7 @@ internal fun ColorCustomControlComponent(
             LibOrientation.PORTRAIT ->
                 ColorCustomControlListItemComponent(
                     label = entry.first,
-                    value = entry.second.value,
+                    value = entry.second.value.toInt(),
                     onValueChange = onValueChange,
                     colorItemLabelWidth = colorItemLabelWidth,
                     colorValueLabelWidth = colorValueLabelWidth,
@@ -105,7 +112,7 @@ internal fun ColorCustomControlComponent(
             LibOrientation.LANDSCAPE ->
                 ColorCustomControlGridItemComponent(
                     label = entry.first,
-                    value = entry.second.value,
+                    value = entry.second.value.toInt(),
                     onValueChange = onValueChange,
                     sliderTestTag = sliderTestTag,
                 )

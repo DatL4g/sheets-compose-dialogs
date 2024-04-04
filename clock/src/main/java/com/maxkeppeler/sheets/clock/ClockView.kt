@@ -67,7 +67,7 @@ fun ClockView(
             PortraitTimeValueComponent(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = dimensionResource(R.dimen.scd_normal_100)),
+                    .padding(bottom = 16.dp),
                 unitValues = clockState.timeTextValues,
                 isAm = clockState.isAm,
                 is24hourFormat = clockState.is24HourFormat,

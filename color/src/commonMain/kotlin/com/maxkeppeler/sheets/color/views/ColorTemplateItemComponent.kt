@@ -28,13 +28,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.core.graphics.alpha
-import com.maxkeppeler.sheets.color.R
+import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.color.models.ColorConfig
-import com.maxkeppeler.sheets.core.R as RC
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
+import sheets_compose_dialogs.color.generated.resources.Res
+import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_transparent_pattern
 
 /**
  * The template item component that represents one color.
@@ -45,6 +45,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param inputDisabled If input is disabled.
  * @param onColorClick The listener that returns the selected color.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun ColorTemplateItemComponent(
     config: ColorConfig,
@@ -68,7 +69,7 @@ internal fun ColorTemplateItemComponent(
             Box(modifier = Modifier.fillMaxSize()) {
                 Image(
                     modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(id = R.drawable.scd_color_dialog_transparent_pattern),
+                    painter = painterResource(Res.drawable.scd_color_dialog_transparent_pattern),
                     contentDescription = null,
                 )
                 Row(
@@ -95,16 +96,16 @@ internal fun ColorTemplateItemComponent(
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
-        } else if (color.alpha < 255) {
+        } else if (Color(color).alpha < 1F) {
             Text(
                 modifier = Modifier
                     .clip(RoundedCornerShape(50))
                     .background(MaterialTheme.colorScheme.background)
-                    .padding(dimensionResource(id = RC.dimen.scd_small_25)),
+                    .padding(2.dp),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = MaterialTheme.typography.labelSmall,
-                text = "${color.alpha.toFloat().div(255).times(100).toInt()}%"
+                text = "${Color(color).alpha.times(100).toInt()}%"
             )
         }
     }
