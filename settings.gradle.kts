@@ -11,7 +11,7 @@ include(
     //":test",
     // Include all modules
     ":core",
-    //":info",
+    ":info",
     ":rating",
     ":calendar",
     //":duration",
