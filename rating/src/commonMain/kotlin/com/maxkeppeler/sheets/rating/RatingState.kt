@@ -26,6 +26,7 @@ import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.rating.models.RatingConfig
 import com.maxkeppeler.sheets.rating.models.RatingSelection
 import kotlinx.serialization.Serializable
+import kotlin.math.max
 
 /**
  * Handles the color state.
@@ -51,7 +52,11 @@ internal class RatingState(
     }
 
     fun updateRating(newRating: Int) {
-        rating = newRating
+        rating = if (rating == newRating) {
+            max(newRating - 1, 0)
+        } else {
+            newRating
+        }
         checkValid()
     }
 
@@ -60,14 +65,18 @@ internal class RatingState(
         checkValid()
     }
 
-    private fun isRatingValid(): Boolean = rating != null
+    private fun isRatingValid(): Boolean = if (config.ratingZeroValid) {
+        true
+    } else {
+        rating != null
+    }
 
     private fun isFeedbackValid(): Boolean =
         if (config.feedbackOptional) true
         else !feedback.isNullOrBlank()
 
     fun onFinish() {
-        selection.onSelectRating(rating!!, feedback)
+        selection.onSelectRating(rating ?: 0, feedback)
     }
 
     override fun reset() {
