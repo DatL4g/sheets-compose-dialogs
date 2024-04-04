@@ -22,11 +22,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.state.models.ProgressIndicator
-import com.maxkeppeler.sheets.core.R as RC
 
 @Composable
 internal fun LinearProgressIndicator(
@@ -47,9 +46,9 @@ internal fun LinearProgressIndicator(
                 )
             }
             LinearProgressIndicator(
-                progress = progress,
+                progress = { progress },
                 modifier = linearIndicatorModifier
-                    .testTags(TestTags.STATE_LOADING_LINEAR, progress)
+                    .testTags(TestTags.STATE_LOADING_LINEAR, progress),
             )
         } ?: run {
             LinearProgressIndicator(

@@ -68,7 +68,7 @@ internal class RatingState(
     private fun isRatingValid(): Boolean = if (config.ratingZeroValid) {
         true
     } else {
-        rating != null
+        rating != null && (rating ?: 0) > 0
     }
 
     private fun isFeedbackValid(): Boolean =

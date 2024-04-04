@@ -19,7 +19,7 @@ include(
     //":date_time",
     //":color",
     ":option",
-    //":state",
+    ":state",
     //":input",
     //":emoji",
     ":list",

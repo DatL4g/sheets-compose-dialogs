@@ -22,31 +22,30 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.state.models.State
 import com.maxkeppeler.sheets.state.models.StateConfig
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
- * The failure state component.
+ * The success state component.
  * @param config The general configuration for the dialog view.
- * @param state The failure state data.
+ * @param state The success state data.
  */
 @Composable
-internal fun StateFailureComponent(
+internal fun StateSuccessComponent(
     config: StateConfig,
-    state: State.Failure
+    state: State.Success
 ) {
     state.customView?.invoke() ?: run {
         Icon(
             modifier = Modifier
-                .testTag(TestTags.STATE_FAILURE)
+                .testTag(TestTags.STATE_SUCCESS)
                 .padding(vertical = 16.dp)
-                .size(dimensionResource(id = RC.dimen.scd_size_350)),
-            imageVector = config.icons.Error,
+                .size(56.dp),
+            imageVector = config.icons.Check,
             contentDescription = null,
-            tint = Color.Red
+            tint = Color.Green
         )
     }
 }

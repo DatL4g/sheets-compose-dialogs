@@ -22,12 +22,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.state.R
 import com.maxkeppeler.sheets.state.models.ProgressIndicator
-import com.maxkeppeler.sheets.core.R as RC
 
 @Composable
 internal fun CircularProgressIndicator(
@@ -35,7 +33,7 @@ internal fun CircularProgressIndicator(
 ) {
     val circularIndicatorModifier = Modifier
         .padding(24.dp)
-        .width(dimensionResource(id = R.dimen.scd_state_dialog_indicator_width))
+        .width(64.dp)
         .aspectRatio(1f)
 
     indicator.customProgressIndicator?.invoke(indicator.value!!)
