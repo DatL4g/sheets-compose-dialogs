@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.SonatypeHost
+
 /*
  *  Copyright (C) 2022-2024. Maximilian Keppeler (https://www.maxkeppeler.com)
  *
@@ -14,23 +16,74 @@
  *  limitations under the License.
  */
 plugins {
-    id(Plugins.CUSTOM_LIBRARY_MODULE.id)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.multiplatform)
+    alias(libs.plugins.serialization)
+    alias(libs.plugins.publish)
+    `maven-publish`
 }
 
 android {
-    namespace = Modules.DATE_TIME.namespace
+    namespace = Modules.CALENDAR.namespace
+    compileSdk = 34
+
+    defaultConfig {
+        minSdk = 21
+    }
     compileOptions {
-        // Flag to enable support for the new language APIs
         isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+kotlin {
+    androidTarget {
+        publishAllLibraryVariants()
+    }
+    jvm()
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    macosX64()
+    macosArm64()
+
+    js(IR) {
+        browser()
+        binaries.executable()
+    }
+
+    applyDefaultHierarchyTemplate()
+
+    sourceSets {
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.components.resources)
+
+            implementation(libs.datetime)
+            implementation(libs.serialization)
+
+            api(project(":core"))
+        }
+
+        val nonJvmMain by creating {
+            dependsOn(commonMain.get())
+
+            nativeMain.orNull?.dependsOn(this)
+            jsMain.orNull?.dependsOn(this)
+        }
     }
 }
 
 dependencies {
-    implementations(Dependencies.SNAPPER)
-    coreLibraryDesugaring(Dependencies.DESUGAR)
+    coreLibraryDesugaring(libs.desugar)
 }
 
 mavenPublishing {
-    publishToMavenCentral()
-    signAllPublications()
+    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
 }

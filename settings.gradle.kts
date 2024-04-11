@@ -16,7 +16,7 @@ include(
     ":calendar",
     //":duration",
     //":clock",
-    //":date_time",
+    ":date_time",
     ":color",
     ":option",
     ":state",

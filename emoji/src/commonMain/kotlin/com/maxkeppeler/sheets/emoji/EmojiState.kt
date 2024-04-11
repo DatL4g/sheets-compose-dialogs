@@ -27,7 +27,7 @@ import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 import com.vanniktech.emoji.Emoji
 import com.vanniktech.emoji.EmojiCategory
 import com.vanniktech.emoji.google.GoogleEmojiProvider
-import java.io.Serializable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 
 /**
  * Handles the emoji state.
@@ -109,7 +109,7 @@ internal class EmojiState(
      */
     data class EmojiStateData(
         val selectedEmoji: Emoji?
-    ) : Serializable
+    ) : JvmSerializable
 }
 
 /**
