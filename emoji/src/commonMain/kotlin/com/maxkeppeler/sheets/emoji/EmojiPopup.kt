@@ -38,6 +38,7 @@ import com.maxkeppeler.sheets.emoji.models.EmojiSelection
  * @param offset The offset of the popup.
  * @param properties PopupProperties for further customization of this popup's behavior.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EmojiPopup(
     state: UseCaseState,
