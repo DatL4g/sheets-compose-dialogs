@@ -81,7 +81,6 @@ internal fun SelectionContainerComponent(
         flingBehavior = rememberSnapFlingBehavior(listState),
         contentPadding = contentPadding,
         modifier = Modifier
-            .testTags(TestTags.DATE_TIME_VALUE_CONTAINER_SELECTION, unit::class.simpleName!!)
             .height(LocalDensity.current.run { height.value.toDp() })
             .padding(top = heightOffsetTopPadding)
             .graphicsLayer { alpha = 0.99F }
@@ -103,7 +102,6 @@ internal fun SelectionContainerComponent(
             item {
                 SelectionValueItem(
                     modifier = Modifier
-                        .testTags(TestTags.DATE_TIME_VALUE_SELECTION, unit::class.simpleName ?: unit::class.qualifiedName ?: "UnitSelection", option.value)
                         .widthIn(min = LocalDensity.current.run { animatedWidth.value.toDp() })
                         .onGloballyPositioned { coordinates ->
                             if (itemHeight.value < coordinates.size.height) {

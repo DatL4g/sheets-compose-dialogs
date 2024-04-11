@@ -47,7 +47,6 @@ internal fun ValueComponent(
 ) {
     Text(
         modifier = Modifier
-            .testTags(TestTags.DATE_TIME_VALUE_SELECTION, if(unit is UnitSelection.Hour) "Hour" else unit::class.simpleName ?: unit::class.qualifiedName ?: "UnitSelection")
             .onGloballyPositioned { coordinates ->
                 if (width.value < coordinates.size.width) {
                     width.value = coordinates.size.width
