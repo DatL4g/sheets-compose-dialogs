@@ -25,7 +25,7 @@ plugins {
 }
 
 android {
-    namespace = Modules.CALENDAR.namespace
+    namespace = Modules.DATE_TIME.namespace
     compileSdk = 34
 
     defaultConfig {
@@ -69,13 +69,6 @@ kotlin {
             implementation(libs.serialization)
 
             api(project(":core"))
-        }
-
-        val nonJvmMain by creating {
-            dependsOn(commonMain.get())
-
-            nativeMain.orNull?.dependsOn(this)
-            jsMain.orNull?.dependsOn(this)
         }
     }
 }
