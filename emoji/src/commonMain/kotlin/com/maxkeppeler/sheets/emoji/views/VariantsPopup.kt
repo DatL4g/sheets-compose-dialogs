@@ -26,11 +26,10 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.IntSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.vanniktech.emoji.Emoji
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * A popup that shows the various variants of an emoji.

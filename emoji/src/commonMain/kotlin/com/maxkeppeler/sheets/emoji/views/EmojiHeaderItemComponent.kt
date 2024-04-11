@@ -17,46 +17,50 @@ package com.maxkeppeler.sheets.emoji.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.core.R as RC
-
 
 /**
- * The textual header item component.
- * @param name The name of the category.
+ * The emoji header item component.
+ * @param imageVector The symbol of the category.
  * @param selected If the current category is selected.
  * @param index Index of category item.
  * @param onClick The listener that is invoked when this component is clicked.
  */
 @Composable
-internal fun EmojiTextHeaderItemComponent(
-    name: String,
+internal fun EmojiHeaderItemComponent(
+    imageVector: ImageVector,
     selected: Boolean,
     index: Int,
     onClick: () -> Unit
 ) {
-    Text(
+    Row(
         modifier = Modifier
+            .aspectRatio(1f, true)
             .testTags(TestTags.EMOJI_CATEGORY_TAB, index)
-            .clip(RoundedCornerShape(50))
+            .clip(if (selected) RoundedCornerShape(50) else MaterialTheme.shapes.small)
             .background(if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent)
             .clickable { onClick() }
-            .padding(
-                horizontal = 12.dp,
-                vertical = 4.dp
-            ),
-        text = name,
-        style = if (selected) MaterialTheme.typography.labelLarge.copy(color = MaterialTheme.colorScheme.primary)
-        else MaterialTheme.typography.labelLarge
-    )
+            .padding(4.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Icon(
+            modifier = Modifier.size(24.dp),
+            imageVector = imageVector,
+            contentDescription = "",
+            tint = if (selected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface
+        )
+    }
 }

@@ -34,17 +34,16 @@ internal object EmojiInstaller {
      * Installs an emoji provider.
      * @param emojiProvider The emoji provider that will be installed.
      */
+    @Synchronized
     fun installProvider(emojiProvider: EmojiProvider) {
-        synchronized(EmojiInstaller::class.java) {
-            if (!initiated) {
-                when (emojiProvider) {
-                    EmojiProvider.GOOGLE -> EmojiManager.install(GoogleEmojiProvider())
-                    EmojiProvider.IOS -> EmojiManager.install(IosEmojiProvider())
-                    EmojiProvider.FACEBOOK -> EmojiManager.install(FacebookEmojiProvider())
-                    EmojiProvider.TWITTER -> EmojiManager.install(TwitterEmojiProvider())
-                }
-                initiated = true
+        if (!initiated) {
+            when (emojiProvider) {
+                EmojiProvider.GOOGLE -> EmojiManager.install(GoogleEmojiProvider())
+                EmojiProvider.IOS -> EmojiManager.install(IosEmojiProvider())
+                EmojiProvider.FACEBOOK -> EmojiManager.install(FacebookEmojiProvider())
+                EmojiProvider.TWITTER -> EmojiManager.install(TwitterEmojiProvider())
             }
+            initiated = true
         }
     }
 

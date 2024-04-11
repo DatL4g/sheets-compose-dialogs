@@ -30,7 +30,6 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
@@ -46,7 +45,6 @@ import com.maxkeppeler.sheets.emoji.utils.EmojiInstaller
 import com.maxkeppeler.sheets.emoji.views.EmojiHeaderComponent
 import com.maxkeppeler.sheets.emoji.views.EmojiItemComponent
 import com.vanniktech.emoji.Emoji
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Emoji view for the use-case to to select any emoji or a variant, if available.

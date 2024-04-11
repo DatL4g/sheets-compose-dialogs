@@ -1,9 +1,10 @@
 [versions]
 android = "8.2.2"
-compose = "1.6.1"
+compose = "1.6.2"
 datetime = "0.5.0"
 desugar = "2.0.4"
-kotlin = "1.9.22"
+emoji = "0.18.0"
+kotlin = "1.9.23"
 publish = "0.28.0"
 serialization = "1.6.3"
 window-size = "0.5.0"
@@ -11,6 +12,10 @@ window-size = "0.5.0"
 [libraries]
 datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "datetime" }
 desugar = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "desugar" }
+emoji-facebook = { group = "com.vanniktech", name = "emoji-facebook", version.ref = "emoji" }
+emoji-google = { group = "com.vanniktech", name = "emoji-google", version.ref = "emoji" }
+emoji-ios = { group = "com.vanniktech", name = "emoji-ios", version.ref = "emoji" }
+emoji-twitter = { group = "com.vanniktech", name = "emoji-twitter", version.ref = "emoji" }
 serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "serialization" }
 stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 window-size = { group = "dev.chrisbanes.material3", name = "material3-window-size-class-multiplatform", version.ref = "window-size" }

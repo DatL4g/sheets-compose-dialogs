@@ -23,6 +23,7 @@ import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,14 +32,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.IntSize
-import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.vanniktech.emoji.Emoji
-import com.vanniktech.emoji.EmojiTextView
-import com.maxkeppeler.sheets.core.R as RC
 
 
 /**
@@ -47,6 +46,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param selectedEmoji The emoji that is currently selected.
  * @param onClick The listener that returns the selected emoji.
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun EmojiItemComponent(
     emoji: Emoji,
@@ -86,15 +86,10 @@ internal fun EmojiItemComponent(
             )
             .padding(2.dp),
     ) {
-
-        AndroidView(
+        Text(
             modifier = Modifier.align(Alignment.Center),
-            factory = { context ->
-                EmojiTextView(context).apply {
-                    setEmojiSize(constraints.maxWidth, false)
-                    text = emoji.unicode
-                }
-            },
+            fontSize = constraints.maxWidth.sp,
+            text = emoji.unicode
         )
     }
 }

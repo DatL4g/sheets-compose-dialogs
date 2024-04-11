@@ -25,10 +25,9 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.emoji.models.EmojiCategoryAppearance
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.vanniktech.emoji.EmojiCategory
@@ -58,7 +57,7 @@ internal fun EmojiHeaderComponent(
                 modifier = Modifier.testTags(TestTags.EMOJI_CATEGORY, config.categoryAppearance),
                 columns = GridCells.Fixed(categories.size),
                 userScrollEnabled = false,
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.scd_small_25)),
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
             ) {
                 itemsIndexed(categoryIcons) { index, icon ->
                     val selected = index == selectedCategory

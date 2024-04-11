@@ -21,6 +21,6 @@ include(
     ":option",
     ":state",
     ":input",
-    //":emoji",
+    ":emoji",
     ":list",
 )
