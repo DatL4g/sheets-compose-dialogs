@@ -15,7 +15,7 @@ include(
     ":rating",
     ":calendar",
     ":duration",
-    //":clock",
+    ":clock",
     ":date_time",
     ":color",
     ":option",

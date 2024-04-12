@@ -14,6 +14,7 @@
  *  limitations under the License.
  */
 package com.maxkeppeler.sheets.clock.views
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -24,8 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
-import com.maxkeppeler.sheets.core.R as RC
+import androidx.compose.ui.unit.dp
 
 
 /**

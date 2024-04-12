@@ -28,18 +28,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.clock.R
-import com.maxkeppeler.sheets.core.R as RC
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.clock.generated.resources.*
+import sheets_compose_dialogs.clock.generated.resources.Res
+import sheets_compose_dialogs.clock.generated.resources.scd_clock_dialog_am
+import sheets_compose_dialogs.clock.generated.resources.scd_clock_dialog_hours
+import sheets_compose_dialogs.clock.generated.resources.scd_clock_dialog_pm
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun PortraitTimeValueComponent(
     modifier: Modifier,
@@ -114,13 +119,13 @@ internal fun PortraitTimeValueComponent(
                     modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 0),
                     selected = isAm,
                     onClick = { onAm.invoke(true) },
-                    text = stringResource(id = R.string.scd_clock_dialog_am),
+                    text = stringResource(Res.string.scd_clock_dialog_am),
                 )
                 TimeTypeItemComponent(
                     modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 1),
                     selected = !isAm,
                     onClick = { onAm.invoke(false) },
-                    text = stringResource(id = R.string.scd_clock_dialog_pm),
+                    text = stringResource(Res.string.scd_clock_dialog_pm),
                 )
             }
         }
@@ -128,6 +133,7 @@ internal fun PortraitTimeValueComponent(
 }
 
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun LandscapeTimeValueComponent(
     modifier: Modifier,
@@ -148,9 +154,9 @@ internal fun LandscapeTimeValueComponent(
     ) {
 
         val labelRes = listOf(
-            R.string.scd_clock_dialog_hours,
-            R.string.scd_clock_dialog_minutes,
-            R.string.scd_clock_dialog_seconds,
+            Res.string.scd_clock_dialog_hours,
+            Res.string.scd_clock_dialog_minutes,
+            Res.string.scd_clock_dialog_seconds,
         )
 
         Column(
@@ -209,13 +215,13 @@ internal fun LandscapeTimeValueComponent(
                     modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 0),
                     selected = isAm,
                     onClick = { onAm.invoke(true) },
-                    text = stringResource(id = R.string.scd_clock_dialog_am),
+                    text = stringResource(Res.string.scd_clock_dialog_am),
                 )
                 TimeTypeItemComponent(
                     modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 1),
                     selected = !isAm,
                     onClick = { onAm.invoke(false) },
-                    text = stringResource(id = R.string.scd_clock_dialog_pm),
+                    text = stringResource(Res.string.scd_clock_dialog_pm),
                 )
             }
         }

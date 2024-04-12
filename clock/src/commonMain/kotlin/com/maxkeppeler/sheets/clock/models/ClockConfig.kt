@@ -19,7 +19,7 @@ import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.BaseConstants
-import java.time.LocalTime
+import kotlinx.datetime.LocalTime
 
 /**
  * The general configuration for the clock dialog.

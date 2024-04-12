@@ -34,17 +34,19 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.clock.R
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.utils.Constants
-import com.maxkeppeler.sheets.core.R as RC
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.clock.generated.resources.Res
+import sheets_compose_dialogs.clock.generated.resources.scd_clock_dialog_next_value
+import sheets_compose_dialogs.clock.generated.resources.scd_clock_dialog_previous_value
 
 /**
  * The item component of the keyboard.
@@ -56,6 +58,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param onPrevAction The listener that is invoked when [Constants.ACTION_PREV] was clicked.
  * @param onNextAction The listener that is invoked when [Constants.ACTION_NEXT] was clicked.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun KeyItemComponent(
     config: ClockConfig,
@@ -121,7 +124,7 @@ internal fun KeyItemComponent(
                     )
                     .fillMaxSize(),
                 imageVector = if (isActionNext) config.icons.ChevronRight else config.icons.ChevronLeft,
-                contentDescription = stringResource(if (isActionNext) R.string.scd_clock_dialog_next_value else R.string.scd_clock_dialog_previous_value),
+                contentDescription = stringResource(if (isActionNext) Res.string.scd_clock_dialog_next_value else Res.string.scd_clock_dialog_previous_value),
                 tint = MaterialTheme.colorScheme.secondary
             )
         } else {

@@ -26,13 +26,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
-import com.maxkeppeler.sheets.clock.R
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
+import com.maxkeppeler.sheets.clock.utils.FormatStyle
+import kotlinx.datetime.LocalTime
+import kotlinx.datetime.format
+import kotlinx.datetime.format.DateTimeFormat
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.clock.generated.resources.Res
+import sheets_compose_dialogs.clock.generated.resources.scd_clock_dialog_boundary_hint
 
 /**
  * A component that displays a hint that the current time is out of the defined boundary, if set and invalid.
@@ -40,6 +43,7 @@ import java.time.format.FormatStyle
  * @param valid Boolean representing the validity of the time
  * @param boundary Optional [ClosedRange] of [LocalTime] representing the time boundary
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun TimeHintComponent(
     modifier: Modifier,
@@ -48,7 +52,7 @@ internal fun TimeHintComponent(
 ) {
     if (valid || boundary == null) return
 
-    val formatter = remember { DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT) }
+    val formatter = remember { getTimeFormatter(FormatStyle.SHORT) }
     val startTime = remember(boundary) { boundary.start.format(formatter) }
     val endTime = remember(boundary) { boundary.endInclusive.format(formatter) }
 
@@ -58,9 +62,11 @@ internal fun TimeHintComponent(
         verticalAlignment = Alignment.Bottom
     ) {
         Text(
-            text = stringResource(R.string.scd_clock_dialog_boundary_hint, startTime, endTime),
+            text = stringResource(Res.string.scd_clock_dialog_boundary_hint, startTime, endTime),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodySmall
         )
     }
 }
+
+internal expect fun getTimeFormatter(style: FormatStyle): DateTimeFormat<LocalTime>

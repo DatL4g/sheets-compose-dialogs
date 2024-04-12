@@ -15,16 +15,13 @@
  */
 package com.maxkeppeler.sheets.clock.utils
 
-import androidx.annotation.RestrictTo
 import androidx.compose.runtime.MutableState
-import java.time.LocalTime
+import kotlinx.datetime.LocalTime
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun isAm(currentTime: LocalTime): Boolean {
     return currentTime.hour < 12
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun convertTimeIntoTimeTextValues(
     is24hourFormat: Boolean,
     allowSeconds: Boolean,
@@ -51,7 +48,6 @@ internal fun convertTimeIntoTimeTextValues(
     return timeTextValues
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun convertTimeTextValuesIntoTime(
     is24HourFormat: Boolean,
     isAm: Boolean,
@@ -73,10 +69,13 @@ internal fun convertTimeTextValuesIntoTime(
         }
     }
 
-    return LocalTime.of(actualHour, min, sec)
+    return LocalTime(
+        hour = actualHour,
+        minute = min,
+        second = sec
+    )
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun getInputKeys(): List<String> {
     return mutableListOf(
         *(1..9).toList().map { it.toString() }.toTypedArray(),
@@ -86,7 +85,6 @@ internal fun getInputKeys(): List<String> {
     )
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun getDisabledInputKeys(
     timeValues: List<StringBuilder>,
     is24hourFormat: Boolean,
@@ -122,7 +120,6 @@ internal fun getDisabledInputKeys(
     }?.map { it.toString() } ?: listOf()
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun moveToPreviousIndex(
     valueIndex: MutableState<Int>,
     groupIndex: MutableState<Int>,
@@ -141,7 +138,6 @@ internal fun moveToPreviousIndex(
     }
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun moveToNextIndex(
     valueIndex: MutableState<Int>,
     groupIndex: MutableState<Int>,
@@ -160,7 +156,6 @@ internal fun moveToNextIndex(
     }
 }
 
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun inputValue(
     is24hourFormat: Boolean,
     timeValues: List<StringBuilder>,
@@ -182,17 +177,16 @@ internal fun inputValue(
                     onNextIndex()
                     hourBuffer[currentIndex.value] = newValue.toString()[0]
                 } else {
-                    if (currentIndex.value == 0 && newValue != 0 && Character.getNumericValue(
-                            hourBuffer[1]
-                        ) > 3
+
+                    if (currentIndex.value == 0 && newValue != 0 && hourBuffer[1].numericValue > 3
                     ) {
                         hourBuffer[1] = 0.digitToChar()
                     }
                     hourBuffer[currentIndex.value] = newValue.toString()[0]
                 }
-                repeat(2) { minBuffer.deleteCharAt(0) }
+                repeat(2) { minBuffer.deleteAt(0) }
                 repeat(2) { minBuffer.append(0.digitToChar()) }
-                repeat(2) { secBuffer?.deleteCharAt(0) }
+                repeat(2) { secBuffer?.deleteAt(0) }
                 repeat(2) { secBuffer?.append(0.digitToChar()) }
             } else {
                 if (currentIndex.value == 0 && newValue >= 2 && newValue <= 9) {
@@ -201,17 +195,17 @@ internal fun inputValue(
                     hourBuffer[currentIndex.value] = newValue.toString()[0]
                 } else {
                     if (currentIndex.value == 0) {
-                        if (newValue != 0 && Character.getNumericValue(hourBuffer[1]) > 2) {
+                        if (newValue != 0 && hourBuffer[1].numericValue > 2) {
                             hourBuffer[1] = 0.digitToChar()
-                        } else if (newValue == 0 && Character.getNumericValue(hourBuffer[1]) == 0) {
+                        } else if (newValue == 0 && hourBuffer[1].numericValue == 0) {
                             hourBuffer[1] = 1.digitToChar()
                         }
                     }
                     hourBuffer[currentIndex.value] = newValue.toString()[0]
                 }
-                repeat(2) { minBuffer.deleteCharAt(0) }
+                repeat(2) { minBuffer.deleteAt(0) }
                 repeat(2) { minBuffer.append(0.digitToChar()) }
-                repeat(2) { secBuffer?.deleteCharAt(0) }
+                repeat(2) { secBuffer?.deleteAt(0) }
                 repeat(2) { secBuffer?.append(0.digitToChar()) }
             }
         }

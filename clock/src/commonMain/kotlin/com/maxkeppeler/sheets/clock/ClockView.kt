@@ -22,8 +22,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
@@ -38,7 +36,6 @@ import com.maxkeppeler.sheets.clock.views.KeyboardComponent
 import com.maxkeppeler.sheets.clock.views.LandscapeTimeValueComponent
 import com.maxkeppeler.sheets.clock.views.PortraitTimeValueComponent
 import com.maxkeppeler.sheets.clock.views.TimeHintComponent
-import com.maxkeppeler.sheets.core.R
 
 /**
  * Clock view for the use-case to to select a clock time.
@@ -55,8 +52,7 @@ fun ClockView(
     config: ClockConfig = ClockConfig(),
     header: Header? = null,
 ) {
-    val context = LocalContext.current
-    val clockState = rememberClockState(context, selection, config)
+    val clockState = rememberClockState(selection, config)
     StateHandler(useCaseState, clockState)
 
     FrameBase(

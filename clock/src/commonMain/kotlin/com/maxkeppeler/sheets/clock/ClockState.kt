@@ -15,8 +15,6 @@
  */
 package com.maxkeppeler.sheets.clock
 
-import android.content.Context
-import android.text.format.DateFormat
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +25,7 @@ import com.maxkeppeker.sheets.core.models.base.Debouncer
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
+import com.maxkeppeler.sheets.clock.utils.*
 import com.maxkeppeler.sheets.clock.utils.Constants
 import com.maxkeppeler.sheets.clock.utils.convertTimeIntoTimeTextValues
 import com.maxkeppeler.sheets.clock.utils.convertTimeTextValuesIntoTime
@@ -36,8 +35,9 @@ import com.maxkeppeler.sheets.clock.utils.inputValue
 import com.maxkeppeler.sheets.clock.utils.isAm
 import com.maxkeppeler.sheets.clock.utils.moveToNextIndex
 import com.maxkeppeler.sheets.clock.utils.moveToPreviousIndex
-import java.io.Serializable
-import java.time.LocalTime
+import kotlinx.datetime.LocalTime
+import kotlinx.serialization.Serializable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 
 /**
  * Handles the clock state.
@@ -47,9 +47,9 @@ import java.time.LocalTime
  * @param stateData The data of the state when the state is required to be restored.
  */
 internal class ClockState(
-    private val context: Context,
     val selection: ClockSelection,
     val config: ClockConfig,
+    private val _is24HourFormat: Boolean,
     stateData: ClockStateData? = null
 ) : BaseTypeState() {
 
@@ -79,7 +79,7 @@ internal class ClockState(
     private fun isValid(): Boolean = config.boundary?.let { time in it } ?: true
 
     private fun isInit24HourFormat(): Boolean {
-        return config.is24HourFormat ?: DateFormat.is24HourFormat(context)
+        return config.is24HourFormat ?: _is24HourFormat
     }
 
     private fun getInitTime(): LocalTime {
@@ -194,9 +194,9 @@ internal class ClockState(
          * @param config The general configuration for the dialog view.
          */
         fun Saver(
-            context: Context,
             selection: ClockSelection,
-            config: ClockConfig
+            config: ClockConfig,
+            is24HourFormat: Boolean
         ): Saver<ClockState, *> = Saver(
             save = { state ->
                 ClockStateData(
@@ -207,7 +207,7 @@ internal class ClockState(
                     isAm = state.isAm
                 )
             },
-            restore = { data -> ClockState(context, selection, config, data) }
+            restore = { data -> ClockState(selection, config, is24HourFormat, data) }
         )
     }
 
@@ -215,13 +215,14 @@ internal class ClockState(
      * Data class that stores the important information of the current state
      * and can be used by the [Saver] to save and restore the state.
      */
+    @Serializable
     data class ClockStateData(
         val groupIndex: Int,
         val valueIndex: Int,
         val is24HourFormat: Boolean,
         val time: LocalTime,
         val isAm: Boolean
-    ) : Serializable
+    ) : JvmSerializable
 }
 
 /**
@@ -232,11 +233,17 @@ internal class ClockState(
  */
 @Composable
 internal fun rememberClockState(
-    context: Context,
     selection: ClockSelection,
     config: ClockConfig,
-): ClockState = rememberSaveable(
-    inputs = arrayOf(selection, config),
-    saver = ClockState.Saver(context, selection, config),
-    init = { ClockState(context, selection, config) }
-)
+): ClockState {
+    val is24Hour = is24HourFormat()
+
+    return rememberSaveable(
+        inputs = arrayOf(selection, config),
+        saver = ClockState.Saver(selection, config, is24Hour),
+        init = { ClockState(selection, config, is24Hour) }
+    )
+}
+
+@Composable
+internal expect fun is24HourFormat(): Boolean
