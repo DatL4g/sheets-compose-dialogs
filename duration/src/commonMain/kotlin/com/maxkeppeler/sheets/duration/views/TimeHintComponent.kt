@@ -18,10 +18,13 @@ package com.maxkeppeler.sheets.duration.views
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
-import com.maxkeppeler.sheets.duration.R
 import com.maxkeppeler.sheets.duration.utils.getFormattedHintTime
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.duration.generated.resources.Res
+import sheets_compose_dialogs.duration.generated.resources.scd_duration_dialog_at_least_placeholder
+import sheets_compose_dialogs.duration.generated.resources.scd_duration_dialog_at_most_placeholder
 
 /**
  * The info component that will show a hint if the selected time is out of the specified bounds.
@@ -29,6 +32,7 @@ import com.maxkeppeler.sheets.duration.utils.getFormattedHintTime
  * @param minTime The minimum valid time.
  * @param maxTime The maximum valid time.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun TimeHintComponent(
     orientation: LibOrientation,
@@ -38,8 +42,8 @@ internal fun TimeHintComponent(
 
     if (minTime != null || maxTime != null) {
 
-        val hintRes = if (minTime != null) R.string.scd_duration_dialog_at_least_placeholder
-        else R.string.scd_duration_dialog_at_most_placeholder
+        val hintRes = if (minTime != null) Res.string.scd_duration_dialog_at_least_placeholder
+        else Res.string.scd_duration_dialog_at_most_placeholder
 
         val time = minTime ?: maxTime
         ?: throw IllegalStateException("Hint is shown but min and max time values are null.")
@@ -49,7 +53,7 @@ internal fun TimeHintComponent(
             modifier = Modifier,
             orientation = orientation,
             values = values,
-            hintValue = stringResource(id = hintRes)
+            hintValue = stringResource(hintRes)
         )
     }
 }

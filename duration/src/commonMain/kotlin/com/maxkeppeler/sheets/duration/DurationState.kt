@@ -25,7 +25,7 @@ import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationSelection
 import com.maxkeppeler.sheets.duration.utils.*
-import java.io.Serializable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 
 /**
  * Handles the duration state.
@@ -96,7 +96,7 @@ internal class DurationState(
     fun onEnterValue(value: String) {
         val newTimeBuilder = timeTextValue.apply {
             if (length >= config.timeFormat.length) {
-                repeat(value.length) { deleteCharAt(0) }
+                repeat(value.length) { deleteAt(0) }
             }
             append(value)
         }
@@ -106,7 +106,7 @@ internal class DurationState(
 
     fun onBackspaceAction() {
         val newTimeBuilder = timeTextValue.apply {
-            deleteCharAt(lastIndex)
+            deleteAt(lastIndex)
             insert(0, 0.toString())
         }
         timeTextValue = StringBuilder(newTimeBuilder)
@@ -151,7 +151,7 @@ internal class DurationState(
      */
     data class DurationStateData(
         val timeTextValue: StringBuilder,
-    ) : Serializable
+    ) : JvmSerializable
 }
 
 /**

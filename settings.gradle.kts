@@ -14,7 +14,7 @@ include(
     ":info",
     ":rating",
     ":calendar",
-    //":duration",
+    ":duration",
     //":clock",
     ":date_time",
     ":color",

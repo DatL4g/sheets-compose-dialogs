@@ -77,7 +77,7 @@ internal fun PortraitTimeValueComponent(
                         .clip(MaterialTheme.shapes.medium)
                         .background(if (currentGroupIndex == groupIndex) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
                         .clickable { onGroupClick.invoke(currentGroupIndex) }
-                        .padding(horizontal = dimensionResource(RC.dimen.scd_small_75)),
+                        .padding(horizontal = 6.dp),
                     text = buildAnnotatedString {
                         val values = value.toString().toCharArray()
                         val selectedStyle = SpanStyle(
@@ -174,7 +174,7 @@ internal fun LandscapeTimeValueComponent(
                             .clip(MaterialTheme.shapes.medium)
                             .background(if (currentGroupIndex == groupIndex) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
                             .clickable { onGroupClick.invoke(currentGroupIndex) }
-                            .padding(horizontal = dimensionResource(RC.dimen.scd_small_75)),
+                            .padding(horizontal = 6.dp),
                         text = buildAnnotatedString {
                             val values = value.toString().toCharArray()
                             val selectedStyle = SpanStyle(

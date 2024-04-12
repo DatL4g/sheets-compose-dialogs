@@ -15,16 +15,22 @@
  */
 package com.maxkeppeler.sheets.duration.utils
 
-import androidx.annotation.RestrictTo
-import androidx.annotation.StringRes
-import com.maxkeppeler.sheets.duration.R
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationFormat
-import java.util.concurrent.TimeUnit
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.StringResource
+import sheets_compose_dialogs.duration.generated.resources.*
+import sheets_compose_dialogs.duration.generated.resources.Res
+import sheets_compose_dialogs.duration.generated.resources.scd_duration_dialog_hour_code
+import sheets_compose_dialogs.duration.generated.resources.scd_duration_dialog_minute_code
+import sheets_compose_dialogs.duration.generated.resources.scd_duration_dialog_second_code
+import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 
 /** Splits seconds into days, hours, minutes and seconds. */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 fun splitTime(timeInSeconds: Long): TimeInfo {
 
     val days = timeInSeconds / 86400
@@ -41,7 +47,6 @@ fun splitTime(timeInSeconds: Long): TimeInfo {
 }
 
 /** Helper class to store time units. */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 data class TimeInfo(
     val days: Long = 0,
     val hours: Long = 0,
@@ -55,7 +60,7 @@ data class TimeInfo(
 
 internal fun parseCurrentTime(format: DurationFormat, currentTime: Long? = null): StringBuilder {
 
-    val time = StringBuffer("")
+    val time = StringBuilder()
     val (days, hours, minutes, seconds) = splitTime(currentTime ?: 0)
 
     // No support for days yet
@@ -96,12 +101,17 @@ internal fun parseCurrentTime(format: DurationFormat, currentTime: Long? = null)
     return filledTimeString
 }
 
-data class Label(@StringRes val short: Int, @StringRes val long: Int)
+@OptIn(ExperimentalResourceApi::class)
+data class Label(
+    val short: StringResource,
+    val long: StringResource
+)
 
-val labels = listOf(
-    Label(R.string.scd_duration_dialog_hour_code, R.string.scd_duration_dialog_hours),
-    Label(R.string.scd_duration_dialog_minute_code, R.string.scd_duration_dialog_minutes),
-    Label(R.string.scd_duration_dialog_second_code, R.string.scd_duration_dialog_seconds)
+@OptIn(ExperimentalResourceApi::class)
+internal val labels = listOf(
+    Label(Res.string.scd_duration_dialog_hour_code, Res.string.scd_duration_dialog_hours),
+    Label(Res.string.scd_duration_dialog_minute_code, Res.string.scd_duration_dialog_minutes),
+    Label(Res.string.scd_duration_dialog_second_code, Res.string.scd_duration_dialog_seconds)
 )
 
 internal fun getValuePairs(
@@ -144,10 +154,10 @@ internal fun parseToSeconds(time: StringBuilder, format: DurationFormat): Long {
         if (time.isEmpty()) return@forEachIndexed
         when {
             formatTimeUnit.contains("H", ignoreCase = true) -> {
-                timeInSeconds += TimeUnit.HOURS.toSeconds(time.reversed().toLong())
+                timeInSeconds += time.reversed().toLong().hours.inWholeSeconds
             }
             formatTimeUnit.contains("M", ignoreCase = true) -> {
-                timeInSeconds += TimeUnit.MINUTES.toSeconds(time.reversed().toLong())
+                timeInSeconds += time.reversed().toLong().minutes.inWholeSeconds
             }
             formatTimeUnit.contains("S", ignoreCase = true) -> {
                 timeInSeconds += time.reversed().toInt()
@@ -175,13 +185,13 @@ internal fun getFormattedHintTime(timeInSeconds: Long): MutableList<Pair<String,
     if (timeInSeconds > 0) {
 
         var secondsValue = timeInSeconds
-        val days = TimeUnit.SECONDS.toDays(secondsValue).toInt()
-        secondsValue -= TimeUnit.DAYS.toSeconds(days.toLong())
-        val hours = TimeUnit.SECONDS.toHours(secondsValue).toInt()
-        secondsValue -= TimeUnit.HOURS.toSeconds(hours.toLong())
-        val minutes = TimeUnit.SECONDS.toMinutes(secondsValue).toInt()
-        secondsValue -= TimeUnit.MINUTES.toSeconds(minutes.toLong())
-        val seconds = TimeUnit.SECONDS.toSeconds(secondsValue).toInt()
+        val days = secondsValue.seconds.inWholeDays.toInt()
+        secondsValue -= days.days.inWholeSeconds
+        val hours = secondsValue.seconds.inWholeHours.toInt()
+        secondsValue -= hours.hours.inWholeSeconds
+        val minutes = secondsValue.seconds.inWholeMinutes.toInt()
+        secondsValue -= minutes.minutes.inWholeSeconds
+        val seconds = secondsValue.seconds.inWholeSeconds.toInt()
 
         if (hours > 0) pairs.add(Pair(hours.toString(), labels[0]))
         if (minutes > 0) pairs.add(Pair(minutes.toString(),labels[1]))

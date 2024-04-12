@@ -21,15 +21,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeler.sheets.duration.utils.Label
-import com.maxkeppeler.sheets.core.R as RC
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 
 /**
  * The value component that reflects one unit and its value.
@@ -40,6 +39,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param indexOfFirstValue The index of the first valid value.
  * @param isHintView If the current component will be displays as a small hint or not.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun TimeValueComponent(
     modifier: Modifier = Modifier,
@@ -129,7 +129,7 @@ internal fun TimeValueComponent(
                     style = labelStyle,
                 )
                 if (!isHintView && index != values.lastIndex) {
-                    Spacer(modifier = Modifier.width(dimensionResource(RC.dimen.scd_small_75)))
+                    Spacer(modifier = Modifier.width(6.dp))
                 }
             }
         }

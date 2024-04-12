@@ -33,17 +33,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.duration.R
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.utils.Constants
-import com.maxkeppeler.sheets.core.R as RC
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
+import sheets_compose_dialogs.duration.generated.resources.Res
+import sheets_compose_dialogs.duration.generated.resources.scd_duration_dialog_clear_input
+import sheets_compose_dialogs.duration.generated.resources.scd_duration_dialog_delete_last_input
 
 /**
  * The item component of the keyboard.
@@ -53,6 +55,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param onBackspaceAction The listener that is invoked when [Constants.ACTION_BACKSPACE] was clicked.
  * @param onEmptyAction The listener that is invoked when [Constants.ACTION_CLEAR] was clicked.
  */
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 internal fun KeyItemComponent(
     config: DurationConfig,
@@ -116,8 +119,8 @@ internal fun KeyItemComponent(
                     .fillMaxSize(),
                 imageVector = if (isActionBackspace) config.icons.Backspace else config.icons.Clear,
                 contentDescription = stringResource(
-                    if (isActionBackspace) R.string.scd_duration_dialog_delete_last_input
-                    else R.string.scd_duration_dialog_clear_input
+                    if (isActionBackspace) Res.string.scd_duration_dialog_delete_last_input
+                    else Res.string.scd_duration_dialog_clear_input
                 ),
                 tint = MaterialTheme.colorScheme.secondary
             )
