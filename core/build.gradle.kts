@@ -98,6 +98,11 @@ kotlin {
             nativeMain.orNull?.dependsOn(this)
             jsMain.orNull?.dependsOn(this)
         }
+
+        val wasmJsMain by getting {
+            dependsOn(nonJvmMain)
+            dependsOn(nonMacosMain)
+        }
     }
 }
 
