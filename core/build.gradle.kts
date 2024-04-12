@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 /*
  *  Copyright (C) 2022-2024. Maximilian Keppeler (https://www.maxkeppeler.com)
@@ -52,6 +53,13 @@ kotlin {
     macosArm64()
 
     js(IR) {
+        moduleName = Modules.CORE.moduleName
+        browser()
+        binaries.executable()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
         moduleName = Modules.CORE.moduleName
         browser()
         binaries.executable()

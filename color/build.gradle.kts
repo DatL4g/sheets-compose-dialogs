@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
     alias(libs.plugins.android.library)
@@ -36,6 +37,13 @@ kotlin {
     macosArm64()
 
     js(IR) {
+        moduleName = Modules.COLOR.moduleName
+        browser()
+        binaries.executable()
+    }
+
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
         moduleName = Modules.COLOR.moduleName
         browser()
         binaries.executable()
