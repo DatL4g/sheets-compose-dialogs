@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = Modules.OPTION.namespace
+    namespace = Modules.INFO.namespace
     compileSdk = 34
 
     defaultConfig {
@@ -36,6 +36,7 @@ kotlin {
     macosArm64()
 
     js(IR) {
+        moduleName = Modules.INFO.moduleName
         browser()
         binaries.executable()
     }

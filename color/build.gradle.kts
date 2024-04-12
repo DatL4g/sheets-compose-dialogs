@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = Modules.OPTION.namespace
+    namespace = Modules.COLOR.namespace
     compileSdk = 34
 
     defaultConfig {
@@ -27,6 +27,19 @@ kotlin {
         publishAllLibraryVariants()
     }
     jvm()
+
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    macosX64()
+    macosArm64()
+
+    js(IR) {
+        moduleName = Modules.COLOR.moduleName
+        browser()
+        binaries.executable()
+    }
 
     applyDefaultHierarchyTemplate()
 

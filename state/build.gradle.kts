@@ -36,6 +36,7 @@ kotlin {
     macosArm64()
 
     js(IR) {
+        moduleName = Modules.STATE.moduleName
         browser()
         binaries.executable()
     }

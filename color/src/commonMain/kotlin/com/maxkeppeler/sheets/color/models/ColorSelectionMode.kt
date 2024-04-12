@@ -15,9 +15,12 @@
  */
 package com.maxkeppeler.sheets.color.models
 
+import kotlinx.serialization.Serializable
+
 /**
  * Defined display modes for the calendar.
  */
+@Serializable
 enum class ColorSelectionMode {
 
     /**

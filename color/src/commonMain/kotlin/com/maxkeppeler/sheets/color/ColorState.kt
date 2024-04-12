@@ -21,11 +21,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
 import com.maxkeppeler.sheets.color.models.ColorSelectionMode
-import java.io.Serializable
+import kotlinx.serialization.Serializable
 
 /**
  * Handles the color state.
@@ -96,10 +97,11 @@ internal class ColorState(
      * Data class that stores the important information of the current state
      * and can be used by the [Saver] to save and restore the state.
      */
+    @Serializable
     data class ColorStateData(
         val color: Int?,
         val displayMode: ColorSelectionMode
-    ) : Serializable
+    ) : JvmSerializable
 }
 
 /**

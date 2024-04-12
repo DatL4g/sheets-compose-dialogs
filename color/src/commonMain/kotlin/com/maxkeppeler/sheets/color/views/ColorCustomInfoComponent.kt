@@ -37,8 +37,6 @@ import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 import sheets_compose_dialogs.color.generated.resources.Res
 import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_argb
-import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_copy_color
-import sheets_compose_dialogs.color.generated.resources.scd_color_dialog_paste_color
 
 /**
  * A information view for the custom color picker.
