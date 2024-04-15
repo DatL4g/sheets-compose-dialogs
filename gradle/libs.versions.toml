@@ -1,6 +1,6 @@
 [versions]
 android = "8.2.2"
-compose = "1.6.2"
+compose = "1.6.10-dev1580"
 datetime = "0.6.0-RC.2"
 desugar = "2.0.4"
 emoji = "0.18.0"
