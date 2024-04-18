@@ -32,5 +32,5 @@ import kotlinx.serialization.Transient
 class InputHeader(
     val title: String? = null,
     val body: String? = null,
-    @Transient val icon: IconSource? = null,
+    @Transient @kotlin.jvm.Transient val icon: IconSource? = null,
 ) : JvmSerializable

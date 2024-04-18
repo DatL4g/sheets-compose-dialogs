@@ -30,5 +30,5 @@ import kotlinx.serialization.Transient
 class OptionDetails(
     val title: String,
     val body: String,
-    @Transient val postView: (@Composable (selected: Boolean) -> Unit)? = null,
+    @Transient @kotlin.jvm.Transient val postView: (@Composable (selected: Boolean) -> Unit)? = null,
 ) : JvmSerializable

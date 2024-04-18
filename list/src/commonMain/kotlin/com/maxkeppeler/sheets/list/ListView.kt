@@ -83,7 +83,7 @@ fun ListView(
             )
         },
         buttonsVisible = selection.withButtonView
-    ) {orientation ->
+    ) { orientation ->
         ButtonsComponent(
             orientation = orientation,
             onPositiveValid = listState.valid,

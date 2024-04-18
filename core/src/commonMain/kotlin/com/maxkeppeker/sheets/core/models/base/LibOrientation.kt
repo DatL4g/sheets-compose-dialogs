@@ -15,13 +15,17 @@
  */
 package com.maxkeppeker.sheets.core.models.base
 
+import kotlinx.serialization.Serializable
+import com.maxkeppeker.sheets.core.utils.JvmSerializable
+
 /**
  * Represents the orientations of the use-case views.
  *
  * @property PORTRAIT orientation with height greater than width
  * @property LANDSCAPE orientation with width greater than height
  */
-enum class LibOrientation {
+@Serializable
+enum class LibOrientation : JvmSerializable {
     PORTRAIT,
     LANDSCAPE,
 }

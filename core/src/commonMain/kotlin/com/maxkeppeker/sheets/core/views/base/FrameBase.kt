@@ -59,8 +59,11 @@ fun FrameBase(
 ) {
     val layoutDirection = LocalLayoutDirection.current
     val isDeviceLandscape = isLandscape()
-    val deviceOrientation =
-        if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
+    val deviceOrientation = if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) {
+        LibOrientation.LANDSCAPE
+    } else {
+        LibOrientation.PORTRAIT
+    }
     val layoutType = when (config?.orientation) {
         null -> {
             when {

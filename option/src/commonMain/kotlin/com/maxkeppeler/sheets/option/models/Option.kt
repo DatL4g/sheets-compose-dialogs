@@ -38,16 +38,16 @@ import kotlinx.serialization.Transient
  */
 @Serializable
 data class Option(
-    @Transient val icon: IconSource? = null,
+    @Transient @kotlin.jvm.Transient val icon: IconSource? = null,
     val titleText: String,
     val subtitleText: String? = null,
     val selected: Boolean = false,
     val disabled: Boolean = false,
     val details: OptionDetails? = null,
     val onLongClick: (() -> Unit)? = null,
-    @Transient val customView: (@Composable (selected: Boolean) -> Unit)? = null,
-    @Transient val listTopView: (@Composable (selected: Boolean) -> Unit)? = null,
-    @Transient val listBottomView: (@Composable (selected: Boolean) -> Unit)? = null,
+    @Transient @kotlin.jvm.Transient val customView: (@Composable (selected: Boolean) -> Unit)? = null,
+    @Transient @kotlin.jvm.Transient val listTopView: (@Composable (selected: Boolean) -> Unit)? = null,
+    @Transient @kotlin.jvm.Transient val listBottomView: (@Composable (selected: Boolean) -> Unit)? = null,
 ) : JvmSerializable {
     internal var position: Int = 0
 }

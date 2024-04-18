@@ -31,7 +31,7 @@ import kotlinx.serialization.Transient
  */
 @Serializable
 data class ListOption(
-    @Transient val icon: IconSource? = null,
+    @Transient @kotlin.jvm.Transient val icon: IconSource? = null,
     val titleText: String,
     val subtitleText: String? = null,
     val selected: Boolean = false,
