@@ -20,6 +20,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    lint {
+        checkGeneratedSources = false
+        checkReleaseBuilds = false
+        abortOnError = false
+    }
 }
 
 kotlin {

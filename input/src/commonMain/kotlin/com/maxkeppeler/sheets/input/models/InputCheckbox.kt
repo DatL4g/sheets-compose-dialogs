@@ -28,7 +28,7 @@ package com.maxkeppeler.sheets.input.models
  * @param header The additional [InputHeader] to add more context information to the selection.
  * @param columns The columns that this input spans.
  */
-class InputCheckbox(
+data class InputCheckbox(
     internal val text: String,
     private val enabled: Boolean = false,
     private val changeListener: ((Boolean) -> Unit)? = null,

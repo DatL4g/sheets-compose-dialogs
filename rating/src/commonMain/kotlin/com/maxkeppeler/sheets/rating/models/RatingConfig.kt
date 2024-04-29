@@ -15,6 +15,7 @@
  */
 package com.maxkeppeler.sheets.rating.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
@@ -23,7 +24,8 @@ import com.maxkeppeler.sheets.rating.utils.Constants.DEFAULT_RATING_OPTIONS_COUN
 /**
  * The general configuration for the rating dialog.
  */
-class RatingConfig(
+@Stable
+data class RatingConfig(
     val ratingViewStyle: RatingViewStyle = RatingViewStyle.CENTER,
     val feedbackTextFieldType: FeedbackTextFieldType = FeedbackTextFieldType.DEFAULT,
     val feedbackErrorMessage: String? = null,
@@ -35,7 +37,7 @@ class RatingConfig(
     override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()
 
-
+@Stable
 enum class RatingViewStyle {
     START,
     CENTER,

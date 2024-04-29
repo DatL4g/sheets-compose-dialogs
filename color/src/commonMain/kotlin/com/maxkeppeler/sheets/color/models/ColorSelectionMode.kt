@@ -15,11 +15,13 @@
  */
 package com.maxkeppeler.sheets.color.models
 
+import androidx.compose.runtime.Stable
 import kotlinx.serialization.Serializable
 
 /**
  * Defined display modes for the calendar.
  */
+@Stable
 @Serializable
 enum class ColorSelectionMode {
 

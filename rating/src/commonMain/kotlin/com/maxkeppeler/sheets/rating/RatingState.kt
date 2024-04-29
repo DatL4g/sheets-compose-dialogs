@@ -16,6 +16,7 @@
 package com.maxkeppeler.sheets.rating
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
@@ -34,6 +35,7 @@ import kotlin.math.max
  * @param config The general configuration for the dialog view.
  * @param stateData The data of the state when the state is required to be restored.
  */
+@Stable
 internal class RatingState(
     val selection: RatingSelection,
     val config: RatingConfig = RatingConfig(),

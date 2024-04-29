@@ -15,9 +15,12 @@
  */
 package com.maxkeppeler.sheets.rating.models
 
+import androidx.compose.runtime.Stable
+
 /**
  * The type of text field that is displayed when using [FeedbackTextFieldType].
  */
+@Stable
 enum class FeedbackTextFieldType {
     OUTLINED,
     DEFAULT,

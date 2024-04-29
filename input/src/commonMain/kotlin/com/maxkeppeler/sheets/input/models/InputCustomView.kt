@@ -18,6 +18,7 @@
 package com.maxkeppeler.sheets.input.models
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 
 /**
  * Represents a custom view.
@@ -25,7 +26,8 @@ import androidx.compose.runtime.Composable
  * @param header The additional [InputHeader] to add more context information to the selection.
  * @param columns The columns that this input spans.
  */
-class InputCustomView(
+@Stable
+data class InputCustomView(
     internal val view: @Composable () -> Unit,
     override val header: InputHeader? = null,
     override val columns: Int? = null,

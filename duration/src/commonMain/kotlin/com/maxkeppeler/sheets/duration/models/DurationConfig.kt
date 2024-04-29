@@ -15,6 +15,7 @@
  */
 package com.maxkeppeler.sheets.duration.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
@@ -30,6 +31,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  * @param orientation The orientation of the view or null for auto orientation.
  */
+@Stable
 data class DurationConfig(
     val timeFormat: DurationFormat = DurationFormat.MM_SS,
     val currentTime: Long? = null,

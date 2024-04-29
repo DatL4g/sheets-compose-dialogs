@@ -15,9 +15,12 @@
  */
 package com.maxkeppeler.sheets.duration.models
 
+import androidx.compose.runtime.Stable
+
 /**
  * Available time formats.
  */
+@Stable
 enum class DurationFormat {
 
     /** HH:mm:ss (e. g. 12h 10m 30s) */

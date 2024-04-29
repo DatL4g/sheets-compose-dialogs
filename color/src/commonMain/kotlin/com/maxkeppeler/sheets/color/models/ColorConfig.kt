@@ -15,6 +15,7 @@
  */
 package com.maxkeppeler.sheets.color.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
@@ -27,6 +28,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
  * @param allowCustomColorAlphaValues Allow alpha values in the custom color picker.
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
+@Stable
 data class ColorConfig(
     val displayMode: ColorSelectionMode? = null,
     val defaultDisplayMode: ColorSelectionMode? = null,

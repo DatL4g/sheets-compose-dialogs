@@ -17,13 +17,16 @@
 
 package com.maxkeppeler.sheets.input.models
 
+import androidx.compose.runtime.Stable
+
 /**
  * Represents a text body.
  * @param text The text of the body
  * @param header The additional [InputHeader] to add more context information to the selection.
  * @param columns The columns that this input spans.
  */
-class InputText(
+@Stable
+data class InputText(
     internal val text: String,
     override val header: InputHeader? = null,
     override val columns: Int? = null,

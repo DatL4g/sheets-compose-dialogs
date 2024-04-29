@@ -41,7 +41,7 @@ internal fun CircularProgressIndicator(
         ?: indicator.value?.let { progress ->
             Box(modifier = Modifier.wrapContentSize()) {
                 androidx.compose.material3.CircularProgressIndicator(
-                    progress = progress,
+                    progress = { progress },
                     modifier = circularIndicatorModifier
                         .testTags(TestTags.STATE_LOADING_CIRCULAR, progress)
                         .align(Alignment.Center)

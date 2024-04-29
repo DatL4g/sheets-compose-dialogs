@@ -17,6 +17,7 @@
 
 package com.maxkeppeler.sheets.input.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.models.base.IconSource
 import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
@@ -28,8 +29,9 @@ import kotlinx.serialization.Transient
  * @param body The text that is used for the body.
  * @param icon The icon that is displayed on the left side of the title.
  */
+@Stable
 @Serializable
-class InputHeader(
+data class InputHeader(
     val title: String? = null,
     val body: String? = null,
     @Transient @kotlin.jvm.Transient val icon: IconSource? = null,

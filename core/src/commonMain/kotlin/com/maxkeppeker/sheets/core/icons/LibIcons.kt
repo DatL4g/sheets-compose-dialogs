@@ -2,10 +2,12 @@
 
 package com.maxkeppeker.sheets.core.icons
 
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.maxkeppeker.sheets.core.utils.JvmSerializable
 import kotlinx.serialization.Serializable
 
+@Stable
 sealed class LibIcons : JvmSerializable {
 
     abstract var EmojiEmotions: ImageVector
@@ -35,7 +37,8 @@ sealed class LibIcons : JvmSerializable {
      * [Filled icons](https://material.io/resources/icons/?style=baseline) (previously the only
      * available theme, also known as the baseline theme) are the default icon theme.
      */
-    object Filled : LibIcons() {
+    @Stable
+    data object Filled : LibIcons() {
         override var EmojiEmotions = com.maxkeppeker.sheets.core.icons.filled.EmojiEmotions
         override var EmojiNature = com.maxkeppeker.sheets.core.icons.filled.EmojiNature
         override var EmojiFoodBeverage = com.maxkeppeker.sheets.core.icons.filled.EmojiFoodBeverage
@@ -64,7 +67,8 @@ sealed class LibIcons : JvmSerializable {
      * [Outlined icons](https://material.io/resources/icons/?style=outline) make use of a thin
      * stroke and empty space inside for a lighter appearance.
      */
-    object Outlined : LibIcons() {
+    @Stable
+    data object Outlined : LibIcons() {
         override var EmojiEmotions = com.maxkeppeker.sheets.core.icons.outlined.EmojiEmotions
         override var EmojiNature = com.maxkeppeker.sheets.core.icons.outlined.EmojiNature
         override var EmojiFoodBeverage = com.maxkeppeker.sheets.core.icons.outlined.EmojiFoodBeverage
@@ -94,7 +98,8 @@ sealed class LibIcons : JvmSerializable {
      * pairs well with brands that use heavier typography, curved logos, or circular elements to
      * express their style.
      */
-    object Rounded : LibIcons() {
+    @Stable
+    data object Rounded : LibIcons() {
         override var EmojiEmotions = com.maxkeppeker.sheets.core.icons.rounded.EmojiEmotions
         override var EmojiNature = com.maxkeppeker.sheets.core.icons.rounded.EmojiNature
         override var EmojiFoodBeverage = com.maxkeppeker.sheets.core.icons.rounded.EmojiFoodBeverage
@@ -124,7 +129,8 @@ sealed class LibIcons : JvmSerializable {
      * straight edges, for a crisp style that remains legible even at smaller scales. These
      * rectangular shapes can support brand styles that are not well-reflected by rounded shapes.
      */
-    object TwoTone : LibIcons() {
+    @Stable
+    data object TwoTone : LibIcons() {
         override var EmojiEmotions = com.maxkeppeker.sheets.core.icons.twotone.EmojiEmotions
         override var EmojiNature = com.maxkeppeker.sheets.core.icons.twotone.EmojiNature
         override var EmojiFoodBeverage = com.maxkeppeker.sheets.core.icons.twotone.EmojiFoodBeverage
@@ -154,7 +160,8 @@ sealed class LibIcons : JvmSerializable {
      * straight edges, for a crisp style that remains legible even at smaller scales. These
      * rectangular shapes can support brand styles that are not well-reflected by rounded shapes.
      */
-    object Sharp : LibIcons() {
+    @Stable
+    data object Sharp : LibIcons() {
         override var EmojiEmotions = com.maxkeppeker.sheets.core.icons.sharp.EmojiEmotions
         override var EmojiNature = com.maxkeppeker.sheets.core.icons.sharp.EmojiNature
         override var EmojiFoodBeverage = com.maxkeppeker.sheets.core.icons.sharp.EmojiFoodBeverage

@@ -15,6 +15,7 @@
  */
 package com.maxkeppeler.sheets.clock.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
@@ -29,6 +30,7 @@ import kotlinx.datetime.LocalTime
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  * @param orientation The orientation of the view or null for auto orientation.
  */
+@Stable
 data class ClockConfig(
     val defaultTime: LocalTime? = null,
     val boundary: ClosedRange<LocalTime>? = null,

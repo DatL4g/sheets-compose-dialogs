@@ -17,6 +17,7 @@
 
 package com.maxkeppeler.sheets.clock.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.BaseConstants
@@ -24,6 +25,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
 /**
  * The selection configuration for the clock dialog.
  */
+@Stable
 sealed class ClockSelection : BaseSelection() {
 
     /**
@@ -36,7 +38,8 @@ sealed class ClockSelection : BaseSelection() {
      * @param positiveButton The button that will be used as a positive button.
      * @param onPositiveClick The listener that returns the selected hours and minutes.
      */
-    class HoursMinutes(
+    @Stable
+    data class HoursMinutes(
         override val withButtonView: Boolean = false,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
@@ -56,7 +59,8 @@ sealed class ClockSelection : BaseSelection() {
      * @param positiveButton The button that will be used as a positive button.
      * @param onPositiveClick The listener that returns the selected hours, minutes and seconds.
      */
-    class HoursMinutesSeconds(
+    @Stable
+    data class HoursMinutesSeconds(
         override val withButtonView: Boolean = false,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,

@@ -17,6 +17,7 @@
 
 package com.maxkeppeler.sheets.rating.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.BaseConstants
@@ -31,7 +32,8 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
  * @param positiveButton The button that will be used as a positive button.
  * @param onSelectRating The listener that is invoked when a rating is selected.
  */
-class RatingSelection(
+@Stable
+data class RatingSelection(
     override val withButtonView: Boolean = true,
     override val extraButton: SelectionButton? = null,
     override val onExtraButtonClick: (() -> Unit)? = null,

@@ -17,6 +17,7 @@
 
 package com.maxkeppeler.sheets.info.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.BaseConstants
@@ -31,6 +32,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
  * @param positiveButton The button that will be used as a positive button.
  * @param onPositiveClick The listener that is invoked when the positive button is clicked.
  */
+@Stable
 class InfoSelection(
     override val withButtonView: Boolean = true,
     override val extraButton: SelectionButton? = null,

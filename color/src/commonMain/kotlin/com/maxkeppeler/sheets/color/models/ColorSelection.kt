@@ -17,6 +17,7 @@
 
 package com.maxkeppeler.sheets.color.models
 
+import androidx.compose.runtime.Stable
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.BaseConstants
@@ -33,6 +34,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
  * @param onSelectNone The listener that is invoked when no color is selected.
  * @param onSelectColor The listener that returns the selected color.
  */
+@Stable
 data class ColorSelection(
     val selectedColor: SingleColor? = null,
     override val withButtonView: Boolean = true,
