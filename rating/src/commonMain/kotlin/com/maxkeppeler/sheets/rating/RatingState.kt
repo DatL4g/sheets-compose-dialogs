@@ -35,7 +35,6 @@ import kotlin.math.max
  * @param config The general configuration for the dialog view.
  * @param stateData The data of the state when the state is required to be restored.
  */
-@Stable
 internal class RatingState(
     val selection: RatingSelection,
     val config: RatingConfig = RatingConfig(),

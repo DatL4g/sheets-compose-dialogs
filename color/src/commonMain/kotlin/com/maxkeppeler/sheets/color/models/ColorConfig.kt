@@ -28,7 +28,6 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
  * @param allowCustomColorAlphaValues Allow alpha values in the custom color picker.
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
-@Stable
 data class ColorConfig(
     val displayMode: ColorSelectionMode? = null,
     val defaultDisplayMode: ColorSelectionMode? = null,

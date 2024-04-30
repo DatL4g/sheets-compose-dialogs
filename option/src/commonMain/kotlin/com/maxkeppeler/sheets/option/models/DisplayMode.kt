@@ -20,7 +20,6 @@ import androidx.compose.runtime.Stable
 /**
  *  The display modes that can be used.
  */
-@Stable
 enum class DisplayMode {
 
     /**

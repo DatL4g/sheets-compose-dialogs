@@ -23,7 +23,6 @@ import androidx.compose.runtime.Stable
  * Represents a divider.
  * @param columns The columns that this input spans.
  */
-@Stable
 data class InputDivider(
     override val columns: Int? = null,
 ) : Input() {

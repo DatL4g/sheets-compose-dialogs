@@ -27,7 +27,6 @@ import com.maxkeppeler.sheets.option.utils.Constants.GRID_COLUMNS_DEFAULT
  * @param gridColumns The amount of columns when display mode is [DisplayMode.GRID_VERTICAL].
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
-@Stable
 class OptionConfig(
     val mode: DisplayMode = DisplayMode.GRID_VERTICAL,
     val gridColumns: Int = GRID_COLUMNS_DEFAULT,

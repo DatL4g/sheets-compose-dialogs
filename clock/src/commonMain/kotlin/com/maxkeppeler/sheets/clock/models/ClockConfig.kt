@@ -30,7 +30,6 @@ import kotlinx.datetime.LocalTime
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  * @param orientation The orientation of the view or null for auto orientation.
  */
-@Stable
 data class ClockConfig(
     val defaultTime: LocalTime? = null,
     val boundary: ClosedRange<LocalTime>? = null,

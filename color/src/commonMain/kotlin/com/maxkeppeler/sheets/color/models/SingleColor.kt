@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.toArgb
  * @param colorRes Res of color value.
  * @param colorHex Color value as Hex-String.
  */
-@Stable
 data class SingleColor(
     val colorInt: Int? = null,
     val colorHex: String? = null,

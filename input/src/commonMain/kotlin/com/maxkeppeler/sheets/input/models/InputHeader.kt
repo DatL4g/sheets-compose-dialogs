@@ -29,7 +29,6 @@ import kotlinx.serialization.Transient
  * @param body The text that is used for the body.
  * @param icon The icon that is displayed on the left side of the title.
  */
-@Stable
 @Serializable
 data class InputHeader(
     val title: String? = null,

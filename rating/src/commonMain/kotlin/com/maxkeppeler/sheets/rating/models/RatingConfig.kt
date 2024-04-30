@@ -24,7 +24,6 @@ import com.maxkeppeler.sheets.rating.utils.Constants.DEFAULT_RATING_OPTIONS_COUN
 /**
  * The general configuration for the rating dialog.
  */
-@Stable
 data class RatingConfig(
     val ratingViewStyle: RatingViewStyle = RatingViewStyle.CENTER,
     val feedbackTextFieldType: FeedbackTextFieldType = FeedbackTextFieldType.DEFAULT,
@@ -37,7 +36,6 @@ data class RatingConfig(
     override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()
 
-@Stable
 enum class RatingViewStyle {
     START,
     CENTER,

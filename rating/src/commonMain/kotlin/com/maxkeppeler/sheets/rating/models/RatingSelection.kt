@@ -32,7 +32,6 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
  * @param positiveButton The button that will be used as a positive button.
  * @param onSelectRating The listener that is invoked when a rating is selected.
  */
-@Stable
 data class RatingSelection(
     override val withButtonView: Boolean = true,
     override val extraButton: SelectionButton? = null,

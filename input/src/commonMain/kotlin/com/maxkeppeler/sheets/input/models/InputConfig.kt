@@ -25,7 +25,6 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
  * @param columns Set the amount of columns inputs can span.
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
-@Stable
 data class InputConfig(
     val columns: Int = 1,
     override val icons: LibIcons = DEFAULT_ICON_STYLE,

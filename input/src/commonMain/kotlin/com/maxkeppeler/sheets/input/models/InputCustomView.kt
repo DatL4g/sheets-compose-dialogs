@@ -26,7 +26,6 @@ import androidx.compose.runtime.Stable
  * @param header The additional [InputHeader] to add more context information to the selection.
  * @param columns The columns that this input spans.
  */
-@Stable
 data class InputCustomView(
     internal val view: @Composable () -> Unit,
     override val header: InputHeader? = null,
