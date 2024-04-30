@@ -44,6 +44,7 @@ data class Option(
     val selected: Boolean = false,
     val disabled: Boolean = false,
     val details: OptionDetails? = null,
+    val onClick: (() -> Unit)? = null,
     val onLongClick: (() -> Unit)? = null,
     @Transient @kotlin.jvm.Transient val customView: (@Composable (selected: Boolean) -> Unit)? = null,
     @Transient @kotlin.jvm.Transient val listTopView: (@Composable (selected: Boolean) -> Unit)? = null,

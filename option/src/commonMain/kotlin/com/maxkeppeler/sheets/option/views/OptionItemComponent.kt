@@ -16,8 +16,10 @@
 package com.maxkeppeler.sheets.option.views
 
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -40,6 +42,7 @@ import com.maxkeppeler.sheets.option.models.OptionConfig
  * @param inputDisabled If input is disabled.
  * @param size The size that should be applied to the option component.
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun OptionItemComponent(
     config: OptionConfig,
@@ -63,7 +66,16 @@ internal fun OptionItemComponent(
         .testTags(TestTags.OPTION_VIEW_SELECTION, option.position)
         .wrapContentHeight()
         .clip(MaterialTheme.shapes.medium)
-        .clickable(!inputDisabled && !option.disabled) { onClick(option) }
+        .combinedClickable(
+            enabled = !inputDisabled && !option.disabled,
+            onClick = {
+                onClick(option)
+                option.onClick?.invoke()
+            },
+            onLongClick = {
+                option.onLongClick?.invoke()
+            }
+        )
         .then(if (option.disabled || option.selected) Modifier.background(backgroundColor) else Modifier)
 
     val detailDialogState = rememberUseCaseState(false)
