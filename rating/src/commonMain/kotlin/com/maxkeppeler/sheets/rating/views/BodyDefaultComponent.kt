@@ -16,6 +16,7 @@
 package com.maxkeppeler.sheets.rating.views
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,12 +42,13 @@ internal fun DefaultBodyComponent(
 ) {
     Column(
         modifier = Modifier
+            .fillMaxWidth()
             .testTag(TestTags.RATING_BODY_DEFAULT)
             .padding(top = 16.dp)
     ) {
         body.preBody()
         Text(
-            modifier = Modifier.testTag(TestTags.RATING_BODY_DEFAULT_TEXT),
+            modifier = Modifier.fillMaxWidth().testTag(TestTags.RATING_BODY_DEFAULT_TEXT),
             textAlign = if (config.ratingViewStyle == RatingViewStyle.START) TextAlign.Start else TextAlign.Center,
             text = body.bodyText,
             style = MaterialTheme.typography.bodyMedium
