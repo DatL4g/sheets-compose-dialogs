@@ -90,7 +90,7 @@ internal fun OptionGridItemComponent(
                 ) {
                     option.icon?.let {
                         IconComponent(
-                            modifier = Modifier.size(24.dp).padding(12.dp),
+                            modifier = Modifier.size(48.dp).padding(12.dp),
                             iconSource = it,
                             tint = iconColor
                         )
