@@ -61,7 +61,8 @@ internal fun OptionListItemComponent(
                         IconComponent(
                             modifier = Modifier
                                 .padding(start = 24.dp)
-                                .size(48.dp),
+                                .size(24.dp)
+                                .padding(12.dp),
                             iconSource = it,
                             tint = iconColor
                         )
