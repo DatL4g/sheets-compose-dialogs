@@ -57,11 +57,14 @@ import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import com.maxkeppeler.sheets.calendar.monthShort
+import com.maxkeppeler.sheets.calendar.utils.monthShort
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.format
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.number
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
@@ -86,7 +89,7 @@ import kotlin.math.min
  * @param onMonthClick The listener that is invoked when the month selection was clicked.
  * @param onYearClick The listener that is invoked when the year selection was clicked.
  */
-@OptIn(ExperimentalResourceApi::class)
+@OptIn(ExperimentalResourceApi::class, FormatStringsInDatetimeFormats::class)
 @ExperimentalMaterial3Api
 @Composable
 internal fun CalendarTopComponent(
@@ -204,10 +207,16 @@ internal fun CalendarTopComponent(
                     },
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                val formatter = remember {
+                    LocalDate.Format {
+                        byUnicodePattern("yyyy")
+                    }
+                }
+
                 Text(
                     modifier = selectableItemModifier
                         .testTags(TestTags.CALENDAR_YEAR_TITLE, cameraDate.year),
-                    text = cameraDate.year.toString(),
+                    text = cameraDate.format(formatter),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )
@@ -266,7 +275,7 @@ internal fun CalendarTopComponent(
  * @param onMonthClick The listener that is invoked when the month selection was clicked.
  * @param onYearClick The listener that is invoked when the year selection was clicked.
  */
-@OptIn(ExperimentalResourceApi::class)
+@OptIn(ExperimentalResourceApi::class, FormatStringsInDatetimeFormats::class)
 @ExperimentalMaterial3Api
 @Composable
 internal fun CalendarTopLandscapeComponent(
@@ -325,9 +334,15 @@ internal fun CalendarTopLandscapeComponent(
                 },
             verticalAlignment = Alignment.CenterVertically
         ) {
+            val formatter = remember {
+                LocalDate.Format {
+                    byUnicodePattern("yyyy")
+                }
+            }
+
             Text(
                 modifier = selectableItemModifier.weight(1f),
-                text = cameraDate.year.toString(),
+                text = cameraDate.format(formatter),
                 style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Start
             )

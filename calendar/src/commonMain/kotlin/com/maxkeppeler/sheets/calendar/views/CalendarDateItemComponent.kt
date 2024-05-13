@@ -27,6 +27,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -39,9 +40,12 @@ import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.calendar.models.CalendarDateData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
-import com.maxkeppeler.sheets.calendar.now
 import com.maxkeppeler.sheets.calendar.utils.Constants
+import com.maxkeppeler.sheets.calendar.utils.now
 import kotlinx.datetime.LocalDate
+import kotlinx.datetime.format
+import kotlinx.datetime.format.FormatStringsInDatetimeFormats
+import kotlinx.datetime.format.byUnicodePattern
 import kotlinx.datetime.isoDayNumber
 
 /**
@@ -50,6 +54,7 @@ import kotlinx.datetime.isoDayNumber
  * @param selection The selection configuration for the dialog view.
  * @param onDateClick The listener that is invoked when a date is clicked.
  */
+@OptIn(FormatStringsInDatetimeFormats::class)
 @Composable
 internal fun CalendarDateItemComponent(
     orientation: LibOrientation,
@@ -138,6 +143,12 @@ internal fun CalendarDateItemComponent(
         else -> Constants.DATE_ITEM_OPACITY
     }
 
+    val formatter = remember {
+        LocalDate.Format {
+            byUnicodePattern("d")
+        }
+    }
+
     Column(modifier = parentModifier) {
         Row(
             modifier = cellModifier,
@@ -148,8 +159,7 @@ internal fun CalendarDateItemComponent(
                 modifier = Modifier
                     .weight(1f)
                     .alpha(textAlpha),
-                text = data.date?.dayOfWeek?.isoDayNumber?.toString()
-                    ?.takeUnless { data.otherMonth } ?: "",
+                text = data.date?.format(formatter)?.takeUnless { data.otherMonth } ?: "",
                 style = textStyle,
                 textAlign = TextAlign.Center
             )

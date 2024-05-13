@@ -16,7 +16,7 @@
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.foundation.lazy.LazyListScope
-import com.maxkeppeler.sheets.calendar.now
+import com.maxkeppeler.sheets.calendar.utils.now
 import kotlinx.datetime.LocalDate
 
 /**

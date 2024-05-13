@@ -38,8 +38,9 @@ internal fun getDayOfWeekLabels(locale: FormatLocale): Map<DayOfWeek, String> = 
  * @return an ordered list of DayOfWeek values starting with the locale's first day of the week
  */
 internal fun getOrderedDaysOfWeek(locale: FormatLocale): List<DayOfWeek> {
-    val daysOfWeek = DayOfWeek.entries.toTypedArray()
-    val orderedDays = daysOfWeek.sortedBy { (it.isoDayNumber - 1 + 7) % 7 }
+    val firstDayOfWeek = DayOfWeek.MONDAY.isoDayNumber
+    val daysOfWeek = DayOfWeek.entries
+    val orderedDays = daysOfWeek.sortedBy { (it.isoDayNumber - firstDayOfWeek + 7) % 7 }
     return orderedDays
 }
 

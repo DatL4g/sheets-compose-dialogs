@@ -20,7 +20,7 @@ package com.maxkeppeler.sheets.calendar.models
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.BaseConstants
-import com.maxkeppeler.sheets.calendar.LocalDateRange
+import com.maxkeppeler.sheets.calendar.utils.LocalDateRange
 import kotlinx.datetime.LocalDate
 
 /**

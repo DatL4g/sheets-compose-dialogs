@@ -30,11 +30,13 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.maxkeppeler.sheets.calendar.monthShort
-import com.maxkeppeler.sheets.calendar.now
 import com.maxkeppeler.sheets.calendar.utils.Constants
+import com.maxkeppeler.sheets.calendar.utils.monthShort
+import com.maxkeppeler.sheets.calendar.utils.now
+import com.maxkeppeler.sheets.calendar.utils.withMonth
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
+import kotlinx.datetime.format
 
 /**
  * The item component of the month selection view.
@@ -89,9 +91,7 @@ internal fun MonthItemComponent(
                 .alpha(textAlpha)
                 .padding(horizontal = 12.dp)
                 .padding(vertical = 8.dp),
-            text = LocalDate.now().run {
-                LocalDate(this.year, month, this.dayOfMonth)
-            }.monthShort(),
+            text = LocalDate.now().withMonth(month).monthShort(),
             style = textStyle,
             textAlign = TextAlign.Center,
             maxLines = 1,
