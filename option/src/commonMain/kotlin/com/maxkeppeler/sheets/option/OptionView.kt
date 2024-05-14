@@ -17,6 +17,8 @@
 package com.maxkeppeler.sheets.option
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
@@ -30,8 +32,10 @@ import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHe
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.option.models.Option
+import com.maxkeppeler.sheets.option.models.OptionBody
 import com.maxkeppeler.sheets.option.models.OptionConfig
 import com.maxkeppeler.sheets.option.models.OptionSelection
+import com.maxkeppeler.sheets.option.views.OptionBodyComponent
 import com.maxkeppeler.sheets.option.views.OptionBoundsComponent
 import com.maxkeppeler.sheets.option.views.OptionComponent
 
@@ -49,6 +53,7 @@ fun OptionView(
     selection: OptionSelection,
     config: OptionConfig = OptionConfig(),
     header: Header? = null,
+    body: OptionBody? = null
 ) {
 
     val coroutine = rememberCoroutineScope()
@@ -73,6 +78,12 @@ fun OptionView(
         // Override content padding, spacing is within the scrollable container for display mode GRID_HORIZONTAL
         horizontalContentPadding = PaddingValues(horizontal = 0.dp),
         layout = {
+            body?.let {
+                OptionBodyComponent(
+                    body = it
+                )
+                Spacer(modifier = Modifier.height(24.dp))
+            }
             OptionBoundsComponent(
                 selection = selection,
                 selectedOptions = optionState.selectedOptions

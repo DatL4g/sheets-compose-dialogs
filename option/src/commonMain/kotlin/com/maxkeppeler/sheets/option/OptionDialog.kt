@@ -23,6 +23,7 @@ import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
+import com.maxkeppeler.sheets.option.models.OptionBody
 import com.maxkeppeler.sheets.option.models.OptionConfig
 import com.maxkeppeler.sheets.option.models.OptionSelection
 
@@ -41,6 +42,7 @@ fun OptionDialog(
     selection: OptionSelection,
     config: OptionConfig = OptionConfig(),
     header: Header? = null,
+    body: OptionBody? = null,
     properties: DialogProperties = DialogProperties(),
 ) {
 

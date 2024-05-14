@@ -25,6 +25,7 @@ import androidx.compose.ui.window.PopupProperties
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.PopupBase
+import com.maxkeppeler.sheets.option.models.OptionBody
 import com.maxkeppeler.sheets.option.models.OptionConfig
 import com.maxkeppeler.sheets.option.models.OptionSelection
 
@@ -45,6 +46,7 @@ fun OptionPopup(
     selection: OptionSelection,
     config: OptionConfig = OptionConfig(),
     header: Header? = null,
+    body: OptionBody? = null,
     alignment: Alignment = Alignment.TopStart,
     offset: IntOffset = IntOffset(0, 0),
     properties: PopupProperties = PopupProperties(),
