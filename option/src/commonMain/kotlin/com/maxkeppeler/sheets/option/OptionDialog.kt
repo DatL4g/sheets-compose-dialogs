@@ -55,6 +55,7 @@ fun OptionDialog(
             selection = selection,
             config = config,
             header = header,
+            body = body
         )
     }
 }

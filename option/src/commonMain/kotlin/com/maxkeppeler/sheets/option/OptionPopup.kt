@@ -63,6 +63,7 @@ fun OptionPopup(
             selection = selection,
             config = config,
             header = header,
+            body = body
         )
     }
 }
