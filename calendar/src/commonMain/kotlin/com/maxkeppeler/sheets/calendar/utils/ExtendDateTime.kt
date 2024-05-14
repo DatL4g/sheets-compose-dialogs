@@ -326,7 +326,7 @@ internal fun calcCalendarData(
 ): CalendarData {
     var weekCameraDate = cameraDate
 
-    val firstDayOfWeek = DayOfWeek.MONDAY
+    val firstDayOfWeek = config.locale.firstDayOfWeek
     val dayOfWeek = cameraDate.dayOfWeek
     val diff = (dayOfWeek.isoDayNumber - firstDayOfWeek.isoDayNumber + 7) % 7
 
