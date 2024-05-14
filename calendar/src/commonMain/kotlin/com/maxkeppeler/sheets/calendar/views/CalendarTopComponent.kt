@@ -57,7 +57,6 @@ import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import com.maxkeppeler.sheets.calendar.utils.monthShort
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -183,7 +182,7 @@ internal fun CalendarTopComponent(
                 Text(
                     modifier = selectableItemModifier
                         .testTags(TestTags.CALENDAR_MONTH_TITLE, cameraDate.month.number),
-                    text = cameraDate.monthShort(),
+                    text = config.locale.getMonthShort(cameraDate),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )
@@ -370,7 +369,7 @@ internal fun CalendarTopLandscapeComponent(
         ) {
             Text(
                 modifier = selectableItemModifier.weight(1f),
-                text = cameraDate.monthShort(),
+                text = config.locale.getMonthShort(cameraDate),
                 style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Start
             )

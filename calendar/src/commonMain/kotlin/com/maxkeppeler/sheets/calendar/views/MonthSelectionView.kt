@@ -18,6 +18,7 @@ package com.maxkeppeler.sheets.calendar.views
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
+import com.maxkeppeler.sheets.calendar.models.FormatLocale
 import kotlinx.datetime.Month
 
 /**
@@ -26,6 +27,7 @@ import kotlinx.datetime.Month
  * @param onMonthClick The listener that is invoked when a month is selected.
  */
 internal fun LazyGridScope.setupMonthSelectionView(
+    locale: FormatLocale,
     monthsData: CalendarMonthData,
     onMonthClick: (Month) -> Unit,
 ) {
@@ -34,6 +36,7 @@ internal fun LazyGridScope.setupMonthSelectionView(
         val disabled = monthsData.disabled.contains(month)
         val thisMonth = monthsData.thisMonth == month
         MonthItemComponent(
+            locale = locale,
             month = month,
             selected = selected,
             disabled = disabled,

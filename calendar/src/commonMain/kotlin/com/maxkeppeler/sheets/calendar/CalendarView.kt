@@ -135,6 +135,7 @@ fun CalendarView(
                 },
                 onMonthView = {
                     setupMonthSelectionView(
+                        locale = config.locale,
                         monthsData = calendarState.monthsData,
                         onMonthClick = calendarState::onMonthClick
                     )
@@ -199,6 +200,7 @@ fun CalendarView(
                         },
                         onMonthView = {
                             setupMonthSelectionView(
+                                locale = config.locale,
                                 monthsData = calendarState.monthsData,
                                 onMonthClick = calendarState::onMonthClick
                             )

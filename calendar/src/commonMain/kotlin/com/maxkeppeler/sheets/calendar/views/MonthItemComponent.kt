@@ -30,8 +30,8 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.maxkeppeler.sheets.calendar.models.FormatLocale
 import com.maxkeppeler.sheets.calendar.utils.Constants
-import com.maxkeppeler.sheets.calendar.utils.monthShort
 import com.maxkeppeler.sheets.calendar.utils.now
 import com.maxkeppeler.sheets.calendar.utils.withMonth
 import kotlinx.datetime.LocalDate
@@ -47,6 +47,7 @@ import kotlinx.datetime.format
  */
 @Composable
 internal fun MonthItemComponent(
+    locale: FormatLocale,
     month: Month,
     thisMonth: Boolean = false,
     disabled: Boolean = false,
@@ -91,7 +92,7 @@ internal fun MonthItemComponent(
                 .alpha(textAlpha)
                 .padding(horizontal = 12.dp)
                 .padding(vertical = 8.dp),
-            text = LocalDate.now().withMonth(month).monthShort(),
+            text = locale.getMonthShort(LocalDate.now().withMonth(month)),
             style = textStyle,
             textAlign = TextAlign.Center,
             maxLines = 1,

@@ -1,11 +1,21 @@
 package com.maxkeppeler.sheets.calendar.models
 
-enum class FormatLocale {
-    Chinese,
-    Japanese,
-    Default;
+import kotlinx.datetime.DayOfWeek
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.Month
 
-    companion object
+expect sealed class FormatLocale {
+
+    val firstDayOfWeek: DayOfWeek
+
+    fun getDayOfWeekLabels(): Map<DayOfWeek, String>
+    fun getMonthShort(date: LocalDate): String
+
+    class CHINESE : FormatLocale
+    class JAPANESE : FormatLocale
+    class Default : FormatLocale
+
+    companion object {
+        fun getDefault(): FormatLocale
+    }
 }
-
-expect fun FormatLocale.Companion.getDefault(): FormatLocale
