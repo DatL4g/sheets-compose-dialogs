@@ -77,6 +77,10 @@ kotlin {
             implementation(libs.serialization)
         }
 
+        androidMain.orNull?.dependencies {
+            implementation(libs.androidx.window)
+        }
+
         val nonMacosMain by creating {
             dependsOn(commonMain.get())
 

@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
+import com.maxkeppeker.sheets.core.utils.AndroidWindowSizeFix
 import com.maxkeppeker.sheets.core.utils.BaseValues
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.isLandscape
@@ -57,95 +58,97 @@ fun FrameBase(
     buttonsVisible: Boolean = true,
     buttons: @Composable (ColumnScope.(LibOrientation) -> Unit)? = null,
 ) {
-    val layoutDirection = LocalLayoutDirection.current
-    val isDeviceLandscape = isLandscape()
-    val deviceOrientation = if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) {
-        LibOrientation.LANDSCAPE
-    } else {
-        LibOrientation.PORTRAIT
-    }
-    val layoutType = when (config?.orientation) {
-        null -> {
-            when {
-                // Only if auto orientation is currently landscape, content for landscape exists
-                // and the device screen is not larger than a typical phone.
-                isDeviceLandscape && layoutLandscape != null -> LibOrientation.LANDSCAPE
-                else -> LibOrientation.PORTRAIT
-            }
+    AndroidWindowSizeFix {
+        val layoutDirection = LocalLayoutDirection.current
+        val isDeviceLandscape = isLandscape()
+        val deviceOrientation = if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) {
+            LibOrientation.LANDSCAPE
+        } else {
+            LibOrientation.PORTRAIT
         }
-        LibOrientation.LANDSCAPE -> if (layoutLandscape != null) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
-        else -> config.orientation
-    }
+        val layoutType = when (config?.orientation) {
+            null -> {
+                when {
+                    // Only if auto orientation is currently landscape, content for landscape exists
+                    // and the device screen is not larger than a typical phone.
+                    isDeviceLandscape && layoutLandscape != null -> LibOrientation.LANDSCAPE
+                    else -> LibOrientation.PORTRAIT
+                }
+            }
+            LibOrientation.LANDSCAPE -> if (layoutLandscape != null) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
+            else -> config.orientation
+        }
 
-    Column(
-        modifier = when (deviceOrientation) {
-            LibOrientation.PORTRAIT -> Modifier.wrapContentSize()
-            LibOrientation.LANDSCAPE -> Modifier
-                .wrapContentWidth()
-        },
-        horizontalAlignment = Alignment.Start
-    ) {
+        Column(
+            modifier = when (deviceOrientation) {
+                LibOrientation.PORTRAIT -> Modifier.wrapContentSize()
+                LibOrientation.LANDSCAPE -> Modifier
+                    .wrapContentWidth()
+            },
+            horizontalAlignment = Alignment.Start
+        ) {
 
-        header?.takeUnless { deviceOrientation == LibOrientation.LANDSCAPE }?.let {
-            // Display header
-            Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_HEADER)) {
-                HeaderComponent(
-                    header = header,
-                    contentHorizontalPadding = PaddingValues(
-                        start = horizontalContentPadding.calculateStartPadding(layoutDirection),
+            header?.takeUnless { deviceOrientation == LibOrientation.LANDSCAPE }?.let {
+                // Display header
+                Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_HEADER)) {
+                    HeaderComponent(
+                        header = header,
+                        contentHorizontalPadding = PaddingValues(
+                            start = horizontalContentPadding.calculateStartPadding(layoutDirection),
+                            end = horizontalContentPadding.calculateEndPadding(layoutDirection),
+                        )
+                    )
+                }
+            } ?: run {
+                // If no header is defined, add extra spacing to the content top padding
+                Spacer(
+                    modifier = Modifier
+                        .testTag(TestTags.FRAME_BASE_NO_HEADER)
+                        .height(8.dp)
+                )
+            }
+
+            val contentModifier = Modifier
+                .testTag(TestTags.FRAME_BASE_CONTENT)
+                .padding(
+                    PaddingValues(
+                        start = horizontalContentPadding.calculateStartPadding(
+                            layoutDirection
+                        ),
                         end = horizontalContentPadding.calculateEndPadding(layoutDirection),
+                        // Enforce default top spacing
+                        top = 16.dp,
                     )
                 )
-            }
-        } ?: run {
-            // If no header is defined, add extra spacing to the content top padding
-            Spacer(
-                modifier = Modifier
-                    .testTag(TestTags.FRAME_BASE_NO_HEADER)
-                    .height(8.dp)
-            )
-        }
-
-        val contentModifier = Modifier
-            .testTag(TestTags.FRAME_BASE_CONTENT)
-            .padding(
-                PaddingValues(
-                    start = horizontalContentPadding.calculateStartPadding(
-                        layoutDirection
-                    ),
-                    end = horizontalContentPadding.calculateEndPadding(layoutDirection),
-                    // Enforce default top spacing
-                    top = 16.dp,
-                )
-            )
-        when (layoutType) {
-            LibOrientation.PORTRAIT -> {
-                Column(
-                    modifier = contentModifier,
-                    horizontalAlignment = layoutHorizontalAlignment,
-                    content = { layout(deviceOrientation) }
-                )
-            }
-            LibOrientation.LANDSCAPE -> {
-                Row(
-                    modifier = contentModifier,
-                    verticalAlignment = layoutLandscapeVerticalAlignment,
-                    content = layoutLandscape!!
-                )
-            }
-            else -> Unit
-        }
-
-        buttons?.let { buttons ->
-            if (buttonsVisible) {
-                Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_BUTTONS)) {
-                    buttons.invoke(this, deviceOrientation)
+            when (layoutType) {
+                LibOrientation.PORTRAIT -> {
+                    Column(
+                        modifier = contentModifier,
+                        horizontalAlignment = layoutHorizontalAlignment,
+                        content = { layout(deviceOrientation) }
+                    )
                 }
-            } else Spacer(
-                modifier = Modifier
-                    .testTag(TestTags.FRAME_BASE_NO_BUTTONS)
-                    .height(24.dp)
-            )
+                LibOrientation.LANDSCAPE -> {
+                    Row(
+                        modifier = contentModifier,
+                        verticalAlignment = layoutLandscapeVerticalAlignment,
+                        content = layoutLandscape!!
+                    )
+                }
+                else -> Unit
+            }
+
+            buttons?.let { buttons ->
+                if (buttonsVisible) {
+                    Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_BUTTONS)) {
+                        buttons.invoke(this, deviceOrientation)
+                    }
+                } else Spacer(
+                    modifier = Modifier
+                        .testTag(TestTags.FRAME_BASE_NO_BUTTONS)
+                        .height(24.dp)
+                )
+            }
         }
     }
 }
